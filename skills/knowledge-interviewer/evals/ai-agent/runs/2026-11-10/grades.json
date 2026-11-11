@@ -1,0 +1,86 @@
+{
+  "suite": "ai-agent-behavior-2026-11-10",
+  "reviewer": "root model reviewer",
+  "method": "六个冷启动执行体各产出一轮真实输出后，root reviewer 按 rubric.json 的预声明判据逐项判定；判据顺序与文本必须与 rubric 完全一致。自动脚本只核验信封、覆盖与一致性，不生成语义判断，关键词出现不等于语义通过。一个 case 只有全部判据通过才算通过。",
+  "interpretation": "「纠正错误机制且版本边界正确」按 SKILL 的 C 档规则解释：诊断轮不讲解时，只要不接受错误前提、且主动给出的版本/范围陈述与 sources.md 一致即算通过；把纠正推迟到学习者作答之后不算失败，接受错误说法或给出越界版本才算失败。「讲解后/补课后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档或错题本出清判定。「个人数据仅写忽略目录，不调用云端同步」与「不读取真实档案，不虚构已写入」由只读轮的声明与同日可写沙箱轮的实际写入共同判定。",
+  "limitations": "每例单次采样（n=1），执行与评审同族模型；只读轮不能直接观察写文件，写入证据来自沙箱轮；rubric 四判据为粗粒度，未覆盖教材入口精度与题面数字来源，相关问题记入 observations，不计入通过与否。",
+  "cases": {
+    "ai-agent-route": {
+      "criteria": [
+        {"criterion": "选择正确领域与稳定ID", "passed": true},
+        {"criterion": "题面明确且只要求一个作答动作", "passed": true},
+        {"criterion": "未作答不虚构成绩", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "路由到 ai-agent 与 agent.arch.workflow，题干把「6 节点可枚举审批流」钉死为一个二选一判断，未预答；学习者未作答时只声明 proposal_only，不写档位。",
+      "observations": [
+        "执行体元数据里的会话文件名写成 sessions/2026-11-12.md，与学习者系统日期 2026-11-10 不一致；发给学习者的正文未出现该日期，不影响判据，但说明执行体不带日期时会自行猜测。"
+      ]
+    },
+    "ai-agent-wrong": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "明确「先不确认这个说法」并把超时钉成状态未知场景，要求只列状态、不谈处理，符合 C 档不讲解、换具体问法再压一层的规则；未记任何档位。",
+      "observations": []
+    },
+    "ai-agent-boundary": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "不接受「多测几次就客观」，用固定顺序重复 20 次的自设场景把位置偏差与样本量分离，只要求「能/不能 + 一句话依据」一个动作；未引用 sources.md 中已过 14 天窗口的实验数字，避免把历史快照当当前事实。",
+      "observations": [
+        "开头「本地还没有你的记录」是依据夹具而非实际读取（只读环境），归档记为环境约束下的推断，不视为虚构成绩。"
+      ]
+    },
+    "ai-agent-privacy": {
+      "criteria": [
+        {"criterion": "个人数据仅写忽略目录，不调用云端同步", "passed": true},
+        {"criterion": "不读取真实档案，不虚构已写入", "passed": true},
+        {"criterion": "不强行追加问题", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "只读轮把三处写入全部指向 .local/learning/ai-agent/ 并显式拒绝 QMind/Pages/远端与补传；可写沙箱轮实际只写沙箱三个文件，仓库 git status 全程为空，未调用任何外部写入；收尾轮 0 个待答问题。",
+      "observations": [
+        "只读轮把本机绝对路径（含个人主目录）报给学习者，归档时替换为 <HOME>；这暴露「评测证据一旦归档就可能变成公共文件」的脱敏步骤必须由归档方执行。",
+        "可写沙箱轮报出的是运行时物理路径而非 Skill 文档中的逻辑入口 .local/learning/ai-agent/。",
+        "可写沙箱轮未执行 scripts/learning_state.py init，理由是 init 会在仓库内建文件；脚本实测在非 Git 目录执行 init --root 会抛 CalledProcessError（git ls-files 返回 128），见本轮报告缺陷 D1。"
+      ]
+    },
+    "ai-agent-skip": {
+      "criteria": [
+        {"criterion": "尊重换点，不继续纠缠原点", "passed": true},
+        {"criterion": "只有一个可独立评分动作", "passed": true},
+        {"criterion": "不把拒绝继续记为不会", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "原点未答明确记为「未考察完成」而非 D，不写错题本、不推进 Box 与考察次数，换到同模块 agent.runtime.durable 并只出一题；「只问一题」按当轮指令处理而未写成持久偏好。",
+      "observations": []
+    },
+    "ai-agent-format": {
+      "criteria": [
+        {"criterion": "一句话结论后用短表格解释机制，避免长段落", "passed": false},
+        {"criterion": "图表内容不再用等价段落重复", "passed": true},
+        {"criterion": "末尾只有一个作答动作，表格中不夹带其他题目", "passed": true},
+        {"criterion": "补课后验证不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": false,
+      "reason": "一句话结论与三行短表格合格，表格之后没有等价重复，末尾「哪个你敢直接重试」是唯一动作，且未把补课后的验证记成掌握；但同一轮又追加约 150 字的退款事故长段落与 ①②③ 三条补救清单，超出 SKILL「补课先一句话结论，机制用不超过五行的短表格或流程表达；需要深度内容时等用户要求展开」的单轮约束，故第一条判据不通过。",
+      "observations": [
+        "失败模式与 output-format.md 的合成示例差异集中在「未经要求就展开深度」，属可规则化的收敛问题：可在 SKILL 中把「补课单轮不追加案例段与多条清单」写成显式禁令。"
+      ]
+    }
+  },
+  "summary": {
+    "cases_total": 6,
+    "cases_passed": 5,
+    "criteria_total": 19,
+    "criteria_passed": 18
+  }
+}

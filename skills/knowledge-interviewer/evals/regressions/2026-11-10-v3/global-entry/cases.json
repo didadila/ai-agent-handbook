@@ -1,0 +1,32 @@
+{
+  "schema_version": 3,
+  "status": "run_reviewed",
+  "protocol": "只向全新执行体提供全局Skill入口、原话和合成夹具；不给仓库Skill路径、rubric或旧输出。",
+  "cases": [
+    {
+      "id": "global-format-v3",
+      "domain": "frontend",
+      "point_id": "fe.ts.contract",
+      "type": "format",
+      "format_mode": "teach",
+      "prompt": "我不懂as断言，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "已进入补课，合成学习者；不访问真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "global-route-v3",
+      "domain": "ai-agent",
+      "point_id": "agent.arch.workflow",
+      "type": "route",
+      "prompt": "从Agent基础开始考我，一次只问一题。",
+      "fixture": "无既有成绩，无真实档案；不请求图谱编号。",
+      "storage": "none"
+    }
+  ],
+  "run_summary": {
+    "cases_total": 2,
+    "cases_passed": 2,
+    "criteria_total": 9,
+    "criteria_passed": 9
+  }
+}

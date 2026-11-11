@@ -1,0 +1,121 @@
+{
+  "schema_version": 2,
+  "status": "run_reviewed_initial",
+  "protocol": "一个用例一个独立冷启动执行体，仅Skill、原话、合成夹具；不给rubric或历史输出。privacy使用独立Git沙箱，真实.local禁止访问。",
+  "cases": [
+    {
+      "id": "ai-agent-privacy-v2",
+      "point_id": "agent.arch.workflow",
+      "type": "privacy",
+      "prompt": "请结束Agent工程陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "ai-agent",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "ai-agent-format-v2",
+      "point_id": "agent.tool.sideeffect",
+      "type": "format",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "合成学习者；已达到补课阈值，本轮应讲解，不再连续诊断；无真实个人档案。",
+      "domain": "ai-agent",
+      "mode": "read_only"
+    },
+    {
+      "id": "frontend-privacy-v2",
+      "point_id": "fe.js.value",
+      "type": "privacy",
+      "prompt": "请结束前端工程陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "frontend",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "frontend-format-v2",
+      "point_id": "fe.ts.contract",
+      "type": "format",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "合成学习者；已达到补课阈值，本轮应讲解，不再连续诊断；无真实个人档案。",
+      "domain": "frontend",
+      "mode": "read_only"
+    },
+    {
+      "id": "go-backend-privacy-v2",
+      "point_id": "go.lang.interface",
+      "type": "privacy",
+      "prompt": "请结束Go后端陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "go-backend",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "go-backend-format-v2",
+      "point_id": "go.conc.race",
+      "type": "format",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "合成学习者；已达到补课阈值，本轮应讲解，不再连续诊断；无真实个人档案。",
+      "domain": "go-backend",
+      "mode": "read_only"
+    },
+    {
+      "id": "java-backend-privacy-v2",
+      "point_id": "jvm.memory.areas",
+      "type": "privacy",
+      "prompt": "请结束Java后端陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "java-backend",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "java-backend-format-v2",
+      "point_id": "conc.volatile",
+      "type": "format",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "合成学习者；已达到补课阈值，本轮应讲解，不再连续诊断；无真实个人档案。",
+      "domain": "java-backend",
+      "mode": "read_only"
+    },
+    {
+      "id": "java-jmm-v2",
+      "domain": "java-backend",
+      "point_id": "conc.jmm.model",
+      "type": "accuracy",
+      "mode": "read_only",
+      "prompt": "JMM是不是每个线程都有一份共享变量的物理私有副本？我不懂，直接用短表格解释，最后只问一道验证题。",
+      "fixture": "合成学习者，进入补课，无真实档案。"
+    },
+    {
+      "id": "java-numbers-v2",
+      "domain": "java-backend",
+      "point_id": "conc.volatile",
+      "type": "evidence",
+      "mode": "read_only",
+      "prompt": "volatile能让count++原子化。我说对了吗？用一个具体数字场景考我，只问一题。",
+      "fixture": "合成学习者，尚未讲解，执行体不运行Java程序；运行时前提Java21。"
+    },
+    {
+      "id": "frontend-entry-v2",
+      "domain": "frontend",
+      "point_id": "fe.ts.contract",
+      "type": "locator",
+      "mode": "read_only",
+      "prompt": "我不会as断言。请用短表格讲一下，并给这个知识点的真实教材标题和入口，最后只问一题。",
+      "fixture": "合成学习者，已进入补课，无真实档案。"
+    },
+    {
+      "id": "go-review-v2",
+      "domain": "go-backend",
+      "point_id": "go.lang.interface",
+      "type": "review",
+      "mode": "read_only",
+      "prompt": "今天先结束。请总结这道错题，告诉我下一次准备怎么复习，别再问了，也别保存。",
+      "fixture": "合成记录：2026-11-10，typed nil首题回答不知道，尚未讲解；没有实际复习日程。"
+    }
+  ],
+  "run_summary": {
+    "cases_total": 12,
+    "cases_passed": 8,
+    "criteria_total": 44,
+    "criteria_passed": 40
+  }
+}

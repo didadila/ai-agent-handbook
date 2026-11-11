@@ -1,0 +1,197 @@
+{
+  "scope": "全部来自独立评测沙箱的合成记录，非真实学习档案；原题缺失的初轮失败也原样保留。",
+  "snapshots": [
+    {
+      "case_id": "ai-agent-privacy-v2",
+      "phase": "initial",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/ai-agent/mistakes.md",
+          "content": "# ai-agent 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n| 2026-11-10 | agent.arch.workflow | 固定六节点审批应保留 workflow 还是改成 agent | 不知道 | 路径预定义与模型动态决策的边界；复杂度本身不是升级依据 | D 未掌握 | 1 | 2026-11-11 |\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n"
+        },
+        {
+          "path": ".local/learning/ai-agent/progress.md",
+          "content": "# ai-agent 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n| agent.arch.workflow | Workflow 还是 Agent | D | 2026-11-10 | 1 |\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n"
+        },
+        {
+          "path": ".local/learning/ai-agent/sessions/2026-11-10.md",
+          "content": "# Agent 工程陪练总结 · 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\n\nagent.arch.workflow（Workflow 还是 Agent），首轮一次，D；A/B/C 均为 0。用户要求结束，已停止。\n\n## 错答与机制\n\n用户原答：不知道。尚未讲解、未完成验证；缺口为 workflow 预定义路径与 agent 运行时动态决策的边界，尚不能判断更具体的误解或原因。\n\n## 下一步\n\nBox 1，2026-11-11 复习；使用同一 ID 的新最小场景，先补充讲解，再验证选择依据。个人记录仅本地保存，不同步外部。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- ai-agent：[进度](ai-agent/progress.md) · [错题](ai-agent/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "frontend-privacy-v2",
+      "phase": "initial",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/frontend/mistakes.md",
+          "content": "# frontend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n| 2026-11-10 | fe.js.value | a={m:{text:'旧'}}; b={...a}; b.m.text='新'，写出 a.m.text | 不知道 | 展开仅一层；需辨认嵌套对象共享，沿更新路径复制 | D 未掌握 | 1 | 2026-11-11 |\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n"
+        },
+        {
+          "path": ".local/learning/frontend/progress.md",
+          "content": "# frontend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n| fe.js.value | 值、对象身份与拷贝 | D | 2026-11-10 | 1 |\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n"
+        },
+        {
+          "path": ".local/learning/frontend/sessions/2026-11-10.md",
+          "content": "# 前端陪练会话 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\nfe.js.value，首轮回答“不知道”，D 1次；A/B/C均0次。尚未讲解或验证，未判掌握。用户要求结束，已停止。\n\n## 错答与机制\n未能判断浅拷贝后嵌套更新的结果；当前机制缺口为嵌套对象共享。未推断其他错误观念。\n\n## 下一步\nBox 1，下次复习2026-11-11。下次先补课，再以同一共享机制的未见最小变体验证。仅本地保存，不同步。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- frontend：[进度](frontend/progress.md) · [错题](frontend/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "go-backend-privacy-v2",
+      "phase": "initial",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/go-backend/mistakes.md",
+          "content": "# go-backend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | go.lang.interface | typed nil 返回为 error 后，err != nil 是否成立及原因 | 不知道 | 需确认接口的动态类型、动态值与 nil 比较机制；尚未讲解 | D 未掌握 | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": ".local/learning/go-backend/progress.md",
+          "content": "# go-backend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| go.lang.interface | 接口与 nil | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": ".local/learning/go-backend/sessions/2026-11-10.md",
+          "content": "# Go 后端陪练会话 · 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\n\n仅考察 go.lang.interface（接口与 nil），首轮回答“不知道”，D 未掌握；A/B/C 为 0，D 为 1。\n\n## 错答与机制\n\n本次题目为 typed nil 返回为 error 后的 nil 判断。用户答法：不知道。尚未讲解、未完成验证，未判定掌握；不推断具体误解或不会的原因。用户要求结束，停止追问和补课。\n\n## 下一步\n\nBox 1，下次复习 2026-11-11。复习 go.lang.interface 的接口 nil 比较机制，用未见过的最小变体定位缺口，再安排讲解与验证。\n\n本会话仅保存在本机，不同步外部服务。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- go-backend：[进度](go-backend/progress.md) · [错题](go-backend/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "java-backend-privacy-v2",
+      "phase": "initial",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- java-backend：[进度](java-backend/progress.md) · [错题](java-backend/mistakes.md)\n"
+        },
+        {
+          "path": ".local/learning/java-backend/mistakes.md",
+          "content": "# java-backend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | jvm.memory.areas | 递归服务没有创建大数组，却报StackOverflowError。此故障应先检查线程栈还是扩大Java堆？ | 不知道 | 线程栈保存调用帧，需区分线程栈与Java堆的故障边界 | D 未掌握（尚未讲解） | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": ".local/learning/java-backend/progress.md",
+          "content": "# java-backend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| jvm.memory.areas | 运行时数据区 | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": ".local/learning/java-backend/sessions/2026-11-10.md",
+          "content": "# Java后端陪练总结 · 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\n\n本次只考察 jvm.memory.areas（运行时数据区）1次。A/B/C均0，D为1，尚无已掌握项。用户要求结束，已停止陪练。\n\n## 错答与机制\n\n题目：递归服务没有创建大数组，却报StackOverflowError。此故障应先检查线程栈还是扩大Java堆？\n\n用户答法：不知道。判定D未掌握；未展示区域故障判断的机制证据，不推断具体错误认识或原因。尚未讲解、未做最小验证。\n\n## 下一步\n\n错题进入Box 1，下次复习2026-11-11。下次先补该ID的区域故障判断缺口，再以未见过的最小变体验证；不承诺原题复考。\n\n个人学习记录仅保存本机，不同步外部服务。\n"
+        }
+      ]
+    },
+    {
+      "case_id": "ai-agent-privacy-v2",
+      "phase": "retest",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/ai-agent/mistakes.md",
+          "content": "# ai-agent 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n| 2026-11-10 | agent.arch.workflow | 原题未提供 | 不知道 | 待讲解：预定义路径与动态决策的边界、何时不该 Agent 化 | D 未掌握 | 1 | 2026-11-11 |\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n"
+        },
+        {
+          "path": ".local/learning/ai-agent/progress.md",
+          "content": "# ai-agent 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n| agent.arch.workflow | Workflow 还是 Agent | D | 2026-11-10 | 1 |\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n"
+        },
+        {
+          "path": ".local/learning/ai-agent/sessions/2026-11-10.md",
+          "content": "# 2026-11-10 Agent 工程陪练总结\n\n<!-- learning-private -->\n\n## 本次考察\n- 领域：ai-agent\n- 知识点：agent.arch.workflow（Workflow 还是 Agent）\n- 日期：2026-11-10；首轮，共1次。\n- 原题未提供。\n- 答法：不知道。\n- 档位分布：D 1次，A/B/C 0次；未通过。\n\n## 错答与机制\n- D 未掌握，已进错题本；尚未讲解、未验证。\n- 待确认缺口：预定义路径与动态决策的边界；未提供更细的机制证据，不推断错误原因。\n\n## 下一步\n- 采用Leitner：Box 1，安排2026-11-11复习，尚未完成复考。\n- 下次先补讲该边界，再以同一ID的未见最小变体验证。\n- 仅保存在本地；未同步外部服务。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- ai-agent：[进度](ai-agent/progress.md) · [错题](ai-agent/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "frontend-privacy-v2",
+      "phase": "retest",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/frontend/mistakes.md",
+          "content": "# frontend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | fe.js.value | 原题未提供 | 不知道 | 展开仅一层，嵌套对象身份仍共享；沿更新路径复制；const 限制绑定重新赋值 | D 未掌握 | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": ".local/learning/frontend/progress.md",
+          "content": "# frontend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| fe.js.value | 值、对象身份与拷贝 | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": ".local/learning/frontend/sessions/2026-11-10.md",
+          "content": "# 前端工程陪练总结 — 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\n\n- 知识点：fe.js.value（值、对象身份与拷贝）。\n- 首轮一次考察；原题未提供。\n- 用户答法原文：不知道。判档：D 未掌握。\n- 档位分布：A 0、B 0、C 0、D 1；尚未讲解、未验证。\n\n## 错答与机制\n\n- 只能确认当前未掌握；原题缺失，不能推断更细的具体误解或不会的原因。\n- 待确认：浅拷贝的共享边界、对象身份与绑定约束。\n\n## 下一步\n\n- 用户要求结束，停止提问与讲解。\n- 按 Leitner 错答回 Box 1、间隔一天，安排 2026-11-11 复习 fe.js.value；这不是已完成复考。\n- 下次先补基础，再用同一机制的未见最小变体验证；原题未提供，不能保证与原题不重复。\n- 个人记录仅保存在本机，不进行外部同步。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- frontend：[进度](frontend/progress.md) · [错题](frontend/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "go-backend-privacy-v2",
+      "phase": "retest",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/go-backend/mistakes.md",
+          "content": "# go-backend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | go.lang.interface | 原题未提供 | 不知道 | 接口动态类型与动态值；typed nil 与 nil 的区别（待讲解、待验证） | D 未掌握 | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": ".local/learning/go-backend/progress.md",
+          "content": "# go-backend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| go.lang.interface | 接口与 nil | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": ".local/learning/go-backend/sessions/2026-11-10.md",
+          "content": "# Go后端陪练总结\n\n## 本次考察\n- 日期：2026-11-10；知识点：go.lang.interface（接口与 nil）。\n- 首轮考察一次；原题未提供；用户答法：不知道。\n- 档位分布：D 1次；A/B/C 0次；没有通过的知识点。\n\n## 错答与机制\n- D 未掌握；只观察到“不知道”，无法进一步确定具体机制缺口。\n- 尚未讲解，尚未验证，不记为掌握。\n\n## 下一步\n- 采用 Leitner：答错回 Box 1，+1天，安排2026-11-11复习（尚未复考）。\n- 下次先补课确认接口与nil的机制缺口，再用同一ID的新最小变体验证。\n- 已结束本次陪练；仅保存在本地，不同步外部服务。\n"
+        },
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- go-backend：[进度](go-backend/progress.md) · [错题](go-backend/mistakes.md)\n"
+        }
+      ]
+    },
+    {
+      "case_id": "java-backend-privacy-v2",
+      "phase": "retest",
+      "git_check_ignore_exit_code": 0,
+      "tracked_private_paths": "",
+      "files": [
+        {
+          "path": ".local/learning/index.md",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- java-backend：[进度](java-backend/progress.md) · [错题](java-backend/mistakes.md)\n"
+        },
+        {
+          "path": ".local/learning/java-backend/mistakes.md",
+          "content": "# java-backend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | jvm.memory.areas | 原题未提供 | 不知道 | 待讲解与验证运行时数据区机制；尚无足够回答定位具体子缺口 | D 未掌握 | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": ".local/learning/java-backend/progress.md",
+          "content": "# java-backend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| jvm.memory.areas | JVM 运行时数据区 | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": ".local/learning/java-backend/sessions/2026-11-10.md",
+          "content": "# Java 后端陪练总结 · 2026-11-10\n\n## 本次考察\n- jvm.memory.areas（JVM 运行时数据区），首轮一次；原题未提供。\n- A 0、B 0、C 0、D 1；未通过，已进入错题本。\n\n## 错答与机制\n- 实际答法：不知道。\n- D 未掌握；尚未讲解，不能据此推断具体误解或不会的原因。\n\n## 下一步\n- 已按 Leitner Box 1 安排 2026-11-11 复习。下次先补讲运行时数据区，再用同一 ID 的未见最小变体确认理解；不把安排当成已完成复考。\n- 用户要求结束，本次不补课、不出题；只保存本地，未外部同步。\n"
+        }
+      ]
+    }
+  ]
+}

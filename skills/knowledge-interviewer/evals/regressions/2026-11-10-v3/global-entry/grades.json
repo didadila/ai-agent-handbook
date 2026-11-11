@@ -1,0 +1,62 @@
+{
+  "schema_version": 3,
+  "method": "root按预声明全局入口rubric评审。执行体仅收到全局Skill入口、原话与夹具，未提供仓库Skill路径或评分标准。文件入口身份另由实际脚本校验；未检查Qoder宿主缓存。n=1，同族模型评审。",
+  "cases": {
+    "global-format-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：固定结论/机制/验证标题，无旁白或独立入口",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际加载全局入口并解析到当前仓库，三段结构粗检通过；TS断言不改变运行时值，构造数字已标注、入口语义标题正确，无内部ID外露。",
+      "observations": []
+    },
+    "global-route-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际加载全局入口解析到当前仓库；从适用边界出题、六节点场景明确为假设、只有一个选择动作，未预填成绩或同步。",
+      "observations": []
+    }
+  },
+  "summary": {
+    "cases_total": 2,
+    "cases_passed": 2,
+    "criteria_total": 9,
+    "criteria_passed": 9
+  }
+}

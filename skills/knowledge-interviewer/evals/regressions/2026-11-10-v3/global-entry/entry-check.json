@@ -1,0 +1,20 @@
+{
+  "before": {
+    "same_directory": false,
+    "old_copy_untouched": true,
+    "previous_target_backed_up_locally": true
+  },
+  "after": {
+    "entry_is_symlink": true,
+    "same_directory": true,
+    "resources_match": {
+      "SKILL.md": true,
+      "references/output-format.md": true,
+      "scripts/learning_state.py": true,
+      "scripts/check_response_format.py": true
+    },
+    "passed": true,
+    "skill_sha256": "4173faccab22d21ee8938d0462d51f8efa4e1ea6a7c92c0207e6447a2a15e37d",
+    "scope": "Filesystem entry identity; host process caches are not inspected."
+  }
+}

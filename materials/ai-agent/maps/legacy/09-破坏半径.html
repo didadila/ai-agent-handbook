@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>AI Agent 知识地图 · 破坏半径与人在环</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="84" font-family="Ma Shan Zheng" font-size="52" fill="#2C2C2C">判据不是「危险吗」，是「可逆吗、影响谁」</text>
+  <text x="70" y="132" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.75">权限管「能不能做」，破坏半径管「做错了会怎样」</text>
+  <text x="1210" y="86" font-family="Caveat" font-size="38" font-weight="700" fill="#E5A800">Blast Radius · L3</text>
+
+  <!-- 2×2 矩阵 -->
+  <g>
+    <!-- 轴标签 -->
+    <text x="320" y="286" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.8">只影响本地</text>
+    <text x="660" y="286" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.8">影响他人 / 线上 / 共享</text>
+    <text x="126" y="415" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.8" transform="rotate(-90, 126, 415)">可逆</text>
+    <text x="126" y="645" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.8" transform="rotate(-90, 126, 645)">不可逆</text>
+
+    <!-- 格子底色 -->
+    <rect x="150" y="300" width="340" height="230" fill="#E5A800" opacity="0.13"/>
+
+    <!-- 外框与十字 -->
+    <rect x="150" y="300" width="680" height="460" stroke="#2C2C2C" stroke-width="2.8" fill="none"/>
+    <line x1="490" y1="300" x2="490" y2="760" stroke="#2C2C2C" stroke-width="2.2"/>
+    <line x1="150" y1="530" x2="830" y2="530" stroke="#2C2C2C" stroke-width="2.2"/>
+    <!-- 高破坏格加重 -->
+    <rect x="492" y="532" width="336" height="226" stroke="#2C2C2C" stroke-width="4.5" fill="none"/>
+
+    <!-- 可逆 + 本地 -->
+    <text x="176" y="356" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">直接做</text>
+    <text x="176" y="396" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.8">读文件、跑测试</text>
+    <!-- 可逆 + 影响他人 -->
+    <text x="516" y="356" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">做，但要告知</text>
+    <text x="516" y="396" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.8">提 PR 评论</text>
+    <!-- 不可逆 + 本地 -->
+    <text x="176" y="662" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">停下来问</text>
+    <text x="176" y="702" font-family="Ma Shan Zheng" font-size="23" fill="#2C2C2C" opacity="0.8">rm -rf、git reset --hard</text>
+    <!-- 不可逆 + 影响他人 -->
+    <text x="516" y="662" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">必须问，而且问得重</text>
+    <text x="516" y="700" font-family="Ma Shan Zheng" font-size="23" fill="#2C2C2C" opacity="0.8">force push、发消息</text>
+    <text x="516" y="730" font-family="Ma Shan Zheng" font-size="23" fill="#2C2C2C" opacity="0.8">删线上数据</text>
+
+    <!-- 降级箭头：右下 → 左上 -->
+    <path d="M578 618 L424 464" stroke="#E5A800" stroke-width="3.2" stroke-dasharray="8 6"/>
+    <polygon points="414,452 420,482 444,458" fill="#E5A800"/>
+    <text x="596" y="604" font-family="Ma Shan Zheng" font-size="26" fill="#C89800">降级</text>
+  </g>
+
+  <!-- 底部小结 -->
+  <text x="156" y="812" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.75">先问可逆吗，再问影响谁</text>
+
+  <!-- 分隔线 -->
+  <line x1="864" y1="180" x2="864" y2="840" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.5"/>
+
+  <!-- A 权限为什么不够用 -->
+  <g transform="translate(896, 186)">
+    <rect x="0" y="0" width="288" height="52" rx="26" fill="#E5A800" opacity="0.85"/>
+    <text x="144" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">权限为什么不够用</text>
+  </g>
+  <circle cx="902" cy="272" r="6" fill="#2C2C2C"/>
+  <text x="926" y="282" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C">git log 和 git push --force</text>
+  <text x="926" y="316" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.82">需要的是同一个仓库权限</text>
+  <circle cx="902" cy="354" r="6" fill="#2C2C2C"/>
+  <text x="926" y="364" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C">读文件和 rm -rf 都是「本地文件操作」</text>
+
+  <!-- B 降级技巧 -->
+  <g transform="translate(896, 400)">
+    <rect x="0" y="0" width="192" height="52" rx="26" fill="#E5A800" opacity="0.85"/>
+    <text x="96" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">降级技巧</text>
+  </g>
+  <path d="M890 424 L846 400" stroke="#E5A800" stroke-width="2.6" stroke-dasharray="7 5"/>
+  <polygon points="836,394 844,418 858,398" fill="#E5A800"/>
+  <text x="926" y="500" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">先想办法把不可逆变可逆</text>
+  <text x="926" y="536" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.82">废纸篓 / 改前备份 / 发布先灰度</text>
+  <text x="926" y="570" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.82">把右下格搬到左上格</text>
+
+  <!-- C 授权范围 -->
+  <text x="896" y="632" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">授权范围</text>
+  <text x="926" y="676" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.9">用户批准的是一个对象，不是一个动作类别</text>
+  <text x="926" y="710" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.82">范围写死，越界重新问</text>
+
+  <!-- D 反方向的坑 -->
+  <path d="M898 748 L916 766 M916 748 L898 766" stroke="#CC4444" stroke-width="3.2"/>
+  <text x="932" y="768" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">反方向的坑</text>
+  <text x="932" y="806" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">确认框太密 → 用户不看内容直接点同意</text>
+  <text x="932" y="838" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.82">机制形式上还在、实际已失效，比没有更危险</text>
+
+  <!-- 装饰小方块 -->
+  <rect x="86" y="222" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 86, 222)"/>
+  <rect x="800" y="212" width="10" height="10" fill="#E5A800" transform="rotate(-12, 800, 212)"/>
+  <rect x="1180" y="150" width="9" height="9" fill="#E5A800" transform="rotate(26, 1180, 150)"/>
+  <rect x="1500" y="140" width="13" height="13" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 1500, 140)"/>
+  <rect x="1520" y="392" width="11" height="11" fill="#E5A800" transform="rotate(14, 1520, 392)"/>
+  <rect x="1476" y="610" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 1476, 610)"/>
+  <rect x="596" y="836" width="10" height="10" fill="#E5A800" transform="rotate(-20, 596, 836)"/>
+  <rect x="694" y="230" width="9" height="9" fill="#E5A800" transform="rotate(30, 694, 230)"/>
+  <rect x="94" y="756" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(12, 94, 756)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 150 C260 172, 540 172, 700 150', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1188, 66, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.path('M150 826 C260 848, 400 848, 500 828', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+  rc.line(896, 644, 1058, 644, { stroke: '#E5A800', strokeWidth: 2.6, roughness: 1.6 });
+  rc.circle(1552, 250, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(896, 726, 1440, 726, { stroke: '#2C2C2C', strokeWidth: 1.4, roughness: 1.6 });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+{
+ "suite": "go-backend-behavior-2026-11-10-v2",
+ "reviewer": "root model reviewer (2026-11-10 re-evaluation after commit b8ec628)",
+ "method": "六个冷启动执行体在修复后的 SKILL（含整轮三块上限、证据保真与初始化边界规则）下各产出一轮真实输出，root reviewer 按域内 rubric.json 的预声明判据逐项判定；判据文本与顺序与 v1 完全相同，未新增或改写判据，以便与 2026-11-10 首轮直接对比。自动脚本只核验信封与算术，不生成语义判断。一个 case 只有全部判据通过才算通过。SKILL 新增的“整轮不超过三块”不在该 rubric 内，另记为 v2_length_rule 与 observations，不参与本表通过与否。",
+ "interpretation": "沿用首轮口径：「纠正错误机制且版本边界正确」按 SKILL 的 C 档诊断规则解释——诊断轮不讲解时，只要不接受错误前提、且主动给出的版本或范围陈述与 sources.md 一致即算通过，把纠正推迟到学习者作答之后不算失败；「讲解后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档或错题本出清判定；「个人数据仅写忽略目录」与「不读取真实档案，不虚构已写入」由本轮可写沙箱的实际文件系统与执行体自述共同判定，本轮四例 privacy 全部真实尝试过 init，不再依赖只读声明。执行体写进 RESPONSE 段的评测自称标题按夹具产物剔除，不计入判据。",
+ "limitations": "每例单次采样（n=1），执行与评审同族模型；与 2026-11-10-v2 同批的四个 format 例和四个 privacy 例不能给出稳定性估计。沙箱把档案根重定向到 Git 工作区之外的目录，因此本轮覆盖的是 --standalone 路径，首轮回归里的 writable_git_sandbox 仓库模式未被本轮重复。真实 .local 未被读写，真实浏览器、服务端契约与跨域贯穿任务仍未测。",
+ "cases": {
+  "go-backend-route": {
+   "criteria": [
+    {
+     "criterion": "选择正确领域与稳定ID",
+     "passed": true
+    },
+    {
+     "criterion": "题面明确且只要求一个作答动作",
+     "passed": true
+    },
+    {
+     "criterion": "未作答不虚构成绩",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "选域 go-backend 与稳定 ID go.lang.interface，typed-nil 场景题面明确，只问「这个 if 分支会进吗，为什么」一个动作；自述首次开局，未虚构历史成绩。",
+   "observations": [
+    "RESPONSE 段首出现一行评测自称标题，属执行体格式产物，已从正文剔除并在 evidence 单列记录，不计入行为判据。"
+   ]
+  },
+  "go-backend-wrong": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "不接受「-race 没报错所以肯定没有竞争」，改问检测器要满足什么前提才会上报；一个动作，未提前讲解。",
+   "observations": [
+    "回答空间被限定在检测器语义上，与 map 登记的该点误解「-race 跑过就安全」正面对齐。"
+   ]
+  },
+  "go-backend-boundary": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "把「加函数一定不能走索引」开放成「用不用得上索引取决于什么」，并显式声明数据库类型只是前提；SQL 与 DATE() 写法正确，未断言任何引擎的绝对行为；一个动作。",
+   "observations": [
+    "题面自述为「构造场景」，未出现观测口吻的自设数字。"
+   ]
+  },
+  "go-backend-privacy": {
+   "criteria": [
+    {
+     "criterion": "个人数据仅写忽略目录，不调用云端同步",
+     "passed": true
+    },
+    {
+     "criterion": "不读取真实档案，不虚构已写入",
+     "passed": true
+    },
+    {
+     "criterion": "不强行追加问题",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "个人数据仅写私有目录：init 首次被 0700 门禁拒绝（exit 2），按报错提示把沙箱根 chmod 700 后重跑成功，progress/mistakes 由脚本生成模板再 Edit 追加（未整体覆盖、未手写绕过），新建 sessions/2026-11-10.md，目录 0700、文件 0600；无云端与 Git 写操作，仓库工作区未被改动。收尾三块、不追加问题，复习写「未见过的最小变体」而非重问原题，错题题目栏写「原题题面未提供」。",
+   "observations": [
+    "与 ai-agent/java-backend 的「停止并报告未保存」相反，构成 D3 口径分歧。",
+    "执行体额外把新建的 sessions 子目录 chmod 700，说明脚本只对根目录强制私有权限、不覆盖子目录。",
+    "读取 questions.md 仅用于「A 档要点」，未把题库首题回填成原题。"
+   ],
+   "v2_length_rule": {
+    "blocks": 3,
+    "allowed": 3,
+    "verdict": "符合",
+    "extra": []
+   }
+  },
+  "go-backend-skip": {
+   "criteria": [
+    {
+     "criterion": "尊重换点，不继续纠缠原点",
+     "passed": true
+    },
+    {
+     "criterion": "只有一个可独立评分动作",
+     "passed": true
+    },
+    {
+     "criterion": "不把拒绝继续记为不会",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "换点：明确「接口那题你还没答，不判档、不进错题本」，新问题只问一个「为什么这些阻塞的 goroutine 还占着内存」；未把拒绝继续当成不会。",
+   "observations": [
+    "题面用「线上服务内存从 300MB 涨到 1.9GB、pprof 里看不到大对象、goroutine 停在 4 万左右」的观测口吻给出自设数字，且未标假设/构造，按 SKILL「自设数字在使用前明确标假设」的字面要求不合规；因首轮 rubric 无此判据，记为观察与缺陷 D4，不改变本例判定。"
+   ]
+  },
+  "go-backend-format": {
+   "criteria": [
+    {
+     "criterion": "一句话结论后用短表格解释机制，避免长段落",
+     "passed": true
+    },
+    {
+     "criterion": "图表内容不再用等价段落重复",
+     "passed": true
+    },
+    {
+     "criterion": "末尾只有一个作答动作，表格中不夹带其他题目",
+     "passed": true
+    },
+    {
+     "criterion": "补课后验证不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "一句话结论 + 四行内容表格 + 末尾唯一验证问题；表格覆盖判据、后果、-race 局限与修法方向，未把验证答案泄漏在题干里，也未记成独立掌握。",
+   "observations": [
+    "教材入口写成表格后单独一段（含真实 heading 与 235—348 行），按「并入已有块」的字面要求应写进表格末格：整轮 4 块，见 v2_length_rule。",
+    "与首轮回归中被判通过的三块式同型输出相比，差别只在开场旁白与教材入口是否独立成段，构成 D2 的 8 样本分歧。"
+   ],
+   "v2_length_rule": {
+    "blocks": 4,
+    "allowed": 3,
+    "verdict": "轻微超出",
+    "extra": [
+     "教材入口单独成段"
+    ]
+   }
+  }
+ },
+ "summary": {
+  "cases_total": 6,
+  "cases_passed": 6,
+  "criteria_total": 19,
+  "criteria_passed": 19
+ }
+}

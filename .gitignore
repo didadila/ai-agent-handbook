@@ -1,0 +1,11 @@
+.DS_Store
+*.zip
+
+# Personal learner data: keep locally, never publish with shared knowledge.
+/.local/
+**/pending-qmind/
+/handbook/*/progress.md
+/handbook/*/mistakes.md
+/interviewer-feedback.md
+/output-style.md
+__pycache__/

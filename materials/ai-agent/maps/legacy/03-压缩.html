@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>压缩与摘要</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="86" font-family="Ma Shan Zheng" font-size="52" fill="#2C2C2C">压缩的分界线是「有效期」，不是「重要性」</text>
+  <text x="70" y="136" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.75">L2 — 压缩与摘要</text>
+  <text x="1330" y="88" font-family="Caveat" font-size="42" font-weight="700" fill="#E5A800">compaction</text>
+
+  <!-- 中缝 -->
+  <line x1="800" y1="196" x2="800" y2="668" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.42"/>
+
+  <!-- 左：剪刀 + 两种问法 -->
+  <g transform="translate(78, 192)">
+    <path d="M6 4 L44 44" stroke="#2C2C2C" stroke-width="3" fill="none"/>
+    <path d="M44 4 L6 44" stroke="#2C2C2C" stroke-width="3" fill="none"/>
+    <circle cx="2" cy="54" r="9" stroke="#2C2C2C" stroke-width="2.6" fill="#E5A800" fill-opacity="0.6"/>
+    <circle cx="48" cy="54" r="9" stroke="#2C2C2C" stroke-width="2.6" fill="#E5A800" fill-opacity="0.6"/>
+  </g>
+  <text x="150" y="238" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">同一个问题，两种问法</text>
+
+  <g transform="translate(70, 272)">
+    <rect x="0" y="0" width="700" height="168" rx="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="30" y="60" font-family="Ma Shan Zheng" font-size="27" fill="#CC4444">✗ 问「这条重要吗」→ 什么都重要，问不出答案</text>
+    <text x="30" y="128" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">✓ 问「它后面还会被用到吗」→ 能问出答案</text>
+  </g>
+
+  <g transform="translate(70, 480)">
+    <rect x="0" y="0" width="216" height="50" rx="25" fill="#E5A800" opacity="0.85"/>
+    <text x="108" y="35" text-anchor="middle" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">有效期示例</text>
+  </g>
+  <text x="70" y="580" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">2000 行文件原文 → 结论一出，有效期就结束</text>
+  <text x="70" y="626" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">用户第 3 轮说的那句约束 → 有效期是整个会话</text>
+
+  <!-- 右：摘要会丢什么 -->
+  <text x="830" y="238" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">摘要的损失是系统性的，不是随机的</text>
+  <text x="830" y="298" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.9">保留：任务是什么、结论是什么</text>
+  <text x="830" y="342" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.9">丢掉：<tspan fill="#E5A800">我做过什么</tspan></text>
+  <text x="830" y="404" font-family="Ma Shan Zheng" font-size="28" fill="#CC4444">典型退化：重复执行已完成的步骤</text>
+  <text x="970" y="448" font-family="Ma Shan Zheng" font-size="28" fill="#CC4444">忘记用户中途改过的约束</text>
+
+  <g transform="translate(830, 500)">
+    <rect x="0" y="0" width="710" height="150" rx="18" stroke="#E5A800" stroke-width="3.5" fill="#FFFDF7"/>
+    <text x="30" y="52" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">可写进代码的判据</text>
+    <text x="30" y="106" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.9">丢了它，agent 会不会自相矛盾？</text>
+  </g>
+
+  <!-- 底部：三类受保护 -->
+  <text x="70" y="730" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">三类受保护，不进压缩</text>
+  <g transform="translate(70, 762)">
+    <rect x="0" y="0" width="268" height="54" rx="27" fill="#E5A800" opacity="0.85"/>
+    <text x="134" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">① 用户显式约束</text>
+  </g>
+  <g transform="translate(368, 762)">
+    <rect x="0" y="0" width="500" height="54" rx="27" fill="#E5A800" opacity="0.85"/>
+    <text x="250" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">② 已完成动作与结果（不可逆优先）</text>
+  </g>
+  <g transform="translate(898, 762)">
+    <rect x="0" y="0" width="290" height="54" rx="27" fill="#E5A800" opacity="0.85"/>
+    <text x="145" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">③ 已被否决的方案</text>
+  </g>
+
+  <!-- 读书的女孩 -->
+  <g transform="translate(1330, 706)">
+    <ellipse cx="60" cy="112" rx="56" ry="13" fill="#2C2C2C" opacity="0.32"/>
+    <ellipse cx="60" cy="34" rx="34" ry="37" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M26 24 C30 -10, 90 -10, 94 26 C86 8, 70 2, 60 12 C48 2, 32 8, 26 24 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="49" cy="38" r="3.4" fill="#2C2C2C"/>
+    <circle cx="71" cy="38" r="3.4" fill="#2C2C2C"/>
+    <path d="M52 50 C57 56, 63 56, 68 50" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M60 71 L60 98 M60 78 L28 92 M60 78 L92 92" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M18 90 L60 82 L102 90 L60 100 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M60 82 L60 100" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="1200" y="150" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 1200, 150)"/>
+  <rect x="1290" y="180" width="10" height="10" fill="#E5A800" transform="rotate(-14, 1290, 180)"/>
+  <rect x="1552" y="330" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1552, 330)"/>
+  <rect x="620" y="470" width="9" height="9" fill="#E5A800" transform="rotate(28, 620, 470)"/>
+  <rect x="726" y="700" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 726, 700)"/>
+  <rect x="1240" y="470" width="11" height="11" fill="#E5A800" transform="rotate(14, 1240, 470)"/>
+  <rect x="1490" y="700" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 1490, 700)"/>
+  <rect x="400" y="852" width="9" height="9" fill="#E5A800" transform="rotate(-20, 400, 852)"/>
+  <rect x="1000" y="852" width="11" height="11" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(12, 1000, 852)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 150 C260 174, 620 174, 800 152', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1566, 132, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(500, 500, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(70, 680, 1188, 680, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+  rc.path('M1180 700 C1230 676, 1290 682, 1320 706', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+});
+</script>
+</body>
+</html>

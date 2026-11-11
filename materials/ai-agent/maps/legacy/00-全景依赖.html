@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>AI Agent 知识地图 · 全景依赖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="88" font-family="Ma Shan Zheng" font-size="62" fill="#2C2C2C">AI Agent 知识地图</text>
+  <text x="70" y="136" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C" opacity="0.75">按依赖顺序读，不要跳级</text>
+  <text x="612" y="82" font-family="Caveat" font-size="40" font-weight="700" fill="#E5A800">L1 → L2 → L3</text>
+
+  <!-- 上升箭头 -->
+  <path d="M96 800 L96 300" stroke="#E5A800" stroke-width="3" stroke-dasharray="8 6"/>
+  <polygon points="96,282 86,306 106,306" fill="#E5A800"/>
+  <text x="58" y="560" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.7" transform="rotate(-90, 58, 560)">越往上越依赖下层</text>
+
+  <!-- L1 -->
+  <g transform="translate(140, 690)">
+    <path d="M0 0 L600 0 L600 88 L0 88 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.5" opacity="0.85"/>
+    <path d="M0 0 L26 -24 L626 -24 L600 0 Z" fill="#F0C030" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <path d="M600 0 L626 -24 L626 64 L600 88 Z" fill="#C89800" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <text x="26" y="42" font-family="Ma Shan Zheng" font-size="36" fill="#2C2C2C">L1 模型能力与边界</text>
+    <text x="26" y="76" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.8">逐 token 生成 · 上下文窗口 · 幻觉 · 无状态</text>
+  </g>
+
+  <!-- L2 -->
+  <g transform="translate(196, 556)">
+    <path d="M0 0 L520 0 L520 88 L0 88 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.5" opacity="0.85"/>
+    <path d="M0 0 L26 -24 L546 -24 L520 0 Z" fill="#F0C030" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <path d="M520 0 L546 -24 L546 64 L520 88 Z" fill="#C89800" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <text x="26" y="42" font-family="Ma Shan Zheng" font-size="36" fill="#2C2C2C">L2 上下文 · 工具 · 检索</text>
+    <text x="26" y="76" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.8">预算 / 压缩 / 污染 · 调用 / 失败 · 切分 / 召回</text>
+  </g>
+
+  <!-- L2→L3 -->
+  <g transform="translate(252, 422)">
+    <path d="M0 0 L430 0 L430 88 L0 88 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.5" opacity="0.85"/>
+    <path d="M0 0 L26 -24 L456 -24 L430 0 Z" fill="#F0C030" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <path d="M430 0 L456 -24 L456 64 L430 88 Z" fill="#C89800" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <text x="26" y="42" font-family="Ma Shan Zheng" font-size="36" fill="#2C2C2C">L2→L3 Agent 循环</text>
+    <text x="26" y="76" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.8">推理-行动 · 规划 · 子 agent · 人在环</text>
+  </g>
+
+  <!-- L3 -->
+  <g transform="translate(308, 288)">
+    <path d="M0 0 L340 0 L340 88 L0 88 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.5" opacity="0.85"/>
+    <path d="M0 0 L26 -24 L366 -24 L340 0 Z" fill="#F0C030" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <path d="M340 0 L366 -24 L366 64 L340 88 Z" fill="#C89800" stroke="#2C2C2C" stroke-width="2" opacity="0.85"/>
+    <text x="26" y="42" font-family="Ma Shan Zheng" font-size="36" fill="#2C2C2C">L3 评估 · 工程化</text>
+    <text x="26" y="76" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.8">基线 / 回归 · 失败模式 · 破坏半径</text>
+  </g>
+
+  <!-- 顶部小旗 -->
+  <line x1="470" y1="264" x2="470" y2="196" stroke="#2C2C2C" stroke-width="3"/>
+  <path d="M470 200 L540 216 L470 234 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.5" opacity="0.85"/>
+  <text x="556" y="228" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.8">能归因失败，才算会用</text>
+
+  <!-- 右栏：跳级的后果 -->
+  <line x1="880" y1="180" x2="880" y2="720" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.5"/>
+
+  <g transform="translate(930, 176)">
+    <rect x="0" y="0" width="250" height="52" rx="26" fill="#E5A800" opacity="0.85"/>
+    <text x="125" y="37" text-anchor="middle" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">跳级的后果</text>
+  </g>
+
+  <g transform="translate(930, 262)">
+    <circle cx="18" cy="18" r="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="18" y="28" text-anchor="middle" font-family="Caveat" font-size="28" font-weight="700" fill="#2C2C2C">1</text>
+    <text x="54" y="14" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">不懂「输出是逐 token 采样」</text>
+    <text x="54" y="50" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.8">→ 谈幻觉只会得到「数据不够」</text>
+  </g>
+
+  <g transform="translate(930, 372)">
+    <circle cx="18" cy="18" r="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="18" y="28" text-anchor="middle" font-family="Caveat" font-size="28" font-weight="700" fill="#2C2C2C">2</text>
+    <text x="54" y="14" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">不懂上下文预算</text>
+    <text x="54" y="50" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.8">→ chunk 大小就只是个调参</text>
+  </g>
+
+  <g transform="translate(930, 482)">
+    <circle cx="18" cy="18" r="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="18" y="28" text-anchor="middle" font-family="Caveat" font-size="28" font-weight="700" fill="#2C2C2C">3</text>
+    <text x="54" y="14" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">没有可观测性</text>
+    <text x="54" y="50" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.8">→ 所有失败都归成「模型不行」</text>
+  </g>
+
+  <!-- 底部结论条 -->
+  <g transform="translate(910, 606)">
+    <rect x="0" y="0" width="620" height="112" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="26" y="44" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">这张图只写<tspan fill="#E5A800">结构层</tspan>：</text>
+    <text x="26" y="86" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.85">框架 API 半年一换，这些问题多年不变</text>
+  </g>
+
+  <!-- 读书的女孩 -->
+  <g transform="translate(1120, 760)">
+    <ellipse cx="60" cy="112" rx="56" ry="13" fill="#2C2C2C" opacity="0.32"/>
+    <ellipse cx="60" cy="34" rx="34" ry="37" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M26 24 C30 -10, 90 -10, 94 26 C86 8, 70 2, 60 12 C48 2, 32 8, 26 24 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="49" cy="38" r="3.4" fill="#2C2C2C"/>
+    <circle cx="71" cy="38" r="3.4" fill="#2C2C2C"/>
+    <path d="M52 50 C57 56, 63 56, 68 50" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M60 71 L60 98 M60 78 L28 92 M60 78 L92 92" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M18 90 L60 82 L102 90 L60 100 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M60 82 L60 100" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="820" y="120" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 820, 120)"/>
+  <rect x="1490" y="140" width="10" height="10" fill="#E5A800" transform="rotate(-12, 1490, 140)"/>
+  <rect x="1540" y="480" width="13" height="13" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1540, 480)"/>
+  <rect x="700" y="200" width="9" height="9" fill="#E5A800" transform="rotate(30, 700, 200)"/>
+  <rect x="146" y="180" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 146, 180)"/>
+  <rect x="740" y="836" width="11" height="11" fill="#E5A800" transform="rotate(14, 740, 836)"/>
+  <rect x="380" y="840" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 380, 840)"/>
+  <rect x="1000" y="836" width="9" height="9" fill="#E5A800" transform="rotate(-20, 1000, 836)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 152 C200 176, 380 176, 520 154', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(596, 108, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(1560, 260, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.path('M1250 748 C1300 720, 1360 730, 1390 762', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+  rc.line(120, 830, 700, 830, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+});
+</script>
+</body>
+</html>

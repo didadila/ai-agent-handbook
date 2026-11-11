@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>Agent 翻车现场 · 第 1 天 · 今日题</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 品牌条 -->
+  <rect x="66" y="34" width="272" height="50" rx="25" fill="#E5A800" opacity="0.9"/>
+  <text x="202" y="68" text-anchor="middle" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">Agent 翻车现场</text>
+  <text x="358" y="68" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.62">第 1 天 · 今日题</text>
+  <text x="1256" y="66" font-family="Caveat" font-size="38" font-weight="700" fill="#E5A800">Day 01 — the crash</text>
+
+  <!-- 标题 -->
+  <text x="70" y="150" font-family="Ma Shan Zheng" font-size="54" fill="#2C2C2C">一条<tspan fill="#E5A800">真实</tspan>的 wiki，把 agent 骗到了</text>
+  <text x="70" y="196" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.75">harness 全程健康 — 4k/200k · 每块带 source 标记 · 反证原地覆盖成 [invalidated] · 零 model_hypothesis</text>
+
+  <!-- 中缝 -->
+  <line x1="905" y1="248" x2="905" y2="800" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.45"/>
+
+  <!-- 左：现场 -->
+  <rect x="70" y="238" width="216" height="48" rx="24" fill="#E5A800" opacity="0.85"/>
+  <text x="178" y="271" text-anchor="middle" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">现场时间线</text>
+  <text x="70" y="330" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C">任务：日报查询 200ms → 40s，找原因，给结论</text>
+
+  <!-- 第 2 轮 -->
+  <g transform="translate(70, 356)">
+    <rect x="0" y="0" width="800" height="176" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="26" y="44" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">第 2 轮  search_wiki("查询变慢")</text>
+    <text x="522" y="44" font-family="Caveat" font-size="30" font-weight="700" fill="#E5A800">[tool_output@10:12]</text>
+    <text x="26" y="86" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.9">《DB 事故复盘》analytics_db.daily_stats</text>
+    <text x="26" y="122" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.9">300ms → 60s：create_time 索引被误删，全表扫描；补回后 320ms</text>
+    <text x="26" y="158" font-family="Ma Shan Zheng" font-size="25" fill="#E5A800">这段是真的 — 事故确实发生过，wiki 还在</text>
+  </g>
+
+  <!-- 第 4 轮 -->
+  <g transform="translate(70, 552)">
+    <rect x="0" y="0" width="800" height="140" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="26" y="44" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">第 4 轮  explain(query)</text>
+    <text x="522" y="44" font-family="Caveat" font-size="30" font-weight="700" fill="#E5A800">[tool_output@10:20]</text>
+    <text x="26" y="86" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">report_db.daily_report → 命中 idx_create_time，type=range</text>
+    <text x="26" y="122" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">扫描 8.1 亿行 · 表总行 8.3 亿（三天前 104 万）</text>
+  </g>
+
+  <!-- 第 6 轮 翻车 -->
+  <g transform="translate(70, 712)">
+    <rect x="0" y="0" width="800" height="84" rx="16" stroke="#CC4444" stroke-width="2.5" fill="#CC4444" fill-opacity="0.06"/>
+    <text x="26" y="36" font-family="Ma Shan Zheng" font-size="27" fill="#CC4444">第 6 轮 结论：疑似 create_time 索引失效，建议重建索引</text>
+    <text x="26" y="70" font-family="Ma Shan Zheng" font-size="25" fill="#CC4444" opacity="0.85">✗ 翻车 — 索引明明是好的</text>
+  </g>
+
+  <!-- 右：今日题 -->
+  <rect x="936" y="238" width="180" height="48" rx="24" fill="#E5A800" opacity="0.85"/>
+  <text x="1026" y="271" text-anchor="middle" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">今日题</text>
+
+  <g transform="translate(936, 336)">
+    <circle cx="20" cy="20" r="20" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="20" y="30" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">1</text>
+    <text x="60" y="16" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">这块 wiki 的哪一条属性，</text>
+    <text x="60" y="56" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">使它能<tspan fill="#E5A800">污染成功</tspan>？</text>
+  </g>
+
+  <g transform="translate(936, 470)">
+    <circle cx="20" cy="20" r="20" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="20" y="30" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">2</text>
+    <text x="60" y="16" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">harness 要在<tspan fill="#E5A800">入库时</tspan>记下什么，</text>
+    <text x="60" y="56" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">才能在第 4 轮之后自动把它</text>
+    <text x="60" y="96" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">挡掉或降权？</text>
+  </g>
+
+  <g transform="translate(930, 662)">
+    <rect x="0" y="0" width="610" height="108" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="26" y="44" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">一问两件，编号答也行</text>
+    <text x="26" y="84" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.8">明天同一时间公布判据，并出第 2 题</text>
+  </g>
+
+  <!-- 小人 -->
+  <g transform="translate(1412, 788) scale(0.92)">
+    <ellipse cx="56" cy="106" rx="52" ry="12" fill="#2C2C2C" opacity="0.3"/>
+    <ellipse cx="56" cy="32" rx="32" ry="35" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M24 22 C28 -10, 84 -10, 88 24 C80 7, 65 1, 56 11 C45 1, 30 7, 24 22 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="46" cy="36" r="3.2" fill="#2C2C2C"/>
+    <circle cx="66" cy="36" r="3.2" fill="#2C2C2C"/>
+    <path d="M48 47 C53 53, 59 53, 64 47" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M56 67 L56 94 M56 74 L26 88 M56 74 L86 88" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M16 86 L56 78 L96 86 L56 96 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M56 78 L56 96" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="1180" y="150" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 1180, 150)"/>
+  <rect x="1548" y="300" width="10" height="10" fill="#E5A800" transform="rotate(-12, 1548, 300)"/>
+  <rect x="1530" y="592" width="13" height="13" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1530, 592)"/>
+  <rect x="44" y="266" width="11" height="11" fill="#E5A800" transform="rotate(30, 44, 266)"/>
+  <rect x="44" y="620" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 44, 620)"/>
+  <rect x="1266" y="836" width="11" height="11" fill="#E5A800" transform="rotate(14, 1266, 836)"/>
+  <rect x="616" y="844" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 616, 844)"/>
+  <rect x="1160" y="838" width="9" height="9" fill="#E5A800" transform="rotate(-20, 1160, 838)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 214 C300 236, 640 236, 900 212', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1216, 120, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(60, 470, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.path('M1240 754 C1290 726, 1350 736, 1382 768', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+  rc.line(930, 632, 1470, 632, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+});
+</script>
+</body>
+</html>

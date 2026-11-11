@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>AI Agent 知识地图 · 真假判据</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="86" font-family="Ma Shan Zheng" font-size="58" fill="#2C2C2C">形容词式的判据，都是假判据</text>
+  <text x="70" y="134" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.75">把说不清的标准，换成能对着具体对象问出是 / 否的事实问题</text>
+  <text x="880" y="82" font-family="Caveat" font-size="38" font-weight="700" fill="#E5A800">Real vs. Fake Criteria</text>
+
+  <!-- 列头 -->
+  <text x="316" y="238" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C" opacity="0.5">问不出来</text>
+  <text x="856" y="238" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">能问出来</text>
+  <line x1="316" y1="252" x2="452" y2="252" stroke="#2C2C2C" stroke-width="2" opacity="0.35"/>
+  <line x1="856" y1="252" x2="992" y2="252" stroke="#E5A800" stroke-width="4"/>
+
+  <!-- 第 1 组 -->
+  <g>
+    <rect x="70" y="300" width="182" height="46" rx="23" fill="#E5A800" opacity="0.8"/>
+    <text x="161" y="332" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">上下文预算</text>
+    <path d="M278 316 L296 334 M296 316 L278 334" stroke="#CC4444" stroke-width="3.2"/>
+    <text x="316" y="336" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.42">这块内容重要吗</text>
+    <line x1="312" y1="324" x2="546" y2="324" stroke="#2C2C2C" stroke-width="2" opacity="0.42"/>
+    <path d="M690 326 L770 326" stroke="#2C2C2C" stroke-width="2.4" stroke-dasharray="7 5"/>
+    <polygon points="784,326 766,318 766,334" fill="#2C2C2C"/>
+    <rect x="848" y="306" width="404" height="38" fill="#E5A800" opacity="0.32"/>
+    <path d="M812 328 L822 340 L840 314" stroke="#E5A800" stroke-width="4" fill="none"/>
+    <text x="856" y="336" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">它会改变模型这一步的决策吗</text>
+  </g>
+
+  <!-- 第 2 组 -->
+  <g>
+    <rect x="70" y="405" width="182" height="46" rx="23" fill="#E5A800" opacity="0.8"/>
+    <text x="161" y="437" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">压缩与摘要</text>
+    <path d="M278 421 L296 439 M296 421 L278 439" stroke="#CC4444" stroke-width="3.2"/>
+    <text x="316" y="441" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.42">这条信息重要吗</text>
+    <line x1="312" y1="429" x2="546" y2="429" stroke="#2C2C2C" stroke-width="2" opacity="0.42"/>
+    <path d="M690 431 L770 431" stroke="#2C2C2C" stroke-width="2.4" stroke-dasharray="7 5"/>
+    <polygon points="784,431 766,423 766,439" fill="#2C2C2C"/>
+    <rect x="848" y="411" width="228" height="38" fill="#E5A800" opacity="0.32"/>
+    <path d="M812 433 L822 445 L840 419" stroke="#E5A800" stroke-width="4" fill="none"/>
+    <text x="856" y="441" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">它还有有效期吗</text>
+  </g>
+
+  <!-- 第 3 组 -->
+  <g>
+    <rect x="70" y="510" width="182" height="46" rx="23" fill="#E5A800" opacity="0.8"/>
+    <text x="161" y="542" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">破坏半径</text>
+    <path d="M278 526 L296 544 M296 526 L278 544" stroke="#CC4444" stroke-width="3.2"/>
+    <text x="316" y="546" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.42">这个动作危险吗</text>
+    <line x1="312" y1="534" x2="546" y2="534" stroke="#2C2C2C" stroke-width="2" opacity="0.42"/>
+    <path d="M690 536 L770 536" stroke="#2C2C2C" stroke-width="2.4" stroke-dasharray="7 5"/>
+    <polygon points="784,536 766,528 766,544" fill="#2C2C2C"/>
+    <rect x="848" y="516" width="258" height="38" fill="#E5A800" opacity="0.32"/>
+    <path d="M812 538 L822 550 L840 524" stroke="#E5A800" stroke-width="4" fill="none"/>
+    <text x="856" y="546" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">它可逆吗、影响谁</text>
+  </g>
+
+  <!-- 第 4 组 -->
+  <g>
+    <rect x="70" y="615" width="182" height="46" rx="23" fill="#E5A800" opacity="0.8"/>
+    <text x="161" y="647" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">评估</text>
+    <path d="M278 631 L296 649 M296 631 L278 649" stroke="#CC4444" stroke-width="3.2"/>
+    <text x="316" y="651" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.42">输出效果好吗</text>
+    <line x1="312" y1="639" x2="516" y2="639" stroke="#2C2C2C" stroke-width="2" opacity="0.42"/>
+    <path d="M690 641 L770 641" stroke="#2C2C2C" stroke-width="2.4" stroke-dasharray="7 5"/>
+    <polygon points="784,641 766,633 766,649" fill="#2C2C2C"/>
+    <rect x="848" y="621" width="502" height="38" fill="#E5A800" opacity="0.32"/>
+    <path d="M812 643 L822 655 L840 629" stroke="#E5A800" stroke-width="4" fill="none"/>
+    <text x="856" y="651" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">固定输入集的通过率，对比基线动了吗</text>
+  </g>
+
+  <!-- 读书的女孩 -->
+  <g transform="translate(1368, 706)">
+    <ellipse cx="60" cy="112" rx="56" ry="13" fill="#2C2C2C" opacity="0.32"/>
+    <ellipse cx="60" cy="34" rx="34" ry="37" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M26 24 C30 -10, 90 -10, 94 26 C86 8, 70 2, 60 12 C48 2, 32 8, 26 24 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="49" cy="38" r="3.4" fill="#2C2C2C"/>
+    <circle cx="71" cy="38" r="3.4" fill="#2C2C2C"/>
+    <path d="M52 50 C57 56, 63 56, 68 50" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M60 71 L60 98 M60 78 L28 92 M60 78 L92 92" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M18 90 L60 82 L102 90 L60 100 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M60 82 L60 100" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 对话气泡 -->
+  <ellipse cx="1136" cy="788" rx="196" ry="64" stroke="#2C2C2C" stroke-width="3" fill="#FFFDF7"/>
+  <path d="M1322 772 L1364 754 L1320 744" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+  <text x="1136" y="800" text-anchor="middle" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">先把形容词换成事实问题</text>
+
+  <!-- 底部结论 -->
+  <text x="110" y="796" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">这是整张知识图的通用解法</text>
+
+  <!-- 装饰小方块 -->
+  <rect x="720" y="176" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 720, 176)"/>
+  <rect x="1400" y="180" width="10" height="10" fill="#E5A800" transform="rotate(-12, 1400, 180)"/>
+  <rect x="1370" y="430" width="9" height="9" fill="#E5A800" transform="rotate(26, 1370, 430)"/>
+  <rect x="1466" y="322" width="13" height="13" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 1466, 322)"/>
+  <rect x="1436" y="548" width="11" height="11" fill="#E5A800" transform="rotate(14, 1436, 548)"/>
+  <rect x="1524" y="642" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 1524, 642)"/>
+  <rect x="700" y="770" width="9" height="9" fill="#E5A800" transform="rotate(30, 700, 770)"/>
+  <rect x="626" y="220" width="9" height="9" fill="#E5A800" transform="rotate(-14, 626, 220)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 152 C240 174, 500 174, 660 152', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(856, 58, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.path('M112 814 C210 838, 380 838, 480 812', { stroke: '#E5A800', strokeWidth: 2.6, roughness: 1.8, fill: 'none' });
+  rc.line(70, 700, 1330, 700, { stroke: '#2C2C2C', strokeWidth: 1.4, roughness: 1.6 });
+  rc.circle(1516, 250, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.path('M1396 500 C1436 474, 1490 478, 1516 506', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+});
+</script>
+</body>
+</html>

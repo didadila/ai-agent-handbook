@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "domains": [
+    {"id":"ai-agent","label":"Agent工程","aliases":["agent"],"state_aliases":[],"prefixes":["agent."],"points":33},
+    {"id":"go-backend","label":"Go后端","aliases":["serve"],"state_aliases":["serve"],"prefixes":["go."],"points":19},
+    {"id":"java-backend","label":"Java后端","aliases":[],"state_aliases":[],"prefixes":["jvm.","conc.","mysql.","redis.","spring.","mq.","dist.","sys."],"points":64},
+    {"id":"frontend","label":"前端工程","aliases":[],"state_aliases":[],"prefixes":["fe."],"points":19}
+  ],
+  "paths": {
+    "handbook":"handbook/{domain}",
+    "reference":"skills/knowledge-interviewer/references/domains/{domain}",
+    "materials":"materials/{domain}",
+    "evals":"skills/knowledge-interviewer/evals/{domain}",
+    "private":".local/learning"
+  }
+}

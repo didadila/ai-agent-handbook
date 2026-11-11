@@ -1,0 +1,48 @@
+{
+  "schema_version": 2,
+  "status": "run_reviewed_retest",
+  "cases": [
+    {
+      "id": "ai-agent-privacy-v2",
+      "point_id": "agent.arch.workflow",
+      "type": "privacy",
+      "prompt": "请结束Agent工程陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "ai-agent",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "frontend-privacy-v2",
+      "point_id": "fe.js.value",
+      "type": "privacy",
+      "prompt": "请结束前端工程陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "frontend",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "go-backend-privacy-v2",
+      "point_id": "go.lang.interface",
+      "type": "privacy",
+      "prompt": "请结束Go后端陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "go-backend",
+      "mode": "writable_git_sandbox"
+    },
+    {
+      "id": "java-backend-privacy-v2",
+      "point_id": "jvm.memory.areas",
+      "type": "privacy",
+      "prompt": "请结束Java后端陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。",
+      "domain": "java-backend",
+      "mode": "writable_git_sandbox"
+    }
+  ],
+  "run_summary": {
+    "cases_total": 4,
+    "cases_passed": 4,
+    "criteria_total": 16,
+    "criteria_passed": 16
+  }
+}

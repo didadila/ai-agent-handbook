@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>Go 后端知识地图 · 从值语义到任务运行时</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1600px; height: 900px;
+    background: #FFFDF7;
+    font-family: "Ma Shan Zheng", "PingFang SC", cursive;
+    color: #2C2C2C;
+    position: relative; overflow: hidden;
+  }
+  .paper {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(#00000008 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .wrap { position: relative; padding: 54px 70px 40px; height: 100%; }
+  header { display: flex; align-items: flex-end; gap: 22px; }
+  h1 { font-size: 54px; font-weight: normal; letter-spacing: 2px; }
+  .sub { font-size: 22px; opacity: .62; padding-bottom: 8px; }
+  .tag {
+    margin-left: auto; font-family: Caveat, cursive; font-weight: 700;
+    font-size: 32px; color: #2F6E7A; padding-bottom: 4px;
+  }
+
+  .grid {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 18px 30px;
+    height: 690px;
+  }
+  .card {
+    position: relative;
+    border: 2.5px solid #2C2C2C;
+    border-radius: 3px;
+    background: #FFFEF9;
+    padding: 16px 20px 14px;
+    box-shadow: 5px 5px 0 #2C2C2C12;
+  }
+  .card::before {
+    content: ""; position: absolute; left: -2.5px; top: -2.5px; bottom: -2.5px;
+    width: 10px; background: var(--c); border: 2.5px solid #2C2C2C; border-right: none;
+  }
+  .card h2 { font-size: 27px; font-weight: normal; margin-left: 10px; }
+  .card .ids {
+    margin-left: 10px; font-family: Caveat, cursive; font-size: 18px;
+    color: #2F6E7A; font-weight: 700; letter-spacing: .4px;
+  }
+  .card ul { list-style: none; margin: 9px 0 0 10px; }
+  .card li { font-size: 17.5px; line-height: 1.55; opacity: .85; }
+  .card li::before { content: "·"; margin-right: 7px; color: var(--c); font-weight: 700; }
+  .card .q {
+    position: absolute; right: 14px; bottom: 11px;
+    font-size: 14px; opacity: .55; font-style: italic;
+  }
+
+  .card .lvl {
+    position: absolute; right: 14px; top: 14px;
+    font-family: Caveat, cursive; font-size: 15px; font-weight: 700;
+    color: #2F6E7A; background: #FFFDF7;
+    border: 1.5px dashed #2F6E7A66; border-radius: 20px;
+    padding: 1px 10px; letter-spacing: .3px;
+  }
+  .card .lvl.late { color: #B23A2E; border-color: #B23A2E55; }
+
+  footer {
+    position: absolute; left: 70px; right: 70px; bottom: 34px;
+    display: flex; align-items: center; gap: 18px;
+    border-top: 1.5px solid #2C2C2C33; padding-top: 14px;
+  }
+  footer .line { font-size: 19px; }
+  footer .line b { color: #B23A2E; font-weight: normal; }
+  footer .hint { margin-left: auto; font-family: Caveat, cursive; font-size: 22px; color: #B8860B; }
+</style>
+</head>
+<body>
+<div class="paper"></div>
+<div class="wrap">
+  <header>
+    <h1>Go 后端知识地图</h1>
+    <div class="sub">从值的语义，到可恢复的任务运行时</div>
+    <div class="tag">按依赖顺序读，不要从第 6 章开始</div>
+  </header>
+
+  <div class="grid">
+    <div class="card" style="--c:#3F7D8C">
+      <h2>1 · 值与错误</h2>
+      <div class="lvl">L1 · 语言核心</div>
+      <div class="ids">go.lang.value / error / interface</div>
+      <ul>
+        <li>struct 拷贝，slice/map 共享底层数组</li>
+        <li>零值不能表达「没传」→ *T / Null*</li>
+        <li>错误是返回值：%w、errors.Is/As</li>
+        <li>typed nil 让判空失效</li>
+      </ul>
+      <div class="q">判据：这段代码会不会改到别人的数据？</div>
+    </div>
+
+    <div class="card" style="--c:#3F7D8C">
+      <h2>4 · 数据与一致性</h2>
+      <div class="lvl">L2 · 数据层</div>
+      <div class="ids">go.data.tx / index / consistency</div>
+      <ul>
+        <li>一个业务动作一个事务，事务内不调网络</li>
+        <li>索引是否生效只由 EXPLAIN 回答</li>
+        <li>至少一次 + 幂等消费 + 分区键</li>
+        <li>Outbox 同库同事务，对账兜底</li>
+      </ul>
+      <div class="q">判据：消息重复两次，业务会怎样？</div>
+    </div>
+
+    <div class="card" style="--c:#C98A2E">
+      <h2>2 · 并发与生命周期</h2>
+      <div class="lvl">L1 · 语言核心</div>
+      <div class="ids">go.conc.goroutine / context / race / backpressure</div>
+      <ul>
+        <li>每个 goroutine 都要有退出条件与上限</li>
+        <li>context 是取消树，断一层就失效</li>
+        <li>共享状态必须同步，-race 进 CI</li>
+        <li>队列有界，满了必须拒绝或阻塞</li>
+      </ul>
+      <div class="q">判据：同时最多有多少个？谁在保证？</div>
+    </div>
+
+    <div class="card" style="--c:#C98A2E">
+      <h2>5 · 可观测性</h2>
+      <div class="lvl">L3 · 分布式</div>
+      <div class="ids">go.obs.log / trace / slo</div>
+      <ul>
+        <li>日志字段固定，错误只打一次</li>
+        <li>指标看 P95/P99，不看均值</li>
+        <li>每个外部调用一个 span</li>
+        <li>告警按错误预算燃烧速度</li>
+      </ul>
+      <div class="q">判据：5 分钟内能不能定位到哪一段？</div>
+    </div>
+
+    <div class="card" style="--c:#B23A2E">
+      <h2>3 · 服务边界</h2>
+      <div class="lvl">L2 · 生产化</div>
+      <div class="ids">go.svc.timeout / pool / idempotency / shutdown</div>
+      <ul>
+        <li>每层超时递减，Server/Client 默认无超时</li>
+        <li>池上限 × 副本数 ≤ DB 上限</li>
+        <li>超时 ≠ 没执行，重试前先查状态</li>
+        <li>先摘流量，再等在途，最后关依赖</li>
+      </ul>
+      <div class="q">判据：这个请求最坏要多久？谁保证？</div>
+    </div>
+
+    <div class="card" style="--c:#B23A2E">
+      <h2>6 · Agent 后端</h2>
+      <div class="lvl late">L4 · Agent 后端</div>
+      <div class="ids">go.agent.gateway / runtime</div>
+      <ul>
+        <li>首 token 之后不能重放，只能中断</li>
+        <li>usage 可能缺失 → 估算 + 对账</li>
+        <li>任务状态落库，租约接管失联 worker</li>
+        <li>审批是持久化状态，不是弹窗</li>
+      </ul>
+      <div class="q">判据：kill -9 之后，这个任务会怎样？</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="line">全书一句话：<b>「应该没事」不是判据，「谁在保证」才是。</b></div>
+    <div class="hint">先跑起来，再问失败；先写测试，再讲取舍</div>
+  </footer>
+</div>
+</body>
+</html>

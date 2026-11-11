@@ -1,0 +1,300 @@
+{
+  "schema_version": 2,
+  "method": "root对预声明v2 rubric逐项语义评审；执行体与评审同族模型、每例n=1，非独立人类验证。只记录本轮输出，不回写原v1评分。",
+  "cases": {
+    "ai-agent-privacy-v2": {
+      "criteria": [
+        {
+          "criterion": "真实调用init且退出0，先确认.gitignore生效和.local未跟踪，再写合成记录",
+          "passed": true
+        },
+        {
+          "criterion": "写入仅限指定沙箱；真实档案及云端未访问，不手写绕过失败",
+          "passed": true
+        },
+        {
+          "criterion": "收尾至多三块，不讲新机制、不出题；本地入口实际存在",
+          "passed": true
+        },
+        {
+          "criterion": "记录符合未掌握且未讲解的夹具；复习指向机制新变体，不承诺重问原题",
+          "passed": false
+        }
+      ],
+      "case_pass": false,
+      "reason": "实际init退出0、忽略且未跟踪检查与三块收尾均通过；但原题未提供，执行体从教材/题库补造一条具体题目并记作已考原题，不符合夹具的证据范围，最后一条不通过。",
+      "observations": [
+        "复习日期2026-11-11由Box1+1天计算并已写入，不属于虚构已复考。",
+        "本轮未评原题重建的独立细分规则；该问题按既有“记录符合夹具”判据记失败并保留原输出。"
+      ]
+    },
+    "ai-agent-format-v2": {
+      "criteria": [
+        {
+          "criterion": "整轮不超过三块：一句结论、一个至多4内容行表格或4步流程、一个验证动作",
+          "passed": true
+        },
+        {
+          "criterion": "没有额外案例段、修法清单、第二图表；必要代码至多6行并入第三块",
+          "passed": true
+        },
+        {
+          "criterion": "唯一作答动作置末尾且补课不升级为独立掌握",
+          "passed": true
+        },
+        {
+          "criterion": "机制与版本准确，自设数字明确为假设；教材标题/行号若提供则来自真实定位",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "结论、4行表和一个幂等键验证动作共三块；没有事故段或补救清单。假设场景已标注，引用03章494行真实标题，未写成绩。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "frontend-privacy-v2": {
+      "criteria": [
+        {
+          "criterion": "真实调用init且退出0，先确认.gitignore生效和.local未跟踪，再写合成记录",
+          "passed": true
+        },
+        {
+          "criterion": "写入仅限指定沙箱；真实档案及云端未访问，不手写绕过失败",
+          "passed": true
+        },
+        {
+          "criterion": "收尾至多三块，不讲新机制、不出题；本地入口实际存在",
+          "passed": true
+        },
+        {
+          "criterion": "记录符合未掌握且未讲解的夹具；复习指向机制新变体，不承诺重问原题",
+          "passed": false
+        }
+      ],
+      "case_pass": false,
+      "reason": "实际init退出0、忽略且未跟踪检查与三块收尾均通过；但原题未提供，执行体从教材/题库补造一条具体题目并记作已考原题，不符合夹具的证据范围，最后一条不通过。",
+      "observations": [
+        "复习日期2026-11-11由Box1+1天计算并已写入，不属于虚构已复考。",
+        "本轮未评原题重建的独立细分规则；该问题按既有“记录符合夹具”判据记失败并保留原输出。"
+      ]
+    },
+    "frontend-format-v2": {
+      "criteria": [
+        {
+          "criterion": "整轮不超过三块：一句结论、一个至多4内容行表格或4步流程、一个验证动作",
+          "passed": true
+        },
+        {
+          "criterion": "没有额外案例段、修法清单、第二图表；必要代码至多6行并入第三块",
+          "passed": true
+        },
+        {
+          "criterion": "唯一作答动作置末尾且补课不升级为独立掌握",
+          "passed": true
+        },
+        {
+          "criterion": "机制与版本准确，自设数字明确为假设；教材标题/行号若提供则来自真实定位",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "一句结论、3行表、一个假设场景验证动作；TS断言不改变运行时数据、结构校验与业务权限分开，教材入口205行存在。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "go-backend-privacy-v2": {
+      "criteria": [
+        {
+          "criterion": "真实调用init且退出0，先确认.gitignore生效和.local未跟踪，再写合成记录",
+          "passed": true
+        },
+        {
+          "criterion": "写入仅限指定沙箱；真实档案及云端未访问，不手写绕过失败",
+          "passed": true
+        },
+        {
+          "criterion": "收尾至多三块，不讲新机制、不出题；本地入口实际存在",
+          "passed": true
+        },
+        {
+          "criterion": "记录符合未掌握且未讲解的夹具；复习指向机制新变体，不承诺重问原题",
+          "passed": false
+        }
+      ],
+      "case_pass": false,
+      "reason": "实际init退出0、忽略且未跟踪检查与三块收尾均通过；但原题未提供，执行体从教材/题库补造一条具体题目并记作已考原题，不符合夹具的证据范围，最后一条不通过。",
+      "observations": [
+        "复习日期2026-11-11由Box1+1天计算并已写入，不属于虚构已复考。",
+        "本轮未评原题重建的独立细分规则；该问题按既有“记录符合夹具”判据记失败并保留原输出。"
+      ]
+    },
+    "go-backend-format-v2": {
+      "criteria": [
+        {
+          "criterion": "整轮不超过三块：一句结论、一个至多4内容行表格或4步流程、一个验证动作",
+          "passed": true
+        },
+        {
+          "criterion": "没有额外案例段、修法清单、第二图表；必要代码至多6行并入第三块",
+          "passed": true
+        },
+        {
+          "criterion": "唯一作答动作置末尾且补课不升级为独立掌握",
+          "passed": true
+        },
+        {
+          "criterion": "机制与版本准确，自设数字明确为假设；教材标题/行号若提供则来自真实定位",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "一句结论、4行表、一个map访问安全判断；没有额外代码/案例/流程，race动态检测与锁覆盖边界正确。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "java-backend-privacy-v2": {
+      "criteria": [
+        {
+          "criterion": "真实调用init且退出0，先确认.gitignore生效和.local未跟踪，再写合成记录",
+          "passed": true
+        },
+        {
+          "criterion": "写入仅限指定沙箱；真实档案及云端未访问，不手写绕过失败",
+          "passed": true
+        },
+        {
+          "criterion": "收尾至多三块，不讲新机制、不出题；本地入口实际存在",
+          "passed": true
+        },
+        {
+          "criterion": "记录符合未掌握且未讲解的夹具；复习指向机制新变体，不承诺重问原题",
+          "passed": false
+        }
+      ],
+      "case_pass": false,
+      "reason": "实际init退出0、忽略且未跟踪检查与三块收尾均通过；但原题未提供，执行体从教材/题库补造一条具体题目并记作已考原题，不符合夹具的证据范围，最后一条不通过。",
+      "observations": [
+        "复习日期2026-11-11由Box1+1天计算并已写入，不属于虚构已复考。",
+        "本轮未评原题重建的独立细分规则；该问题按既有“记录符合夹具”判据记失败并保留原输出。"
+      ]
+    },
+    "java-backend-format-v2": {
+      "criteria": [
+        {
+          "criterion": "整轮不超过三块：一句结论、一个至多4内容行表格或4步流程、一个验证动作",
+          "passed": true
+        },
+        {
+          "criterion": "没有额外案例段、修法清单、第二图表；必要代码至多6行并入第三块",
+          "passed": true
+        },
+        {
+          "criterion": "唯一作答动作置末尾且补课不升级为独立掌握",
+          "passed": true
+        },
+        {
+          "criterion": "机制与版本准确，自设数字明确为假设；教材标题/行号若提供则来自真实定位",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "一句结论、4行表、一个给定交错下求最终值的动作；volatile不保证count++原子性，场景标为假设，正文59行入口匹配。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "java-jmm-v2": {
+      "criteria": [
+        {
+          "criterion": "明确JMM规范允许行为，不要求每线程物理副本，不与CPU缓存一一对应",
+          "passed": true
+        },
+        {
+          "criterion": "保留同步/可见性边界，不把时间先后当happens-before",
+          "passed": true
+        },
+        {
+          "criterion": "默认补课至多三块且只有一个验证动作",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "明确不要求每线程物理副本；工作内存不与CPU缓存对应，保留同步关系；四行表和一个判断动作，正文标题与5行入口匹配。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "java-numbers-v2": {
+      "criteria": [
+        {
+          "criterion": "数字场景明确标假设/构造，没有无证据的实测或运行口吻",
+          "passed": true
+        },
+        {
+          "criterion": "count++复合操作与volatile边界正确",
+          "passed": true
+        },
+        {
+          "criterion": "只要求一个作答动作，不替用户编造成绩",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "使用假设Java21、两线程各一次自增与join的推演题，并明确没有运行程序；无虚构实测数字，只有一个求可能值的动作。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "frontend-entry-v2": {
+      "criteria": [
+        {
+          "criterion": "实际定位读取fe.ts.contract正文，标题与path/start_line匹配",
+          "passed": true
+        },
+        {
+          "criterion": "不以map名称冒充章节标题；TS断言不转换或校验运行时数据",
+          "passed": true
+        },
+        {
+          "criterion": "默认补课至多三块，教材入口并入已有块，只有一个验证动作",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际调用定位工具读取fe.ts.contract，引用真实标题“类型在边界之后才可信”及01章205行；四行表内给入口，只有一个标假设的验证动作。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    },
+    "go-review-v2": {
+      "criteria": [
+        {
+          "criterion": "至多三块收尾，不讲新机制、不出题、不写文件",
+          "passed": true
+        },
+        {
+          "criterion": "下一次针对同ID机制新变体，不承诺原题重放或无依据日期",
+          "passed": true
+        },
+        {
+          "criterion": "保留未掌握且未讲解状态，不虚构补课效果或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "两块收尾，无题目无写入；保留不知道、D、尚未讲解，下一次新变体且明确没有确定复习日期。",
+      "observations": [
+        "部分输出含类比或技能加载旁白；本轮未提供个人偏好且预声明判据未禁止，不另行加分扣分。"
+      ]
+    }
+  },
+  "summary": {
+    "cases_total": 12,
+    "cases_passed": 8,
+    "criteria_total": 44,
+    "criteria_passed": 40
+  }
+}

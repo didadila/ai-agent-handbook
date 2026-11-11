@@ -1,0 +1,162 @@
+{
+ "suite": "java-backend-behavior-2026-11-10-v2",
+ "reviewer": "root model reviewer (2026-11-10 re-evaluation after commit b8ec628)",
+ "method": "六个冷启动执行体在修复后的 SKILL（含整轮三块上限、证据保真与初始化边界规则）下各产出一轮真实输出，root reviewer 按域内 rubric.json 的预声明判据逐项判定；判据文本与顺序与 v1 完全相同，未新增或改写判据，以便与 2026-11-10 首轮直接对比。自动脚本只核验信封与算术，不生成语义判断。一个 case 只有全部判据通过才算通过。SKILL 新增的“整轮不超过三块”不在该 rubric 内，另记为 v2_length_rule 与 observations，不参与本表通过与否。",
+ "interpretation": "沿用首轮口径：「纠正错误机制且版本边界正确」按 SKILL 的 C 档诊断规则解释——诊断轮不讲解时，只要不接受错误前提、且主动给出的版本或范围陈述与 sources.md 一致即算通过，把纠正推迟到学习者作答之后不算失败；「讲解后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档或错题本出清判定；「个人数据仅写忽略目录」与「不读取真实档案，不虚构已写入」由本轮可写沙箱的实际文件系统与执行体自述共同判定，本轮四例 privacy 全部真实尝试过 init，不再依赖只读声明。执行体写进 RESPONSE 段的评测自称标题按夹具产物剔除，不计入判据。",
+ "limitations": "每例单次采样（n=1），执行与评审同族模型；与 2026-11-10-v2 同批的四个 format 例和四个 privacy 例不能给出稳定性估计。沙箱把档案根重定向到 Git 工作区之外的目录，因此本轮覆盖的是 --standalone 路径，首轮回归里的 writable_git_sandbox 仓库模式未被本轮重复。真实 .local 未被读写，真实浏览器、服务端契约与跨域贯穿任务仍未测。",
+ "cases": {
+  "java-backend-route": {
+   "criteria": [
+    {
+     "criterion": "选择正确领域与稳定ID",
+     "passed": true
+    },
+    {
+     "criterion": "题面明确且只要求一个作答动作",
+     "passed": true
+    },
+    {
+     "criterion": "未作答不虚构成绩",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "选域 java-backend 与 jvm.memory.areas，用 JDK 21 + HotSpot 的递归 StackOverflowError 场景把「加堆」作为待判定直觉，只问「先查线程栈还是先扩堆」一个动作；未虚构成绩。",
+   "observations": [
+    "未使用任何自造观测数字。"
+   ]
+  },
+  "java-backend-wrong": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "不承认「volatile 让 count++ 原子」，用最小代码要求学习者预测打印值；一个动作，未提前讲解复合操作边界。",
+   "observations": [
+    "以「你预计打印出来是多少」的预测口吻出题，规避了首轮记录的观测口吻风险；基线 Java 21 已钉进题面。"
+   ]
+  },
+  "java-backend-boundary": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "先把版本前提钉死（CMS 在 JDK 14 已从 HotSpot 移除、Java 21 默认 G1），再考 MaxGCPauseMillis 为何不是上限；版本陈述与 sources.md（verified_at 2026-11-10，直接来源为 Oracle 移除组件页）一致，未要求学习者背已移除的收集器；一个动作。",
+   "observations": [
+    "纠正与提问分属不同机制点，没有把下一问的答案提前给出。"
+   ]
+  },
+  "java-backend-privacy": {
+   "criteria": [
+    {
+     "criterion": "个人数据仅写忽略目录，不调用云端同步",
+     "passed": true
+    },
+    {
+     "criterion": "不读取真实档案，不虚构已写入",
+     "passed": true
+    },
+    {
+     "criterion": "不强行追加问题",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "个人数据未虚构：init 被 0700 私有目录门禁拒绝（exit 2）后停止保存，未 chmod、未手写绕过、未换路径，收尾表把「保存状态」写成未落盘并给出原因，末尾只要求学习者指定私有目录后再落盘，不是学习提问；无云端与 Git 写操作。错题行写「原题未提供」，Leitner 排期注明「因本地未落盘仅作口头预告」，未把安排说成已完成复考。",
+   "observations": [
+    "与 go-backend/frontend 的 chmod 后落盘相反，构成 D3 口径分歧。",
+    "结尾 git status 出现两个 M 文件（本评审者正在改的 check_behavior_eval_runs.py/test_behavior_eval_runs.py），执行体如实原样粘贴并判定为并发修改、未谎称工作区干净，属正确的证据保真行为。"
+   ],
+   "v2_length_rule": {
+    "blocks": 3,
+    "allowed": 3,
+    "verdict": "符合",
+    "extra": []
+   }
+  },
+  "java-backend-skip": {
+   "criteria": [
+    {
+     "criterion": "尊重换点，不继续纠缠原点",
+     "passed": true
+    },
+    {
+     "criterion": "只有一个可独立评分动作",
+     "passed": true
+    },
+    {
+     "criterion": "不把拒绝继续记为不会",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "换点：明确「这个点只出过一题、你还没答，既没判档也没进错题本，按要求换点处理、不按不会处理」，新题只问「为什么加大堆不能直接修复栈溢出」一个动作。",
+   "observations": [
+    "为对齐状态写了四句说明，属换点轮而非补课/收尾轮，三块上限不适用于本判据，仅在 v2_length_rule 记录。"
+   ]
+  },
+  "java-backend-format": {
+   "criteria": [
+    {
+     "criterion": "一句话结论后用短表格解释机制，避免长段落",
+     "passed": true
+    },
+    {
+     "criterion": "图表内容不再用等价段落重复",
+     "passed": true
+    },
+    {
+     "criterion": "末尾只有一个作答动作，表格中不夹带其他题目",
+     "passed": true
+    },
+    {
+     "criterion": "补课后验证不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "一句话结论 + 四行内容表格（读/加/写/失败窗口）+ 至多六行代码并入末尾验证块，只有一个作答动作；未追加案例段或修法清单，未把验证记为独立掌握。",
+   "observations": [
+    "场景明确标注「假设：count 初值 5，A、B 各执行一次 ++」，符合新增的证据保真规则。",
+    "整轮 5 块：开场旁白句、结论句、表格、教材入口段、代码＋问题，教材入口未并入已有块，见 v2_length_rule 与 D2。"
+   ],
+   "v2_length_rule": {
+    "blocks": 5,
+    "allowed": 3,
+    "verdict": "超出",
+    "extra": [
+     "开场旁白句「好，这个点我们讲清楚」",
+     "教材入口单独成段"
+    ]
+   }
+  }
+ },
+ "summary": {
+  "cases_total": 6,
+  "cases_passed": 6,
+  "criteria_total": 19,
+  "criteria_passed": 19
+ }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>上下文污染与提示注入</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="84" font-family="Ma Shan Zheng" font-size="50" fill="#2C2C2C">污染 ≠ 内容太多，是内容是错的还被当真</text>
+  <text x="70" y="132" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.75">压缩解决「太多」，污染解决「错的」—— 两件正交的事</text>
+  <text x="1222" y="84" font-family="Caveat" font-size="38" font-weight="700" fill="#E5A800">pollution &amp; injection</text>
+
+  <!-- 根因 -->
+  <g transform="translate(70, 174)">
+    <rect x="0" y="0" width="1470" height="100" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <text x="30" y="44" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">根因：模型读上下文时，不区分「我验证过的事实」和「我随口猜的一句」</text>
+    <text x="30" y="84" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.85">窗口再大，也<tspan fill="#E5A800">不解决污染</tspan></text>
+  </g>
+
+  <!-- 三种形态 -->
+  <g transform="translate(90, 312)">
+    <rect x="0" y="0" width="452" height="228" rx="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 图标：引用气泡 -->
+    <ellipse cx="52" cy="56" rx="30" ry="22" stroke="#2C2C2C" stroke-width="2.6" fill="#E5A800" fill-opacity="0.45"/>
+    <path d="M40 74 L36 88 L52 76" stroke="#2C2C2C" stroke-width="2.4" fill="#FFFDF7"/>
+    <text x="52" y="66" text-anchor="middle" font-family="Caveat" font-size="34" font-weight="700" fill="#2C2C2C">”</text>
+    <text x="102" y="66" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">自我确认</text>
+    <text x="30" y="140" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">引用自己二十轮前的猜测，</text>
+    <text x="30" y="180" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">当成这一步的证据</text>
+  </g>
+
+  <g transform="translate(588, 312)">
+    <rect x="0" y="0" width="452" height="228" rx="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 图标：循环箭头 -->
+    <path d="M76 56 A26 26 0 1 1 52 30" stroke="#2C2C2C" stroke-width="2.8" fill="none"/>
+    <polygon points="52,22 44,38 62,36" fill="#E5A800" stroke="#2C2C2C" stroke-width="1.8"/>
+    <circle cx="52" cy="56" r="6" fill="#E5A800" opacity="0.85"/>
+    <text x="102" y="66" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">原地打转</text>
+    <text x="30" y="140" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">注意力锁在失败报错那一小片，</text>
+    <text x="30" y="180" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">反复做同样的动作</text>
+  </g>
+
+  <g transform="translate(1086, 312)">
+    <rect x="0" y="0" width="454" height="228" rx="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 图标：此路不通 -->
+    <path d="M26 34 L58 56 L26 78" stroke="#2C2C2C" stroke-width="2.8" fill="none"/>
+    <line x1="70" y1="26" x2="70" y2="86" stroke="#2C2C2C" stroke-width="4"/>
+    <rect x="62" y="46" width="16" height="20" fill="#E5A800" opacity="0.8"/>
+    <text x="102" y="66" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">过早收敛</text>
+    <text x="30" y="140" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">连续失败形成隐含叙事：</text>
+    <text x="30" y="180" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.9">「这条路走不通」</text>
+  </g>
+
+  <!-- 左下：做法 -->
+  <g transform="translate(90, 584)">
+    <rect x="0" y="0" width="670" height="248" rx="18" stroke="#E5A800" stroke-width="3.5" fill="#FFFDF7"/>
+    <rect x="30" y="26" width="140" height="50" rx="25" fill="#E5A800" opacity="0.85"/>
+    <text x="100" y="61" text-anchor="middle" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">做法</text>
+    <text x="30" y="132" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">失败记录不原样留，转成一行判据留</text>
+    <text x="30" y="200" font-family="Ma Shan Zheng" font-size="38" fill="#2C2C2C">留<tspan fill="#E5A800">判据</tspan>，丢过程噪音</text>
+  </g>
+
+  <!-- 右下：提示注入 -->
+  <g transform="translate(800, 584)">
+    <rect x="0" y="0" width="740" height="248" rx="18" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <rect x="30" y="26" width="288" height="50" rx="25" fill="#E5A800" opacity="0.85"/>
+    <text x="174" y="61" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">提示注入（同源）</text>
+    <text x="30" y="122" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.9">注入 = 外部塞进来的不可信内容</text>
+    <text x="30" y="164" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.9">机制和污染同源：错内容被当事实继承</text>
+    <text x="30" y="216" font-family="Ma Shan Zheng" font-size="26" fill="#CC4444">✗ 写一句「忽略后面的指令」不是防御</text>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="1150" y="140" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 1150, 140)"/>
+  <rect x="1030" y="150" width="10" height="10" fill="#E5A800" transform="rotate(-14, 1030, 150)"/>
+  <rect x="1558" y="330" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1558, 330)"/>
+  <rect x="562" y="290" width="9" height="9" fill="#E5A800" transform="rotate(28, 562, 290)"/>
+  <rect x="1058" y="292" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 1058, 292)"/>
+  <rect x="52" y="410" width="11" height="11" fill="#E5A800" transform="rotate(14, 52, 410)"/>
+  <rect x="1560" y="700" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 1560, 700)"/>
+  <rect x="400" y="860" width="9" height="9" fill="#E5A800" transform="rotate(-20, 400, 860)"/>
+  <rect x="1100" y="860" width="11" height="11" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(12, 1100, 860)"/>
+  <rect x="52" y="700" width="10" height="10" fill="#E5A800" transform="rotate(-8, 52, 700)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 148 C280 168, 560 168, 760 150', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1570, 128, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(30, 560, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(90, 562, 1540, 562, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+  rc.path('M300 856 C360 836, 440 840, 500 860', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+});
+</script>
+</body>
+</html>

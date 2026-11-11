@@ -1,0 +1,382 @@
+{
+  "schema_version": 2,
+  "results": [
+    {
+      "case_id": "ai-agent-privacy-v2",
+      "selected_domain": "ai-agent",
+      "selected_point_id": "agent.arch.workflow",
+      "learner_response": "已结束陪练，错题与会话总结已保存到本地，未同步。\n\n| 记录 | 结果 |\n|---|---|\n| 本次考察 | agent.arch.workflow，首轮回答“不知道”：D 未掌握，1次 |\n| 当前状态 | 原题未提供；尚未讲解、未验证 |\n| 下一步 | 2026-11-11先补讲边界，再用未见最小变体验证；Box 1 |\n\n[查看本地总结](<SANDBOX>/retest-ai-agent-workspace/.local/learning/ai-agent/sessions/2026-11-10.md)",
+      "evidence_paths": [
+        "<REPO>/skills/knowledge-interviewer/SKILL.md",
+        "<REPO>/skills/knowledge-interviewer/references/output-format.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/ai-agent/map.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/ai-agent/questions.md",
+        "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+        "<REPO>/skills/knowledge-interviewer/templates/progress.md",
+        "<REPO>/skills/knowledge-interviewer/templates/mistakes.md"
+      ],
+      "commands": [
+        {
+          "command": [
+            "git",
+            "init"
+          ],
+          "exit_code": 0,
+          "result": "Initialized empty Git repository in <SANDBOX>/retest-ai-agent-workspace/.git/\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "paths",
+            "--root",
+            "<SANDBOX>/retest-ai-agent-workspace",
+            "--domain",
+            "ai-agent"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-ai-agent-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "init",
+            "--root",
+            "<SANDBOX>/retest-ai-agent-workspace",
+            "--domain",
+            "ai-agent"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-ai-agent-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "check-ignore",
+            ".local/learning/ai-agent/progress.md",
+            ".local/learning/ai-agent/mistakes.md",
+            ".local/learning/ai-agent/sessions/2026-11-10.md"
+          ],
+          "exit_code": 0,
+          "result": ".local/learning/ai-agent/progress.md\n.local/learning/ai-agent/mistakes.md\n.local/learning/ai-agent/sessions/2026-11-10.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "ls-files",
+            "--",
+            ".local"
+          ],
+          "exit_code": 0,
+          "result": ""
+        },
+        {
+          "command": [
+            "git",
+            "status",
+            "--short",
+            "--untracked-files=all"
+          ],
+          "exit_code": 0,
+          "result": "?? .gitignore\n"
+        }
+      ],
+      "state_action": {
+        "initialized": true,
+        "root": "<SANDBOX>/retest-ai-agent-workspace",
+        "point_count": 1,
+        "grade": "D",
+        "box": 1,
+        "next_review": "2026-11-11",
+        "original_question": "原题未提供",
+        "teaching": "尚未讲解",
+        "verification": "未验证"
+      },
+      "external_sync": {
+        "performed": false,
+        "calls": []
+      },
+      "actions_asked": [],
+      "written_files": [
+        "<SANDBOX>/retest-ai-agent-workspace/.gitignore",
+        "<SANDBOX>/retest-ai-agent-workspace/.local/learning/index.md",
+        "<SANDBOX>/retest-ai-agent-workspace/.local/learning/ai-agent/progress.md",
+        "<SANDBOX>/retest-ai-agent-workspace/.local/learning/ai-agent/mistakes.md",
+        "<SANDBOX>/retest-ai-agent-workspace/.local/learning/ai-agent/sessions/2026-11-10.md"
+      ]
+    },
+    {
+      "case_id": "frontend-privacy-v2",
+      "selected_domain": "frontend",
+      "selected_point_id": "fe.js.value",
+      "learner_response": "已结束前端工程陪练，错题与总结已保存本地，未同步。\n\n| 记录 | 结果 |\n|---|---|\n| fe.js.value | 首轮答“不知道”，D 未掌握；尚未讲解 |\n| 题目证据 | 原题未提供 |\n| 下一步 | 2026-11-11 复习浅拷贝与对象身份；尚未完成复考 |\n\n[查看本地总结](<SANDBOX>/retest-frontend-workspace/.local/learning/frontend/sessions/2026-11-10.md)",
+      "evidence_paths": [
+        "<REPO>/skills/knowledge-interviewer/SKILL.md",
+        "<REPO>/skills/knowledge-interviewer/references/output-format.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/frontend/questions.md",
+        "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+        "<REPO>/skills/knowledge-interviewer/templates/progress.md",
+        "<REPO>/skills/knowledge-interviewer/templates/mistakes.md"
+      ],
+      "commands": [
+        {
+          "command": [
+            "git",
+            "init"
+          ],
+          "cwd": "<SANDBOX>/retest-frontend-workspace",
+          "exit_code": 0,
+          "result": "Initialized empty Git repository in <SANDBOX>/retest-frontend-workspace/.git/\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "paths",
+            "--root",
+            "<SANDBOX>/retest-frontend-workspace",
+            "--domain",
+            "frontend"
+          ],
+          "cwd": "<SANDBOX>/retest-frontend-workspace",
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-frontend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "init",
+            "--root",
+            "<SANDBOX>/retest-frontend-workspace",
+            "--domain",
+            "frontend"
+          ],
+          "cwd": "<SANDBOX>/retest-frontend-workspace",
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-frontend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "check-ignore",
+            ".local/learning/frontend/progress.md",
+            ".local/learning/frontend/mistakes.md",
+            ".local/learning/frontend/sessions/2026-11-10.md"
+          ],
+          "cwd": "<SANDBOX>/retest-frontend-workspace",
+          "exit_code": 0,
+          "result": ".local/learning/frontend/progress.md\n.local/learning/frontend/mistakes.md\n.local/learning/frontend/sessions/2026-11-10.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "ls-files",
+            "--",
+            ".local"
+          ],
+          "cwd": "<SANDBOX>/retest-frontend-workspace",
+          "exit_code": 0,
+          "result": ""
+        }
+      ],
+      "state_action": {
+        "mode": "repository",
+        "root": "<SANDBOX>/retest-frontend-workspace",
+        "initialized": true,
+        "recorded_grade": "D",
+        "assessment_count": 1,
+        "original_question": "原题未提供",
+        "teaching": "尚未讲解",
+        "box": 1,
+        "next_review": "2026-11-11",
+        "verified_files": true
+      },
+      "external_sync": {
+        "performed": false,
+        "calls": []
+      },
+      "actions_asked": [],
+      "written_files": [
+        "<SANDBOX>/retest-frontend-workspace/.gitignore",
+        "<SANDBOX>/retest-frontend-workspace/.local/learning/index.md",
+        "<SANDBOX>/retest-frontend-workspace/.local/learning/frontend/progress.md",
+        "<SANDBOX>/retest-frontend-workspace/.local/learning/frontend/mistakes.md",
+        "<SANDBOX>/retest-frontend-workspace/.local/learning/frontend/sessions/2026-11-10.md"
+      ]
+    },
+    {
+      "case_id": "go-backend-privacy-v2",
+      "selected_domain": "go-backend",
+      "selected_point_id": "go.lang.interface",
+      "learner_response": "本次Go后端陪练已结束，错题与总结已保存在本地，未同步。\n\n| 记录 | 状态 |\n|---|---|\n| go.lang.interface | 首轮回答“不知道”，D 未掌握；原题未提供 |\n| 讲解与验证 | 尚未进行，没有已通过的知识点 |\n| 下一步 | Box 1，安排2026-11-11复习；先补课，再验证同一ID的机制缺口 |\n\n[本地会话总结](<SANDBOX>/retest-go-backend-workspace/.local/learning/go-backend/sessions/2026-11-10.md)",
+      "evidence_paths": [
+        "<REPO>/skills/knowledge-interviewer/SKILL.md",
+        "<REPO>/skills/knowledge-interviewer/references/output-format.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/go-backend/map.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/go-backend/questions.md",
+        "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py"
+      ],
+      "commands": [
+        {
+          "command": [
+            "git",
+            "init"
+          ],
+          "exit_code": 0,
+          "result": "Initialized empty Git repository in <SANDBOX>/retest-go-backend-workspace/.git/\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "paths",
+            "--root",
+            "<SANDBOX>/retest-go-backend-workspace",
+            "--domain",
+            "go-backend"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-go-backend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "init",
+            "--root",
+            "<SANDBOX>/retest-go-backend-workspace",
+            "--domain",
+            "go-backend"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-go-backend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "check-ignore",
+            ".local/learning/go-backend/progress.md",
+            ".local/learning/go-backend/mistakes.md",
+            ".local/learning/go-backend/sessions/2026-11-10.md"
+          ],
+          "exit_code": 0,
+          "result": ".local/learning/go-backend/progress.md\n.local/learning/go-backend/mistakes.md\n.local/learning/go-backend/sessions/2026-11-10.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "ls-files",
+            "--",
+            ".local"
+          ],
+          "exit_code": 0,
+          "result": ""
+        }
+      ],
+      "state_action": "initialized ignored local records; recorded one D answer; Box 1 review 2026-11-11; stopped without teaching or questions",
+      "external_sync": false,
+      "actions_asked": [],
+      "written_files": [
+        "<SANDBOX>/retest-go-backend-workspace/.gitignore",
+        "<SANDBOX>/retest-go-backend-workspace/.local/learning/index.md",
+        "<SANDBOX>/retest-go-backend-workspace/.local/learning/go-backend/progress.md",
+        "<SANDBOX>/retest-go-backend-workspace/.local/learning/go-backend/mistakes.md",
+        "<SANDBOX>/retest-go-backend-workspace/.local/learning/go-backend/sessions/2026-11-10.md"
+      ]
+    },
+    {
+      "case_id": "java-backend-privacy-v2",
+      "selected_domain": "java-backend",
+      "selected_point_id": "jvm.memory.areas",
+      "learner_response": "Java 后端陪练已结束，错题与总结已保存本地，未同步。\n\n| 记录 | 本次结果 |\n|---|---|\n| JVM 运行时数据区 | 首轮答“不知道”，D 未掌握；原题未提供 |\n| 进度 | 1 次考察，尚未讲解或验证 |\n| 下一步 | Box 1：2026-11-11 补讲后，以同一 ID 的新最小变体验证 |\n\n[本地总结](<SANDBOX>/retest-java-backend-workspace/.local/learning/java-backend/sessions/2026-11-10.md)",
+      "evidence_paths": [
+        "<REPO>/skills/knowledge-interviewer/SKILL.md",
+        "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+        "<REPO>/skills/knowledge-interviewer/references/output-format.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/java-backend/map.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/java-backend/questions.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/java-backend/sources.md"
+      ],
+      "commands": [
+        {
+          "command": [
+            "git",
+            "init"
+          ],
+          "exit_code": 0,
+          "result": "Initialized empty Git repository in <SANDBOX>/retest-java-backend-workspace/.git/\nhint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "paths",
+            "--root",
+            "<SANDBOX>/retest-java-backend-workspace",
+            "--domain",
+            "java-backend"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-java-backend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "python3",
+            "<REPO>/skills/knowledge-interviewer/scripts/learning_state.py",
+            "init",
+            "--root",
+            "<SANDBOX>/retest-java-backend-workspace",
+            "--domain",
+            "java-backend"
+          ],
+          "exit_code": 0,
+          "result": "<SANDBOX>/retest-java-backend-workspace/.local/learning/index.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "check-ignore",
+            ".local/learning/java-backend/progress.md",
+            ".local/learning/java-backend/mistakes.md",
+            ".local/learning/java-backend/sessions/2026-11-10.md"
+          ],
+          "exit_code": 0,
+          "result": ".local/learning/java-backend/progress.md\n.local/learning/java-backend/mistakes.md\n.local/learning/java-backend/sessions/2026-11-10.md\n"
+        },
+        {
+          "command": [
+            "git",
+            "ls-files",
+            "--",
+            ".local"
+          ],
+          "exit_code": 0,
+          "result": ""
+        }
+      ],
+      "state_action": {
+        "root": "<SANDBOX>/retest-java-backend-workspace",
+        "initialized": true,
+        "recorded_grade": "D 未掌握",
+        "question": "原题未提供",
+        "attempts": 1,
+        "explained": false,
+        "box": 1,
+        "next_review": "2026-11-11",
+        "verified_written_files": true
+      },
+      "external_sync": false,
+      "actions_asked": [],
+      "written_files": [
+        "<SANDBOX>/retest-java-backend-workspace/.gitignore",
+        "<SANDBOX>/retest-java-backend-workspace/.local/learning/index.md",
+        "<SANDBOX>/retest-java-backend-workspace/.local/learning/java-backend/mistakes.md",
+        "<SANDBOX>/retest-java-backend-workspace/.local/learning/java-backend/progress.md",
+        "<SANDBOX>/retest-java-backend-workspace/.local/learning/java-backend/sessions/2026-11-10.md"
+      ]
+    }
+  ]
+}

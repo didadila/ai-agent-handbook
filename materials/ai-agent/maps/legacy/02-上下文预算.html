@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>上下文预算</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="86" font-family="Ma Shan Zheng" font-size="56" fill="#2C2C2C">窗口是配额，注意力是另一回事</text>
+  <text x="70" y="136" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C" opacity="0.75">上下文预算 — 没超窗口 ≠ 没代价</text>
+  <text x="1290" y="88" font-family="Caveat" font-size="42" font-weight="700" fill="#E5A800">context budget</text>
+
+  <!-- 预算条 -->
+  <g>
+    <rect x="90" y="236" width="170" height="70" fill="#E5A800" opacity="0.22" stroke="#2C2C2C" stroke-width="2.5"/>
+    <rect x="260" y="236" width="256" height="70" fill="#E5A800" opacity="0.4" stroke="#2C2C2C" stroke-width="2.5"/>
+    <rect x="516" y="236" width="639" height="70" fill="#E5A800" opacity="0.8" stroke="#2C2C2C" stroke-width="2.5"/>
+    <rect x="1155" y="236" width="355" height="70" fill="#E5A800" opacity="0.55" stroke="#2C2C2C" stroke-width="2.5"/>
+
+    <text x="175" y="200" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">① 系统提示</text>
+    <text x="388" y="200" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">② 工具定义</text>
+    <text x="835" y="200" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">③ 对话历史（含每次工具返回的原文）</text>
+    <text x="1332" y="200" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">④ 本轮检索注入</text>
+
+    <text x="175" y="282" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">1</text>
+    <text x="388" y="282" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">2</text>
+    <text x="835" y="282" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">3 — the widest one</text>
+    <text x="1332" y="282" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="#2C2C2C">4</text>
+
+    <!-- 括号：固定 / 增长 -->
+    <path d="M92 320 L92 334 L514 334 L514 320" stroke="#2C2C2C" stroke-width="2" fill="none"/>
+    <path d="M518 320 L518 334 L1508 334 L1508 320" stroke="#E5A800" stroke-width="2.5" fill="none"/>
+    <text x="303" y="370" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.8">固定开销，一直都在</text>
+    <text x="1013" y="370" text-anchor="middle" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">增长项只有这两段</text>
+  </g>
+
+  <!-- 关键标注 -->
+  <text x="90" y="440" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C">真正吃掉窗口的绝大多数，是 ③ 里的<tspan fill="#E5A800">工具返回</tspan></text>
+  <text x="90" y="480" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C" opacity="0.85">一次文件读、一次报错栈，就是几千 token</text>
+
+  <!-- 中部分隔 -->
+  <line x1="758" y1="520" x2="758" y2="800" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.42"/>
+
+  <!-- 左：注意力衰减 -->
+  <text x="90" y="566" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">注意力不是均匀分布的</text>
+  <text x="90" y="606" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.85">同一段信息放在十万 token 的开头，</text>
+  <text x="90" y="640" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.85">和放在中段，被用上的概率不一样</text>
+  <text x="90" y="678" font-family="Caveat" font-size="32" font-weight="700" fill="#E5A800">lost in the middle</text>
+
+  <line x1="110" y1="828" x2="700" y2="828" stroke="#2C2C2C" stroke-width="2"/>
+  <path d="M130 706 C210 812, 300 816, 400 816 C500 816, 590 812, 670 706" stroke="#2C2C2C" stroke-width="3" fill="none"/>
+  <circle cx="130" cy="706" r="6" fill="#E5A800" stroke="#2C2C2C" stroke-width="2"/>
+  <circle cx="400" cy="816" r="6" fill="#CC4444" stroke="#2C2C2C" stroke-width="2"/>
+  <circle cx="670" cy="706" r="6" fill="#E5A800" stroke="#2C2C2C" stroke-width="2"/>
+  <text x="130" y="866" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.85">开头</text>
+  <text x="400" y="866" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#CC4444">中段</text>
+  <text x="670" y="866" text-anchor="middle" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.85">结尾</text>
+
+  <!-- 右：判据框 -->
+  <g transform="translate(790, 520)">
+    <rect x="0" y="0" width="750" height="252" rx="20" stroke="#E5A800" stroke-width="3.5" fill="#FFFDF7"/>
+    <text x="32" y="52" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">砍之前先问对问题</text>
+    <text x="32" y="110" font-family="Ma Shan Zheng" font-size="27" fill="#CC4444">✗ 不问「这块内容有用吗」（问不出答案）</text>
+    <text x="32" y="164" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">✓ 要问「它会改变模型这一步的决策吗」</text>
+    <text x="32" y="218" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C" opacity="0.85">砍的顺序按相关性排，不按时间早晚排</text>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="900" y="120" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 900, 120)"/>
+  <rect x="1180" y="140" width="10" height="10" fill="#E5A800" transform="rotate(-14, 1180, 140)"/>
+  <rect x="1552" y="430" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1552, 430)"/>
+  <rect x="60" y="196" width="9" height="9" fill="#E5A800" transform="rotate(28, 60, 196)"/>
+  <rect x="700" y="490" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 700, 490)"/>
+  <rect x="1240" y="480" width="11" height="11" fill="#E5A800" transform="rotate(14, 1240, 480)"/>
+  <rect x="60" y="740" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 60, 740)"/>
+  <rect x="1300" y="828" width="9" height="9" fill="#E5A800" transform="rotate(-20, 1300, 828)"/>
+  <rect x="820" y="812" width="11" height="11" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(12, 820, 812)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 148 C220 170, 480 170, 640 150', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1566, 130, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(760, 448, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(90, 502, 1510, 502, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+  rc.path('M960 810 C1030 786, 1110 790, 1180 814', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+});
+</script>
+</body>
+</html>

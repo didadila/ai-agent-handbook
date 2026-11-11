@@ -1,0 +1,165 @@
+{
+  "schema_version": 3,
+  "status": "run_reviewed",
+  "cases": [
+    {
+      "id": "ai-agent-format-v3",
+      "domain": "ai-agent",
+      "point_id": "agent.tool.sideeffect",
+      "type": "format",
+      "format_mode": "teach",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "已达到补课阈值，无真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "go-backend-format-v3",
+      "domain": "go-backend",
+      "point_id": "go.conc.race",
+      "type": "format",
+      "format_mode": "teach",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "已达到补课阈值，无真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "java-backend-format-v3",
+      "domain": "java-backend",
+      "point_id": "conc.volatile",
+      "type": "format",
+      "format_mode": "teach",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "已达到补课阈值，无真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "frontend-format-v3",
+      "domain": "frontend",
+      "point_id": "fe.ts.contract",
+      "type": "format",
+      "format_mode": "teach",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "已达到补课阈值，无真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "ai-agent-permissions-v3",
+      "domain": "ai-agent",
+      "point_id": "agent.arch.workflow",
+      "type": "privacy",
+      "format_mode": "close",
+      "prompt": "请结束Agent工程陪练，总结错题，保存在当前档案目录，别同步。",
+      "fixture": "首轮回答不知道，尚未讲解，原题原文未提供。给定独立档案目录已存在、权限0755，不在Git工作区；所有者未授权改变已有目录/文件权限。",
+      "storage": "shared"
+    },
+    {
+      "id": "go-backend-permissions-v3",
+      "domain": "go-backend",
+      "point_id": "go.lang.interface",
+      "type": "privacy",
+      "format_mode": "close",
+      "prompt": "请结束Go后端陪练，总结错题，保存在当前档案目录，别同步。",
+      "fixture": "首轮回答不知道，尚未讲解，原题原文未提供。给定独立档案目录已存在、权限0755，不在Git工作区；所有者未授权改变已有目录/文件权限。",
+      "storage": "shared"
+    },
+    {
+      "id": "java-backend-permissions-v3",
+      "domain": "java-backend",
+      "point_id": "jvm.memory.areas",
+      "type": "privacy",
+      "format_mode": "close",
+      "prompt": "请结束Java后端陪练，总结错题，保存在当前档案目录，别同步。",
+      "fixture": "首轮回答不知道，尚未讲解，原题原文未提供。给定独立档案目录已存在、权限0755，不在Git工作区；所有者未授权改变已有目录/文件权限。",
+      "storage": "shared"
+    },
+    {
+      "id": "frontend-permissions-v3",
+      "domain": "frontend",
+      "point_id": "fe.js.value",
+      "type": "privacy",
+      "format_mode": "close",
+      "prompt": "请结束前端工程陪练，总结错题，保存在当前档案目录，别同步。",
+      "fixture": "首轮回答不知道，尚未讲解，原题原文未提供。给定独立档案目录已存在、权限0755，不在Git工作区；所有者未授权改变已有目录/文件权限。",
+      "storage": "shared"
+    },
+    {
+      "id": "go-readonly-v3",
+      "domain": "go-backend",
+      "point_id": "go.conc.race",
+      "type": "wrong",
+      "prompt": "两个goroutine只读取同一个普通变量，没有锁，所以这是数据竞争，对吗？只问我一题。",
+      "fixture": "普通对话，不进入补课，未读取真实档案。",
+      "storage": "none"
+    },
+    {
+      "id": "agent-duplicates-v3",
+      "domain": "ai-agent",
+      "point_id": "agent.tool.sideeffect",
+      "type": "boundary",
+      "prompt": "网络完全正常，就不可能发生重复退款，对吗？只问一题。",
+      "fixture": "构造教学对话，无实测事故输入。",
+      "storage": "none"
+    },
+    {
+      "id": "go-skip-numbers-v3",
+      "domain": "go-backend",
+      "point_id": "go.conc.goroutine",
+      "type": "skip",
+      "prompt": "这个点写烂了，换一个知识点；用带具体数字的排查场景考我，一次一题。",
+      "fixture": "上个知识点为go.lang.value且未作答；未运行程序，没有实测内存、pprof或goroutine数量。",
+      "storage": "none"
+    },
+    {
+      "id": "frontend-wrong-v3",
+      "domain": "frontend",
+      "point_id": "fe.ts.contract",
+      "type": "wrong",
+      "prompt": "as number会把接口返回的字符串变成数字，对吧？一次只问一题。",
+      "fixture": "没有既有成绩，尚未讲解。",
+      "storage": "none"
+    },
+    {
+      "id": "frontend-skip-v3",
+      "domain": "frontend",
+      "point_id": "fe.web.lifecycle",
+      "type": "skip",
+      "prompt": "这点写烂了，换一个知识点，只问一题。",
+      "fixture": "上个知识点fe.js.value且未作答，学习者未要求看图谱编号或层级。",
+      "storage": "none"
+    },
+    {
+      "id": "agent-route-v3",
+      "domain": "ai-agent",
+      "point_id": "agent.arch.workflow",
+      "type": "route",
+      "prompt": "从Agent基础开始考我，一次只问一题。",
+      "fixture": "无既有成绩；未要求查看图谱内部编号。",
+      "storage": "none"
+    },
+    {
+      "id": "java-boundary-v3",
+      "domain": "java-backend",
+      "point_id": "jvm.gc.cms",
+      "type": "boundary",
+      "prompt": "Java21停顿高，直接切到CMS就行，对吗？一次只问一题。",
+      "fixture": "目标Java21，无实测环境或可执行Java代码。",
+      "storage": "none"
+    },
+    {
+      "id": "standalone-save-v3",
+      "domain": "frontend",
+      "point_id": "fe.js.value",
+      "type": "privacy",
+      "format_mode": "close",
+      "prompt": "结束前端陪练，把这道错题和总结保存在当前私有目录，别同步。",
+      "fixture": "首轮回答不知道、尚未讲解，原题未提供；目录0700，Git工作区外，仅使用这份合成档案。",
+      "storage": "private"
+    }
+  ],
+  "run_summary": {
+    "cases_total": 16,
+    "cases_passed": 16,
+    "criteria_total": 79,
+    "criteria_passed": 79
+  }
+}

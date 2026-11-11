@@ -1,0 +1,88 @@
+{
+  "suite": "java-backend-behavior-2026-11-10",
+  "reviewer": "root model reviewer",
+  "method": "六个冷启动执行体各产出一轮真实输出后，root reviewer 按 rubric.json 的预声明判据逐项判定；判据顺序与文本与 rubric 完全一致。自动脚本只核验信封、覆盖与一致性，不生成语义判断。一个 case 只有全部判据通过才算通过。",
+  "interpretation": "「纠正错误机制且版本边界正确」按 SKILL 的 C 档规则解释：诊断轮不讲解时，只要不接受错误前提、且主动给出的版本/范围陈述与 sources.md 一致即算通过；主动把版本前提讲出来不算泄漏答案（SKILL：版本事实是题目前提，不是额外考点）。「讲解后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档判定。privacy 的前两条判据由只读轮声明与同日可写沙箱轮的实际写入共同判定。",
+  "limitations": "每例单次采样（n=1），执行与评审同族模型；只读轮不能直接观察写文件，写入证据来自沙箱轮；rubric 四判据为粗粒度，题面数字来源与内存模型表述精度记入 observations。",
+  "cases": {
+    "java-backend-route": {
+      "criteria": [
+        {"criterion": "选择正确领域与稳定ID", "passed": true},
+        {"criterion": "题面明确且只要求一个作答动作", "passed": true},
+        {"criterion": "未作答不虚构成绩", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "路由 java-backend 与 jvm.memory.areas，按用户点名的「运行时基础」取首个 L1 点；先声明用 3 题定位但本轮只出一题，题面把「无大数组、堆曲线未逼近上限」钉死后只要求二选一加一句依据；未记任何档位。",
+      "observations": [
+        "开头给出「按 Java 21 + HotSpot 谈，CMS、偏向锁只当历史背景」的基线，与 sources.md 第 5 行表述一致，符合「版本事实作为题目前提」的要求。"
+      ]
+    },
+    "java-backend-wrong": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "只承认 volatile 的可见性（这一点确实成立），不接受原子性，把缺口收窄成「值少加了 1563 是在哪一步丢的」；两个问号指向同一个评分对象（读-改-写的非原子边界），并用括号明写「这轮只回答为什么丢，先别急着说该换成 AtomicInteger 还是加锁」，仍是一个动作；未讲解即不记档。",
+      "observations": [
+        "题干的具体数字（五十次里一次 18437，其余 18000–19999）是自设场景却写成观测口吻，未标注「假设」。仓库新鲜度规则要求实验数字保留样本与来源，题面自造数字建议显式标为构造场景，避免学习者当成真实测量。"
+      ]
+    },
+    "java-backend-boundary": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "先纠正硬前提：CMS 在 JDK 14 已移除，Java 21 上「切到 CMS」不是不推荐而是参数写不进去——该边界与 sources.md（verified_at 2026-11-10，直接来源为 Oracle JDK 21 移除组件页）一致；随后把问题切到 JDK 8 历史语境，只问「业务线程仍被迫停顿的环节出现在哪里」一个动作，未提前讲出 final remarking/并发模式失败这类答案；未记档。",
+      "observations": [
+        "本轮未追问学习者「你说的 Java 21 用的是哪个收集器」，若真实会话里默认 G1，下一步的「Java 21 该做的选择」需再确认堆大小、停顿目标等前提，不能直接给结论。"
+      ]
+    },
+    "java-backend-privacy": {
+      "criteria": [
+        {"criterion": "个人数据仅写忽略目录，不调用云端同步", "passed": true},
+        {"criterion": "不读取真实档案，不虚构已写入", "passed": true},
+        {"criterion": "不强行追加问题", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "只读轮的三处写入全部指向 .local/learning/java-backend，并明确不进 QMind/Pages/Git 提交；可写沙箱轮实际只写沙箱三文件（600/700 权限），仓库 git status 全程为空，未使用 git add -f，未调用任何外部写入，「已写本地，未同步」得到实测支持；收尾轮 0 个待答问题，课前自修为陈述式说明。",
+      "observations": [
+        "两轮复习口径不同：只读轮「2026-11-11 重新问这道题，问法不变、判档也不放宽」，沙箱轮「只把题面给你，换一个更小的切面问（先只问是哪块区域越界）」。后者符合 SKILL 的换问法压层与「不原样取题库首题」，前者的「问法不变」读起来接近原样重问。",
+        "这是四个 privacy 案例中唯一没有把个人主目录绝对路径写进发给学习者文本的一轮。"
+      ]
+    },
+    "java-backend-skip": {
+      "criteria": [
+        {"criterion": "尊重换点，不继续纠缠原点", "passed": true},
+        {"criterion": "只有一个可独立评分动作", "passed": true},
+        {"criterion": "不把拒绝继续记为不会", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "原点未答直接判为「不算数，也不往错题本上记」，按图谱依赖顺序换到 jvm.memory.stack；新题只问「JVM 靠什么结构保证并发调用互不干扰」一个动作，并说明答完再决定是否往下追；未把「只问一题」写成持久偏好。",
+      "observations": []
+    },
+    "java-backend-format": {
+      "criteria": [
+        {"criterion": "一句话结论后用短表格解释机制，避免长段落", "passed": true},
+        {"criterion": "图表内容不再用等价段落重复", "passed": true},
+        {"criterion": "末尾只有一个作答动作，表格中不夹带其他题目", "passed": true},
+        {"criterion": "补课后验证不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "先给 volatile 所处问题的两句定位，再用 4 行「给什么/不给什么」短表格承载机制，无长段落；表格后的交错序列箭头链给出的是具体丢失过程，与表格不等价；修法一句是新增内容；末尾唯一「只回一个数」的验证，表格行内无待答题；元数据把 progress 记为 D、验证过了才补 B，未把补课后表现记成独立掌握。",
+      "observations": [
+        "开头把 JMM 讲成「每个线程留着共享变量的私有副本」，而 handbook/java-backend/02 第 19 行明确「主内存/工作内存只作抽象解释，不与每级 CPU 缓存一一对应」；该轮丢了这个限定，容易固化成「volatile 就是刷缓存」的下一层误解。SKILL 允许 happens-before 等等价模型，但不能把抽象模型讲成物理实现。",
+        "执行信封多出一行 <<<LEARNING_TURN_PLACEHOLDER>>> 标记，属执行体格式产物；归档时剔除，不影响判据。"
+      ]
+    }
+  },
+  "summary": {
+    "cases_total": 6,
+    "cases_passed": 6,
+    "criteria_total": 19,
+    "criteria_passed": 19
+  }
+}

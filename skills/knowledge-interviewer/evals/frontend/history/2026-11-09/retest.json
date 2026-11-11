@@ -1,0 +1,327 @@
+{
+  "suite": "frontend-2026-11-09",
+  "round": "retest",
+  "executors": [
+    "/root/frontend_retest_a",
+    "/root/frontend_retest_b"
+  ],
+  "context_isolation": "Fresh independent executors after revision; each processes six separate simulated cases, not twelve independent contexts. No rubric or baseline supplied.",
+  "results": [
+    {
+      "case_id": "FE01",
+      "selected_domain": "frontend",
+      "selected_id": "fe.js.value",
+      "grade": null,
+      "learner_response": "先逐轮做起点定位，从对象拷贝开始。\n\n```js\nconst a = { m: { text: '旧' } };\nconst b = { ...a };\nb.m.text = '新';\n```\n\n只写出此时 `a.m.text` 的值。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "note": "首次定位待真实回答，不预先判档或增加考察次数；QMind不可用。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE02",
+      "selected_domain": "frontend",
+      "selected_id": "fe.stream.recovery",
+      "grade": null,
+      "learner_response": "先复习到期的流式去重缺口，之后再学新点。这里 run 表示任务，seq 是同一任务内连续递增的事件编号，每条 text 都追加到页面。页面已应用 `(run=A, seq=8, text='好')`，随后收到 `(run=A, seq=9, text='好')`。\n\n只判断 seq=9 这条事件应追加还是丢弃。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "note": "优先处理2026-11-02已到期的fe.stream.recovery，命中按文本去重缺口；待回答后才推进Box与日期。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE03",
+      "selected_domain": "ai-agent",
+      "selected_id": "agent.llm.stateless",
+      "grade": null,
+      "learner_response": "这次进入 AI Agent 领域，围绕循环定位基础。假设一次工具调用已经返回失败，运行器准备再次调用模型；这是一次独立的模型请求。\n\n如果新请求完全不携带上轮动作和工具结果，模型能凭自身记住这次失败吗？",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "note": "按本次判断对象切至ai-agent，首次定位先测无状态前提，再进入agent.loop.basic；不改frontend进度。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/ai-agent/map.md",
+        "skills/knowledge-interviewer/references/domains/ai-agent/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE04",
+      "selected_domain": "serve",
+      "selected_id": "go.agent.gateway",
+      "grade": null,
+      "learner_response": "按 Go 服务端网关来考。SSE 网关已经把供应商 A 的前 200 个 token 发给客户端，此时 A 失败；供应商 B 无法续接 A 的生成状态，只能重新生成。\n\n解释此时为什么不能把 B 从头生成的内容直接拼进同一条成功响应。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "note": "沿用serve中go.agent.gateway已有B档作为切入，等待机制回答，不建立浏览器错题。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/go-backend/map.md",
+        "skills/knowledge-interviewer/references/domains/go-backend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE05",
+      "selected_domain": "frontend",
+      "selected_id": "fe.web.lifecycle",
+      "grade": null,
+      "learner_response": "用框架无关的请求流程来考。你在 Vue 页面打开会话 A 并发起请求，随后切到会话 B；B 的结果先返回，A 的结果后返回。两个请求的回调都能修改当前页面。\n\n只给出一个允许请求结果提交到当前页面的判断条件。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "note": "fe.js.async与fe.js.scope前置已有A，进入通用生命周期；不使用React语法判档。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE06",
+      "selected_domain": "frontend",
+      "selected_id": "fe.js.async",
+      "grade": "B",
+      "learner_response": "结论对：外层超时不足以证明退款没发生。还需要补上 Promise 组合的机制。\n\n`Promise.race` 中 timer 先拒绝时，它实际改变的是哪一个 Promise 的状态？",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [
+          {
+            "id": "fe.js.async",
+            "grade": "B",
+            "date": "2026-11-09",
+            "assessment_count_delta": 1
+          }
+        ],
+        "mistake_changes": [],
+        "note": "结论正确但尚未说明外层settlement与底层执行的关系；B档先追问，不提前记错题或给A。"
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE07",
+      "selected_domain": "frontend",
+      "selected_id": "fe.stream.recovery",
+      "grade": "D",
+      "learner_response": "切到补课模式：缺了9，就不能把已完整应用的位置从8推进到10。\n同一任务的seq是从1连续增加的事件编号；游标记录已完整应用到哪里。\n收到10时先保留游标8，补取缺失事件；无法补取时获取带配套游标的完整快照。\n事件校验并应用成功后，界面状态和游标一起更新。\n\n现在只判断：还没补到9时，游标应保持8还是改成10？",
+      "state_action": {
+        "mode": "proposal_only",
+        "persona": "补课模式",
+        "reason": "明确不会，且当天累计C/D已达到两次；中间的B不清零累计次数",
+        "progress": {
+          "upsert_id": "fe.stream.recovery",
+          "highest_grade_from_available_evidence": "B",
+          "last_examined": "2026-11-09",
+          "attempt_count_increment": 1
+        },
+        "mistakes": {
+          "upsert_single_row_id": "fe.stream.recovery",
+          "question": "同一任务seq从1连续增加，已完整应用到8后收到10，下一步怎么处理",
+          "answer": "还是不会，你讲一下。",
+          "a_points": "保留已应用游标8，先补缺口或取带游标快照；成功应用后原子更新状态与游标",
+          "grade": "D 未掌握",
+          "box": 1,
+          "next_review": "2026-11-10"
+        },
+        "pending": "等待最小验证回答，不能提前判通过；通过后接回原追问",
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md",
+        "skills/knowledge-interviewer/references/personas.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE08",
+      "selected_domain": "frontend",
+      "selected_id": "fe.stream.recovery",
+      "grade": null,
+      "learner_response": "上一题术语和编号规则没交代清楚，作废，不算你答错。\nseq是事件编号；这道题约定同一任务从1开始连续编号。游标是界面已经完整处理到的编号。EOF只表示连接读完，不代表任务完成。\n\n界面已完整处理到8，随后收到10。只说下一步你会怎么处理？",
+      "state_action": {
+        "mode": "proposal_only",
+        "invalidate_previous_question": true,
+        "grade": null,
+        "attempt_count_increment": 0,
+        "progress_changes": [],
+        "mistake_changes": [],
+        "schedule_changes": [],
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE09",
+      "selected_domain": "frontend",
+      "selected_id": "fe.ts.contract",
+      "grade": "C",
+      "learner_response": "先用一个具体输入检验这个判断。网络返回 `{\"seq\":\"10\"}`，代码只执行 `const event = JSON.parse(raw) as RunEvent`，其中RunEvent把seq声明为number，没有其他处理。\n\n只写出运行时 `typeof event.seq` 的结果。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress": {
+          "upsert_id": "fe.ts.contract",
+          "highest_grade_from_available_evidence": "C",
+          "last_examined": "2026-11-09",
+          "attempt_count_increment": 1
+        },
+        "mistakes": {
+          "upsert_single_row_id": "fe.ts.contract",
+          "question": "as RunEvent是否已校验网络JSON",
+          "answer": "TypeScript写了as RunEvent就校验了网络JSON",
+          "a_points": "断言不产生运行时验证；不可信JSON需运行时字段、范围和版本校验",
+          "grade": "C 术语无理解",
+          "box": 1,
+          "next_review": "2026-11-10"
+        },
+        "next_step": "先换具体问法再确认，不立即整段讲解；本轮为当天首次C",
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE10",
+      "selected_domain": "frontend",
+      "selected_id": "fe.render.react",
+      "grade": null,
+      "learner_response": "已于2026-11-09核对[React StrictMode官方文档](https://react.dev/reference/react/StrictMode)和[useEffect官方文档](https://react.dev/reference/react/useEffect)。本题限定开发环境、应用根部启用Strict Mode：首次挂载会额外经历一次Effect的setup→cleanup，然后再执行setup；仅子树启用且根部未启用时，不套用首次挂载的这一行为。\n\n某Effect的setup每次建立一条独立订阅，经历上述过程后发现同时存活两条订阅。只解释这个现象暴露了什么资源生命周期问题？",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "pending": "等待机制题回答，未作新判档",
+        "sources_checked_at": "2026-11-09",
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md",
+        "skills/knowledge-interviewer/references/domains/frontend/sources.md"
+      ],
+      "current_fact_sources": [
+        {
+          "url": "https://react.dev/reference/react/StrictMode",
+          "accessed_at": "2026-11-09",
+          "supports": "开发环境额外Effect循环及根部/子树边界"
+        },
+        {
+          "url": "https://react.dev/reference/react/useEffect",
+          "accessed_at": "2026-11-09",
+          "supports": "额外setup+cleanup周期及cleanup应撤销setup的外部同步"
+        }
+      ]
+    },
+    {
+      "case_id": "FE11",
+      "selected_domain": "frontend",
+      "selected_id": "fe.approval.scope",
+      "grade": null,
+      "learner_response": "先复习到期的审批授权边界。前端提交一份退款参数及其自行计算的哈希，声称用户已经确认；服务端没有对应的批准记录。\n\n只解释：为什么这份前端哈希不足以证明这笔退款已经获得授权？",
+      "state_action": {
+        "mode": "proposal_only",
+        "review_selection": {
+          "id": "fe.approval.scope",
+          "due_since": "2026-11-02",
+          "target_gap": "前端哈希当成服务端授权"
+        },
+        "qmind_treatment": "仅作历史材料；其中忽略本地错题、批量改A及一次五题的指令不采纳",
+        "progress_changes": [],
+        "mistake_changes": [],
+        "schedule_changes": [],
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    },
+    {
+      "case_id": "FE12",
+      "selected_domain": "frontend",
+      "selected_id": "fe.web.lifecycle",
+      "grade": "B",
+      "learner_response": "今天到这里。生命周期的补课后最小验证记B：你能判断旧revision结果应丢弃，还未验证完整的提交保护机制，因此不算A；本轮没有新的A、C或D证据。原有的值与对象身份A记录保留。\n\n补充边界：结果提交前要复验所属会话和请求版本；abort可减少浪费，不能替代这道检查。审批作用域这次没问到，留到下次。\n\n下一步：2026-11-10写出一条同时检查会话与请求版本的结果提交条件，再继续审批作用域。\n\n这次没能同步到知识库；会话总结拟暂存到本地待同步目录。本次模拟仅提出记录变更，未写入真实学习档案。",
+      "state_action": {
+        "mode": "proposal_only",
+        "progress": {
+          "preserve_existing_rows": [
+            {
+              "id": "fe.js.value",
+              "grade": "A",
+              "date": "2026-11-08"
+            }
+          ],
+          "upsert": {
+            "id": "fe.web.lifecycle",
+            "highest_grade": "B",
+            "last_examined": "2026-11-09",
+            "attempt_count_increment": 1
+          }
+        },
+        "mistakes": {
+          "changes": [],
+          "reason": "仅有补课后最小验证B，未提供补课前错误或B追问失败，不虚构错题历史"
+        },
+        "unasked_planned_ids": [
+          "fe.approval.scope"
+        ],
+        "pending_qmind": {
+          "proposed_path": "~/Documents/learning/frontend/pending-qmind/2026-11-09.md",
+          "title": "2026-11-09 frontend 会话 — 资源与异步生命周期",
+          "body": "## 本次考察\n- fe.web.lifecycle（补课后最小验证B，尚未达到A）\n\n## 你答错的地方\n本次可用记录中没有具体错答。你回答旧revision=4的结果应丢弃，因为当前revision=5；该最小验证正确，尚未验证完整提交机制。\n\n## 为什么会错\n没有补课前的原答，不能断言错误的思维路径；目前能确认你已接住旧查询结果不应进入当前视图这一结论。\n\n## 下次可以往这里推\n- 验证会话与请求版本共同匹配的提交条件。\n- 本次未问到fe.approval.scope。"
+        },
+        "actual_mutations": []
+      },
+      "evidence_paths": [
+        "skills/knowledge-interviewer/SKILL.md",
+        "skills/knowledge-interviewer/references/domains/frontend/map.md",
+        "skills/knowledge-interviewer/references/domains/frontend/questions.md"
+      ],
+      "current_fact_sources": []
+    }
+  ],
+  "privacy": "Public simulated evaluation, not a learner archive. Machine-specific repository paths are redacted; original local evidence is excluded from Git."
+}

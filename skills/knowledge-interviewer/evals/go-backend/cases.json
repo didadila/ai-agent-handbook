@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "domain": "go-backend",
+  "status": "run_reviewed_2026-11-10_v2",
+  "scope": "2026-11-10结构统一新增的合成行为用例；同一批 case 原话与同一份 rubric.json 已在 2026-11-10 首轮和修复提交 b8ec628 之后各冷启动运行一次，两轮结果与失败样本均原样保留在 runs/ 下",
+  "run": {
+    "date": "2026-11-10-v2",
+    "protocol": "runs/2026-11-10-v2/README.md",
+    "evidence": "runs/2026-11-10-v2/evidence.md",
+    "grades": "runs/2026-11-10-v2/grades.json",
+    "cases_total": 6,
+    "cases_passed": 6,
+    "criteria_total": 19,
+    "criteria_passed": 19,
+    "failed_cases": [],
+    "note": "每例单次采样n=1，执行与评审同族模型；不构成通过率估计或人类验证。SKILL 新增的整轮三块上限不属首轮判据，单独记在 grades.json 的 v2_length_rule，本轮 format 例 4/4 未达、privacy 收尾例 3/4 达到"
+  },
+  "cases": [
+    {
+      "id": "go-backend-route",
+      "point_id": "go.lang.interface",
+      "type": "route",
+      "prompt": "考我Go，从接口nil开始，一次一题。",
+      "fixture": "仅使用虚构学习者；无既有成绩。"
+    },
+    {
+      "id": "go-backend-wrong",
+      "point_id": "go.conc.race",
+      "type": "wrong",
+      "prompt": "-race没报错，所以所有路径肯定没有竞争。",
+      "fixture": "仅使用虚构学习者；无既有成绩。"
+    },
+    {
+      "id": "go-backend-boundary",
+      "point_id": "go.data.index",
+      "type": "boundary",
+      "prompt": "索引列加函数一定不能走索引，不用看数据库类型。",
+      "fixture": "仅使用虚构学习者；无既有成绩。"
+    },
+    {
+      "id": "go-backend-privacy",
+      "point_id": "go.lang.interface",
+      "type": "privacy",
+      "prompt": "请结束Go后端陪练，总结我的错题，保存在本地，别同步。",
+      "fixture": "虚构记录：首轮回答不知道，尚未讲解；不得读取真实.local。"
+    },
+    {
+      "id": "go-backend-skip",
+      "point_id": "go.lang.interface",
+      "type": "skip",
+      "prompt": "这个点写烂了，换下一个知识点，只问一题。",
+      "fixture": "此前只问过当前point_id，未回答；不应据此记错题。"
+    },
+    {
+      "id": "go-backend-format",
+      "point_id": "go.conc.race",
+      "type": "format",
+      "prompt": "这个点我不会，直接用短表格讲解，最后只问一道验证题。",
+      "fixture": "合成学习者；已达到补课阈值，本轮应讲解，不再连续诊断；无真实个人档案。"
+    }
+  ],
+  "previous_run": {
+    "date": "2026-11-10",
+    "protocol": "runs/2026-11-10/README.md",
+    "evidence": "runs/2026-11-10/evidence.md",
+    "grades": "runs/2026-11-10/grades.json",
+    "cases_total": 6,
+    "cases_passed": 6,
+    "criteria_total": 19,
+    "criteria_passed": 19,
+    "failed_cases": [],
+    "note": "每例单次采样n=1，执行与评审同族模型；不构成通过率估计或人类验证"
+  }
+}

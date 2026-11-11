@@ -1,0 +1,65 @@
+{
+  "scope": "仅独立沙箱的合成学习记录；真实学习档案未读写。",
+  "observations": [
+    {
+      "case_id": "ai-agent-permissions-v3",
+      "state_directory_mode": "0o755",
+      "directories": [],
+      "files": []
+    },
+    {
+      "case_id": "go-backend-permissions-v3",
+      "state_directory_mode": "0o755",
+      "directories": [],
+      "files": []
+    },
+    {
+      "case_id": "java-backend-permissions-v3",
+      "state_directory_mode": "0o755",
+      "directories": [],
+      "files": []
+    },
+    {
+      "case_id": "frontend-permissions-v3",
+      "state_directory_mode": "0o755",
+      "directories": [],
+      "files": []
+    },
+    {
+      "case_id": "standalone-save-v3",
+      "state_directory_mode": "0o700",
+      "directories": [
+        {
+          "path": "frontend",
+          "mode": "0o700"
+        },
+        {
+          "path": "frontend/sessions",
+          "mode": "0o700"
+        }
+      ],
+      "files": [
+        {
+          "path": "frontend/mistakes.md",
+          "mode": "0o600",
+          "content": "# frontend 错题本\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 日期 | 知识点 ID | 题目 | 用户答法 | A 档要点 | 档位 | Box | 下次复习 |\n|---|---|---|---|---|---|---|---|\n\n一知识点一行；只记录真实错答，不把题面缺陷或未回答的问题算错。复习时先展示题目，不提前展示正解。\n\n| 2026-11-10 | fe.js.value | 原题未提供 | 不知道 | 浅拷贝仅复制一层，嵌套对象仍共享身份；const 只限制绑定重新赋值 | D 未掌握 | 1 | 2026-11-11 |\n"
+        },
+        {
+          "path": "frontend/progress.md",
+          "mode": "0o600",
+          "content": "# frontend 学习进度\n\n<!-- learning-private -->\n\n此文件是个人数据，只保存在本机，不进入公共教材或云端知识库。\n\n| 知识点 ID | 名称 | 最高档 | 最近考察 | 考察次数 |\n|---|---|---|---|---|\n\n仅在真实作答后添加记录；首次使用不预填档位。讲解后的最小验证不能冒充独立掌握。\n\n| fe.js.value | 值、对象身份与拷贝 | D | 2026-11-10 | 1 |\n"
+        },
+        {
+          "path": "frontend/sessions/2026-11-10.md",
+          "mode": "0o600",
+          "content": "# 前端陪练合成会话 2026-11-10\n\n<!-- learning-private -->\n\n## 本次考察\n本合成夹具首轮：fe.js.value（值、对象身份与拷贝）；原题未提供，用户答法：不知道。记录一次，D 未掌握；尚未讲解，未做最小验证。\n\n## 错答与机制\n仅有“不知道”，无法归因到具体子机制，不推定用户误解。后续待核验浅拷贝的嵌套共享与 const 绑定边界。未在收尾补课。\n\n## 下一步\n按 Leitner 错答回 Box 1，安排 2026-11-11 复习；尚未复考。下一次先明确最小题面，定位具体缺口后补课。没有其他实际考察记录；未同步外部服务。\n"
+        },
+        {
+          "path": "index.md",
+          "mode": "0o600",
+          "content": "# 本地学习记录\n\n<!-- learning-private -->\n\n个人错题、成绩、复习安排只存本机；本目录被Git忽略，不自动同步云端。\n\n- frontend：[进度](frontend/progress.md) · [错题](frontend/mistakes.md)\n"
+        }
+      ]
+    }
+  ]
+}

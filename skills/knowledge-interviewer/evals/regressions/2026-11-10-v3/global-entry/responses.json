@@ -1,0 +1,105 @@
+{
+  "schema_version": 3,
+  "results": [
+    {
+      "case_id": "global-format-v3",
+      "selected_domain": "frontend",
+      "selected_point_id": "fe.ts.contract",
+      "learner_response": "### 结论\n`as` 只是告诉 TypeScript 按某种类型检查代码，不会转换或校验运行时数据。\n\n### 机制\n| 环节 | 发生什么 |\n|---|---|\n| 编译期 | `value as T` 表示“我断言它是 T”，编译器据此检查后续代码。 |\n| 运行期 | 断言被移除，字符串仍是字符串，不会变成数字。 |\n| 外部输入 | 用可执行代码检查字段和范围；需要转换时显式转换，见[类型在边界之后才可信](<REPO>/handbook/frontend/01-浏览器与语言基础.md:205)。 |\n\n### 验证\n构造案例：`const value: unknown = \"8\"; const n = value as number;`，执行 `typeof n` 得到什么？",
+      "evidence_paths": [
+        "<GLOBAL_SKILL>/SKILL.md",
+        "<SANDBOX>/packets/global-format-v3.json",
+        "<GLOBAL_SKILL>/references/learning-flow.md",
+        "<GLOBAL_SKILL>/references/output-format.md",
+        "<GLOBAL_SKILL>/references/domains/frontend/map.md",
+        "<GLOBAL_SKILL>/references/domains/frontend/questions.md",
+        "<GLOBAL_SKILL>/references/domains/frontend/sources.md",
+        "<REPO>/handbook/frontend/01-浏览器与语言基础.md"
+      ],
+      "commands": [
+        {
+          "command": "cat <GLOBAL_SKILL>/SKILL.md",
+          "exit_code": 0
+        },
+        {
+          "command": "cat <SANDBOX>/packets/global-format-v3.json",
+          "exit_code": 0
+        },
+        {
+          "command": "pwd; realpath <GLOBAL_SKILL>; cat <GLOBAL_SKILL>/references/learning-flow.md <GLOBAL_SKILL>/references/output-format.md",
+          "exit_code": 0
+        },
+        {
+          "command": "cat <REPO>/RTK.md; rg -n -A 22 -B 4 'fe.ts.contract' <GLOBAL_SKILL>/references/domains/frontend/map.md <GLOBAL_SKILL>/references/domains/frontend/questions.md; python3 <GLOBAL_SKILL>/scripts/learning_content.py --help",
+          "exit_code": 0,
+          "note": "cat RTK.md 报不存在；后续命令继续且整体退出码为0。"
+        },
+        {
+          "command": "python3 <GLOBAL_SKILL>/scripts/learning_content.py --domain frontend --point fe.ts.contract; cat <GLOBAL_SKILL>/references/domains/frontend/sources.md",
+          "exit_code": 0
+        },
+        {
+          "command": "sed -n '205,239p' <REPO>/handbook/frontend/01-浏览器与语言基础.md",
+          "exit_code": 0
+        },
+        {
+          "command": "python3 - <<'PY' [本次JSON输出写入脚本] PY",
+          "exit_code": 0
+        }
+      ],
+      "state_action": "none; storage=none; 未访问或写入个人档案",
+      "external_sync": "none",
+      "actions_asked": [
+        "执行 typeof n 得到什么？"
+      ],
+      "written_files": [
+        "<SANDBOX>/global-format-v3.json"
+      ],
+      "entry_observation": {
+        "loaded_entry": "<GLOBAL_SKILL>/SKILL.md",
+        "resolved_directory": "<REPO>/skills/knowledge-interviewer"
+      }
+    },
+    {
+      "case_id": "global-route-v3",
+      "selected_domain": "ai-agent",
+      "selected_point_id": "agent.arch.workflow",
+      "learner_response": "先从 Agent 的适用边界开始。\n\n假设一个审批流程有固定的 6 个节点，所有分支都有明确规则。团队想让模型每一步自己决定接下来做什么。\n\n你会保留预定义流程（workflow），还是改成由模型动态决定步骤的 Agent？",
+      "evidence_paths": [
+        "<GLOBAL_SKILL>/SKILL.md",
+        "<SANDBOX>/packets/global-route-v3.json",
+        "<REPO>/skills/knowledge-interviewer/references/learning-flow.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/ai-agent/map.md",
+        "<REPO>/skills/knowledge-interviewer/references/domains/ai-agent/questions.md"
+      ],
+      "commands": [
+        {
+          "command": "cat RTK.md; cat <GLOBAL_SKILL>/SKILL.md; cat <SANDBOX>/packets/global-route-v3.json",
+          "exit_code": 0,
+          "note": "RTK.md读取失败：No such file or directory；其余两个文件成功。"
+        },
+        {
+          "command": "python3 - <<'PY'\nfrom pathlib import Path\np=Path('<GLOBAL_SKILL>/SKILL.md')\nprint(p.resolve())\nbase=p.resolve().parent\nfor rel in ['references/learning-flow.md','references/domains/ai-agent/map.md','references/domains/ai-agent/questions.md']:\n print('\\nFILE',base/rel)\n print((base/rel).read_text())\nPY",
+          "exit_code": 0
+        },
+        {
+          "command": "python3 heredoc: json.dumps 本记录并以 Path.write_text 写入 packet.output_file",
+          "exit_code": 0
+        }
+      ],
+      "state_action": "none；使用无既有成绩夹具，未读取或写入个人档案，等待首次回答。",
+      "external_sync": "none",
+      "actions_asked": [
+        "在给定审批场景中选择保留 workflow 或改成 Agent"
+      ],
+      "written_files": [
+        "<SANDBOX>/global-route-v3.json"
+      ],
+      "entry_observation": {
+        "loaded_entry": "<GLOBAL_SKILL>/SKILL.md",
+        "resolved_entry": "<REPO>/skills/knowledge-interviewer/SKILL.md",
+        "resolved_directory": "<REPO>/skills/knowledge-interviewer"
+      }
+    }
+  ]
+}

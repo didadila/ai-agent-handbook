@@ -1,0 +1,60 @@
+{
+  "skill_name": "knowledge-interviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我想学最新的 Agent 协议。MCP 和 A2A 是不是接上以后就把工具调用、agent 互操作、安全和失败恢复都解决了？先考我，不要直接讲答案。",
+      "expected_output": "只提出一个不泄漏答案的问题；能把协议能力与业务授权/幂等/恢复语义区分开；涉及当前协议时保留版本边界。",
+      "files": [],
+      "assertions": [
+        "只提出一个问题，且问题单独成行",
+        "不直接泄漏完整答案",
+        "问题命中协议能力与业务授权、幂等或恢复语义之间的边界",
+        "涉及具体协议时不把当前版本能力泛化成永久事实",
+        "若引用 MCP 具体版本，以 2026-07-28 为现行版本，不把 2025-11-25 当作当前版本",
+        "若引用 A2A 具体版本，区分规范页的 1.0.0 与仓库 v1.0.1 补丁发布，不把补丁版说成新规范代际"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "继续学习 agent。请基于我现有的 progress.md 和 mistakes.md 决定从哪里开始，并严格一次只问一个问题。",
+      "expected_output": "先读学习状态并优先到期复习；不因新增图谱跳过旧错题；最终只问一个问题。",
+      "files": [
+        "skills/knowledge-interviewer/evals/ai-agent/fixtures/progress.md",
+        "skills/knowledge-interviewer/evals/ai-agent/fixtures/mistakes.md"
+      ],
+      "assertions": [
+        "读取并使用现有 progress.md 与 mistakes.md",
+        "优先选择已经到期的复习项，不因新增图谱跳过旧错题",
+        "最终只提出一个问题，且问题单独成行",
+        "没有一次抛出多个子问题"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "考我 Agent 的成本优化。我说只要换更便宜的小模型、开启 prompt cache、并行调用更多 subagent，成本和延迟就一定会下降。",
+      "expected_output": "只提出一个针对机制的追问；考察每次成功任务成本、端到端尾延迟及缓存/路由/并行的收益条件，而非泄漏完整答案。",
+      "files": [],
+      "assertions": [
+        "只提出一个针对机制的追问",
+        "问题考察每次成功任务总成本，而非只看单次调用价格",
+        "问题至少覆盖尾延迟、缓存条件、路由误判或并行边界中的一个",
+        "不在题目中直接给出完整答案"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "我理解 MCP 服务器靠 initialize 握手建立会话、用 Mcp-Session-Id 维持状态，所以水平扩容必须做 session 粘性。考我，别直接讲答案。",
+      "expected_output": "只提一个问题；以 MCP 2026-07-28 为现行版本纠正用户过时前提（版本事实作为题目前提给出），但不泄漏被考的机制答案。",
+      "files": [],
+      "assertions": [
+        "只提出一个问题，且问题单独成行",
+        "题干不得泄漏被考机制的答案：不说出哪些状态仍必须跨请求延续（如 Tasks 扩展的任务状态、凭证），也不替用户裁定会话粘性结论是否成立；版本事实本身可以作为前提直接给出",
+        "以 MCP 2026-07-28 为现行版本，未把 2025-11-25 的会话机制当成当前事实",
+        "区分“已移除”（initialize 握手、协议级会话、Mcp-Session-Id）与“仅弃用、仍在规范中”（Roots/Sampling/Logging/HTTP+SSE/OAuth DCR）",
+        "问题指向机制：无状态化后身份/状态放在哪里，或会话粘性扩容前提是否仍成立"
+      ]
+    }
+  ],
+  "privacy": "Only synthetic fixtures may be shared. Never attach real learner records."
+}

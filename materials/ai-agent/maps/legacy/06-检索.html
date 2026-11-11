@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>检索 · 预算分配问题</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 标题 -->
+  <text x="70" y="86" font-family="Ma Shan Zheng" font-size="58" fill="#2C2C2C">检索是预算分配问题，不是调参问题</text>
+  <text x="70" y="134" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.75">top-k 定多少，本质上在跟对话历史抢窗口</text>
+  <text x="1210" y="82" font-family="Caveat" font-size="36" font-weight="700" fill="#E5A800">L2 · RAG</text>
+
+  <!-- 顶部预算横梁 -->
+  <path d="M96 214 L1500 214" stroke="#E5A800" stroke-width="2.5" stroke-dasharray="9 7"/>
+  <polygon points="1516,214 1496,205 1496,223" fill="#E5A800"/>
+  <path d="M96 214 L96 240 M480 214 L480 240 M860 214 L860 240 M1240 214 L1240 240" stroke="#E5A800" stroke-width="2" stroke-dasharray="5 5" opacity="0.8"/>
+  <g transform="translate(560, 178)">
+    <rect x="0" y="0" width="430" height="44" rx="22" fill="#E5A800" opacity="0.9"/>
+    <text x="215" y="32" text-anchor="middle" font-family="Ma Shan Zheng" font-size="27" fill="#2C2C2C">这一整块都压在「上下文预算」上面</text>
+  </g>
+
+  <!-- ============ ① 切分 ============ -->
+  <g transform="translate(70, 252)">
+    <rect x="0" y="0" width="330" height="466" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 剪刀式切分图标 -->
+    <g transform="translate(24, 26)">
+      <rect x="0" y="6" width="26" height="34" stroke="#2C2C2C" stroke-width="2.5" fill="#E5A800" fill-opacity="0.35"/>
+      <rect x="34" y="6" width="26" height="34" stroke="#2C2C2C" stroke-width="2.5" fill="#E5A800" fill-opacity="0.35"/>
+      <path d="M30 0 L30 48" stroke="#CC4444" stroke-width="2.5" stroke-dasharray="5 4"/>
+    </g>
+    <text x="102" y="60" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">① 切分</text>
+    <text x="102" y="90" font-family="Caveat" font-size="24" font-weight="700" fill="#E5A800">chunking</text>
+    <text x="28" y="152" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">太小丢上下文</text>
+    <text x="28" y="192" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">太大稀释注意力</text>
+    <text x="28" y="232" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">还顺手挤掉预算</text>
+    <text x="28" y="288" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">答案跨 chunk 怎么办</text>
+    <text x="28" y="328" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">结构化文档</text>
+    <text x="28" y="364" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">不能按字数切</text>
+    <line x1="28" y1="392" x2="302" y2="392" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.4"/>
+    <text x="28" y="428" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">✗ 以为存在一个</text>
+    <text x="28" y="456" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">通用最优大小</text>
+  </g>
+  <path d="M412 486 L438 486" stroke="#2C2C2C" stroke-width="2.5"/>
+  <polygon points="452,486 434,478 434,494" fill="#2C2C2C"/>
+
+  <!-- ============ ② 检索策略 ============ -->
+  <g transform="translate(450, 252)">
+    <rect x="0" y="0" width="330" height="466" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 放大镜 -->
+    <g transform="translate(24, 26)">
+      <circle cx="24" cy="22" r="17" stroke="#2C2C2C" stroke-width="2.8" fill="#E5A800" fill-opacity="0.35"/>
+      <path d="M36 34 L54 48" stroke="#2C2C2C" stroke-width="3"/>
+    </g>
+    <text x="102" y="60" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">② 检索策略</text>
+    <text x="102" y="90" font-family="Caveat" font-size="24" font-weight="700" fill="#E5A800">hybrid</text>
+    <text x="28" y="152" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">向量漏精确词</text>
+    <text x="28" y="188" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">ID、报错码、专名</text>
+    <text x="28" y="228" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">关键词漏同义表述</text>
+    <text x="28" y="264" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">所以必须混合</text>
+    <text x="28" y="316" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">rerank 只管排序</text>
+    <text x="28" y="352" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">不解决召回</text>
+    <line x1="28" y1="392" x2="302" y2="392" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.4"/>
+    <text x="28" y="428" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">✗ 以为向量天然</text>
+    <text x="28" y="456" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">优于关键词</text>
+  </g>
+  <path d="M792 486 L818 486" stroke="#2C2C2C" stroke-width="2.5"/>
+  <polygon points="832,486 814,478 814,494" fill="#2C2C2C"/>
+
+  <!-- ============ ③ 检索质量 ============ -->
+  <g transform="translate(830, 252)">
+    <rect x="0" y="0" width="330" height="466" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 漏斗 -->
+    <g transform="translate(24, 24)">
+      <path d="M2 4 L54 4 L34 30 L34 50 L22 50 L22 30 Z" stroke="#2C2C2C" stroke-width="2.8" fill="#E5A800" fill-opacity="0.35"/>
+    </g>
+    <text x="102" y="60" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">③ 检索质量</text>
+    <text x="102" y="90" font-family="Caveat" font-size="24" font-weight="700" fill="#E5A800">precision</text>
+    <text x="28" y="152" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">召回高、精度低</text>
+    <text x="28" y="204" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">错内容进了上下文</text>
+    <text x="28" y="240" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">就会被当事实用</text>
+    <text x="28" y="296" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">多来源互相矛盾</text>
+    <text x="28" y="332" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">要显式处理</text>
+    <line x1="28" y1="392" x2="302" y2="392" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.4"/>
+    <text x="28" y="428" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">✗ 只盯召回率</text>
+    <text x="28" y="456" font-family="Ma Shan Zheng" font-size="24" fill="#CC4444">多召回也有代价</text>
+  </g>
+  <path d="M1172 486 L1198 486" stroke="#2C2C2C" stroke-width="2.5"/>
+  <polygon points="1212,486 1194,478 1194,494" fill="#2C2C2C"/>
+
+  <!-- ============ ④ 归因溯源 ============ -->
+  <g transform="translate(1210, 252)">
+    <rect x="0" y="0" width="330" height="466" rx="16" stroke="#2C2C2C" stroke-width="2.5" fill="#FFFDF7"/>
+    <!-- 书签 -->
+    <g transform="translate(26, 24)">
+      <path d="M4 2 L40 2 L40 50 L22 36 L4 50 Z" stroke="#2C2C2C" stroke-width="2.8" fill="#E5A800" fill-opacity="0.35"/>
+    </g>
+    <text x="102" y="60" font-family="Ma Shan Zheng" font-size="32" fill="#2C2C2C">④ 归因溯源</text>
+    <text x="102" y="90" font-family="Caveat" font-size="24" font-weight="700" fill="#E5A800">citation</text>
+    <text x="28" y="152" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">「让模型给引用」</text>
+    <text x="28" y="188" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">这件事本身</text>
+    <text x="28" y="224" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C" opacity="0.85">也会被编造</text>
+    <text x="28" y="288" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">引用要在程序侧</text>
+    <text x="28" y="324" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">绑定到实际取回</text>
+    <text x="28" y="360" font-family="Ma Shan Zheng" font-size="25" fill="#2C2C2C">的那个片段</text>
+    <line x1="28" y1="392" x2="302" y2="392" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.4"/>
+    <text x="28" y="428" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.8">不是让它自己</text>
+    <text x="28" y="456" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.8">「说」引用了谁</text>
+  </g>
+
+  <!-- ============ 底部一句 ============ -->
+  <text x="70" y="820" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">检索只<tspan fill="#E5A800">缓解</tspan>幻觉，不<tspan fill="#CC4444">消除</tspan>幻觉。</text>
+  <text x="70" y="866" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.7">top-k 每加一条，都是从对话历史里扣出来的</text>
+
+  <!-- 读书的女孩 -->
+  <g transform="translate(1400, 748) scale(0.86)">
+    <ellipse cx="60" cy="112" rx="56" ry="13" fill="#2C2C2C" opacity="0.32"/>
+    <ellipse cx="60" cy="34" rx="34" ry="37" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M26 24 C30 -10, 90 -10, 94 26 C86 8, 70 2, 60 12 C48 2, 32 8, 26 24 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="49" cy="38" r="3.4" fill="#2C2C2C"/>
+    <circle cx="71" cy="38" r="3.4" fill="#2C2C2C"/>
+    <path d="M52 50 C57 56, 63 56, 68 50" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M60 71 L60 98 M60 78 L28 92 M60 78 L92 92" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M18 90 L60 82 L102 90 L60 100 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M60 82 L60 100" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="1120" y="120" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 1120, 120)"/>
+  <rect x="1430" y="140" width="10" height="10" fill="#E5A800" transform="rotate(-12, 1430, 140)"/>
+  <rect x="1556" y="420" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1556, 420)"/>
+  <rect x="40" y="420" width="10" height="10" fill="#E5A800" transform="rotate(28, 40, 420)"/>
+  <rect x="42" y="238" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-18, 42, 238)"/>
+  <rect x="1000" y="820" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-20, 1000, 820)"/>
+  <rect x="1090" y="862" width="9" height="9" fill="#E5A800" transform="rotate(14, 1090, 862)"/>
+  <rect x="1552" y="760" width="11" height="11" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(20, 1552, 760)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 152 C300 178, 640 178, 900 154', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1180, 68, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(70, 776, 940, 776, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+  rc.path('M1240 758 C1296 730, 1356 740, 1390 772', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+  rc.circle(1570, 300, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+});
+</script>
+</body>
+</html>

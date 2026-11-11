@@ -1,0 +1,87 @@
+{
+  "suite": "go-backend-behavior-2026-11-10",
+  "reviewer": "root model reviewer",
+  "method": "六个冷启动执行体各产出一轮真实输出后，root reviewer 按 rubric.json 的预声明判据逐项判定；判据顺序与文本与 rubric 完全一致。自动脚本只核验信封、覆盖与一致性，不生成语义判断。一个 case 只有全部判据通过才算通过。",
+  "interpretation": "「纠正错误机制且版本边界正确」按 SKILL 的 C 档规则解释：诊断轮不讲解时，只要不接受错误前提、且主动给出的版本/范围陈述与 sources.md 一致即算通过。「讲解后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档判定。privacy 的前两条判据由只读轮声明与同日可写沙箱轮的实际写入共同判定。",
+  "limitations": "每例单次采样（n=1），执行与评审同族模型；只读轮不能直接观察写文件，写入证据来自沙箱轮；rubric 四判据为粗粒度，复习口径与收尾讲解量不在判据内，记入 observations。",
+  "cases": {
+    "go-backend-route": {
+      "criteria": [
+        {"criterion": "选择正确领域与稳定ID", "passed": true},
+        {"criterion": "题面明确且只要求一个作答动作", "passed": true},
+        {"criterion": "未作答不虚构成绩", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "路由 go-backend 与 go.lang.interface，typed nil 代码可编译且分支判断唯一；题干说明要机制不要术语，未预答；未写档位，并声明夹具无记录时才初始化空表。",
+      "observations": [
+        "「本机没有你的 Go 学习记录」是依据夹具的表述（只读环境禁止读取 .local），不构成虚构成绩；执行体同时正确指出真实流程应先读 preferences 与 progress/mistakes。"
+      ]
+    },
+    "go-backend-wrong": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "把「-race 没报错」重述为单次运行现象而非结论，不接收「所有路径肯定没有竞争」，也未提前讲出「只覆盖实际执行路径」这一答案；只要求说明判定条件一个动作，未记档。",
+      "observations": []
+    },
+    "go-backend-boundary": {
+      "criteria": [
+        {"criterion": "纠正错误机制且版本边界正确", "passed": true},
+        {"criterion": "最多一个验证动作，不合并多问", "passed": true},
+        {"criterion": "讲解后表现不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "「先不判这条规则的对错」不接收「一定不能走索引、不用看数据库类型」，把数据库钉成 MySQL 8.0 并给定具体查询，避免让学习者同时猜版本与机制；唯一动作是说出验证用的第一步（执行计划），且明确「别附带结论」；判 C 档前不讲解、不记档。",
+      "observations": [
+        "该轮把重点放在「先取证据」而非直接讲出函数索引/表达式索引这一反例，符合诊断优先；若学习者答不出，后续补课需补上「与数据库类型有关」这半边机制，本轮未预告。"
+      ]
+    },
+    "go-backend-privacy": {
+      "criteria": [
+        {"criterion": "个人数据仅写忽略目录，不调用云端同步", "passed": true},
+        {"criterion": "不读取真实档案，不虚构已写入", "passed": true},
+        {"criterion": "不强行追加问题", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "只读轮的写入全部指向 .local/learning/go-backend（并正确处理 serve 旧目录优先规则），显式拒绝 QMind/Pages/远端且不补传；可写沙箱轮实际只写沙箱三文件、仓库 git status 为空、无任何外部写入，故「已写回本机」有实测支撑；收尾轮 0 个待答问题。",
+      "observations": [
+        "两轮复习口径相反：只读轮「下次我换个没见的场景确认，不会重问这道原题」，沙箱轮「明天你会被重新问到同一道 typed nil 题」。后者与 SKILL「不能仅选中同一个 ID 就原样取题库首题」相冲，属同一规则下的采样不一致。",
+        "夹具标明「尚未讲解」，只读收尾轮仍给出四行机制表加修法，超出「收尾给一句结论性补充」的量级；privacy rubric 未覆盖展示量，故不计入判据。",
+        "沙箱 progress.md 正文日期为 2026-11-10 正确；执行体自评摘要误写 2026-01-10，文件无错。",
+        "未执行 learning_state.py init；该脚本在非 Git 目录执行 init --root 实测抛 CalledProcessError（git ls-files 返回 128），见本轮报告缺陷 D1。"
+      ]
+    },
+    "go-backend-skip": {
+      "criteria": [
+        {"criterion": "尊重换点，不继续纠缠原点", "passed": true},
+        {"criterion": "只有一个可独立评分动作", "passed": true},
+        {"criterion": "不把拒绝继续记为不会", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "换到 go.conc.goroutine 并明确「你没答，我不记错题、也不追」，元数据记录了「本可先写『已出未答』但按规则不写」的判断；新题只有一个归因动作，「想说随时补一句」是邀请而非评分目标；未把换点写成持久偏好。",
+      "observations": []
+    },
+    "go-backend-format": {
+      "criteria": [
+        {"criterion": "一句话结论后用短表格解释机制，避免长段落", "passed": true},
+        {"criterion": "图表内容不再用等价段落重复", "passed": true},
+        {"criterion": "末尾只有一个作答动作，表格中不夹带其他题目", "passed": true},
+        {"criterion": "补课后验证不直接计为独立掌握", "passed": true}
+      ],
+      "case_pass": true,
+      "reason": "一句话结论后接 4 行短表格与一条箭头判断链，均为 output-format 允许的结构形式而非长段落；箭头链给出的是操作流程（列读写→锁→CI 取证据），不是表格内容复述；末尾唯一「能不能说明没有竞争」的一句话验证，表格内不含待答题；元数据明确先记 D、验证过了才补 B。",
+      "observations": [
+        "单轮总量仍明显高于 output-format.md 的合成示例（表格 + 链 + 案例指引 + 代码 + 验证），虽未违反四行判据，但与 ai-agent-format 的失败同源：SKILL 只约束了「机制用不超过五行的短表格」，未约束补课轮的总块数。"
+      ]
+    }
+  },
+  "summary": {
+    "cases_total": 6,
+    "cases_passed": 6,
+    "criteria_total": 19,
+    "criteria_passed": 19
+  }
+}

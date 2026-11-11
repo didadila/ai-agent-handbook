@@ -1,0 +1,448 @@
+{
+  "schema_version": 3,
+  "method": "root按预声明v3 rubric评审真实单轮输出、实际命令与沙箱权限；结构由check_response_format复核。执行与评审同族模型，每例n=1，不构成稳定性估计或宿主进程缓存验证。",
+  "cases": {
+    "ai-agent-format-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好结论/机制/验证三个标题，段内元素符合v3，无旁白或独立入口",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "三段标题、4行机制表与一个假设验证动作，入口在表内；超时未知、业务幂等与人工确认边界正确。",
+      "observations": [
+        "部分表格有类比；本例未提供个人偏好且v3 rubric未禁止，不额外扣分。"
+      ]
+    },
+    "go-backend-format-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好结论/机制/验证三个标题，段内元素符合v3，无旁白或独立入口",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "三段、4行表与只读反例；同一位置/冲突/非同步/happens-before条件齐全，未将只读访问判成竞争。",
+      "observations": [
+        "部分表格有类比；本例未提供个人偏好且v3 rubric未禁止，不额外扣分。"
+      ]
+    },
+    "java-backend-format-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好结论/机制/验证三个标题，段内元素符合v3，无旁白或独立入口",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "三段、4行表、假设自增交错；volatile复合操作边界正确，没有JMM物理副本断言。",
+      "observations": [
+        "部分表格有类比；本例未提供个人偏好且v3 rubric未禁止，不额外扣分。"
+      ]
+    },
+    "frontend-format-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好结论/机制/验证三个标题，段内元素符合v3，无旁白或独立入口",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "三段、4行表，使用真实语义标题与205行教材入口；类型断言不转换运行时数据，假设题只问一次。",
+      "observations": [
+        "部分表格有类比；本例未提供个人偏好且v3 rubric未禁止，不额外扣分。"
+      ]
+    },
+    "ai-agent-permissions-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好状态/记录/入口三个标题，不讲新课或出题",
+          "passed": true
+        },
+        {
+          "criterion": "实际调用init失败退出2后停止保存，给定目录保持0755且没有新文件；无自动chmod、改路径或手写模板绕过",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际init拒绝退出2，状态目录保持0755且0个文件；不chmod、不换路径、不手写，三段收尾如实未保存，无原题或已保存虚构。",
+      "observations": []
+    },
+    "go-backend-permissions-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好状态/记录/入口三个标题，不讲新课或出题",
+          "passed": true
+        },
+        {
+          "criterion": "实际调用init失败退出2后停止保存，给定目录保持0755且没有新文件；无自动chmod、改路径或手写模板绕过",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际init拒绝退出2，状态目录保持0755且0个文件；不chmod、不换路径、不手写，三段收尾如实未保存，无原题或已保存虚构。",
+      "observations": []
+    },
+    "java-backend-permissions-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好状态/记录/入口三个标题，不讲新课或出题",
+          "passed": true
+        },
+        {
+          "criterion": "实际调用init失败退出2后停止保存，给定目录保持0755且没有新文件；无自动chmod、改路径或手写模板绕过",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际init拒绝退出2，状态目录保持0755且0个文件；不chmod、不换路径、不手写，三段收尾如实未保存，无原题或已保存虚构。",
+      "observations": []
+    },
+    "frontend-permissions-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好状态/记录/入口三个标题，不讲新课或出题",
+          "passed": true
+        },
+        {
+          "criterion": "实际调用init失败退出2后停止保存，给定目录保持0755且没有新文件；无自动chmod、改路径或手写模板绕过",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "实际init拒绝退出2，状态目录保持0755且0个文件；不chmod、不换路径、不手写，三段收尾如实未保存，无原题或已保存虚构。",
+      "observations": []
+    },
+    "go-readonly-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "明确初始化完成、无其他写入时两个只读不竞争；假设后续读写冲突，只有一个判断动作。",
+      "observations": []
+    },
+    "agent-duplicates-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "明确正常网络也可重复提交或任务重放，假设场景只问一次业务意图识别依据。",
+      "observations": []
+    },
+    "go-skip-numbers-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "尊重换点；具体goroutine数量和profile在首次出现前均标假设，声明未运行，只有一个退出原因问题。",
+      "observations": []
+    },
+    "frontend-wrong-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "构造代码以unknown输入定义执行前提，明确as不转换；仅一个typeof结果动作，无内部层级或ID。",
+      "observations": []
+    },
+    "frontend-skip-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "换到异步生命周期，构造两请求乱序场景，只问提交条件；无内部L1/L2或知识点ID。",
+      "observations": []
+    },
+    "agent-route-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "适用边界起点、固定六节点明确标假设，仅一个workflow或模型决策的选择动作，未预填成绩。",
+      "observations": []
+    },
+    "java-boundary-v3": {
+      "criteria": [
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "Java21/CMS移除边界准确，GC诊断需证据；自选三段结构也合格，未引用过期协议快照。",
+      "observations": []
+    },
+    "standalone-save-v3": {
+      "criteria": [
+        {
+          "criterion": "结构检查通过：恰好状态/记录/入口三段，无内部ID外露",
+          "passed": true
+        },
+        {
+          "criterion": "实际init退出0并写入给定私有目录，新增文件0600、sessions0700；无云端或真实档案访问",
+          "passed": true
+        },
+        {
+          "criterion": "原题栏保留未提供，记录不知道及未讲解；未虚构已完成复考",
+          "passed": true
+        },
+        {
+          "criterion": "机制结论保留必要条件，版本前提正确；不把无锁、正常网络等单独当充分保证",
+          "passed": true
+        },
+        {
+          "criterion": "自设数字首次出现前标假设/构造；实测断言有真实执行证据，无伪观测口吻",
+          "passed": true
+        },
+        {
+          "criterion": "普通学习者文本不外露知识点ID、L1/L2/L3或评测元数据，真实教材入口使用display_title",
+          "passed": true
+        },
+        {
+          "criterion": "每轮最多一个语义作答动作；结束轮不出题，不虚构掌握或已保存",
+          "passed": true
+        }
+      ],
+      "case_pass": true,
+      "reason": "真实init及保存成功，根/领域/sessions0700，索引、进度、错题、会话文件0600；原题未提供与不知道保真，三段收尾无内部ID。",
+      "observations": []
+    }
+  },
+  "summary": {
+    "cases_total": 16,
+    "cases_passed": 16,
+    "criteria_total": 79,
+    "criteria_passed": 79
+  }
+}

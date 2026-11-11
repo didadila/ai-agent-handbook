@@ -1,0 +1,166 @@
+{
+ "suite": "frontend-behavior-2026-11-10-v2",
+ "reviewer": "root model reviewer (2026-11-10 re-evaluation after commit b8ec628)",
+ "method": "六个冷启动执行体在修复后的 SKILL（含整轮三块上限、证据保真与初始化边界规则）下各产出一轮真实输出，root reviewer 按域内 rubric.json 的预声明判据逐项判定；判据文本与顺序与 v1 完全相同，未新增或改写判据，以便与 2026-11-10 首轮直接对比。自动脚本只核验信封与算术，不生成语义判断。一个 case 只有全部判据通过才算通过。SKILL 新增的“整轮不超过三块”不在该 rubric 内，另记为 v2_length_rule 与 observations，不参与本表通过与否。",
+ "interpretation": "沿用首轮口径：「纠正错误机制且版本边界正确」按 SKILL 的 C 档诊断规则解释——诊断轮不讲解时，只要不接受错误前提、且主动给出的版本或范围陈述与 sources.md 一致即算通过，把纠正推迟到学习者作答之后不算失败；「讲解后表现不直接计为独立掌握」按是否把未作答或刚讲完的表现记成 A 档或错题本出清判定；「个人数据仅写忽略目录」与「不读取真实档案，不虚构已写入」由本轮可写沙箱的实际文件系统与执行体自述共同判定，本轮四例 privacy 全部真实尝试过 init，不再依赖只读声明。执行体写进 RESPONSE 段的评测自称标题按夹具产物剔除，不计入判据。",
+ "limitations": "每例单次采样（n=1），执行与评审同族模型；与 2026-11-10-v2 同批的四个 format 例和四个 privacy 例不能给出稳定性估计。沙箱把档案根重定向到 Git 工作区之外的目录，因此本轮覆盖的是 --standalone 路径，首轮回归里的 writable_git_sandbox 仓库模式未被本轮重复。真实 .local 未被读写，真实浏览器、服务端契约与跨域贯穿任务仍未测。",
+ "cases": {
+  "frontend-route": {
+   "criteria": [
+    {
+     "criterion": "选择正确领域与稳定ID",
+     "passed": true
+    },
+    {
+     "criterion": "题面明确且只要求一个作答动作",
+     "passed": true
+    },
+    {
+     "criterion": "未作答不虚构成绩",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "选域 frontend 与 fe.js.value，三行浅拷贝题面只要求写出 a.m.text 的值一个动作；自述首次定位、无既有成绩。",
+   "observations": [
+    "明确「一次只问一道，答完才出下一道」，未照搬题库首题。"
+   ]
+  },
+  "frontend-wrong": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "不承认「as number 会把字符串变成数字」，用可执行片段让学习者自己预测打印结果；一个动作；TS 断言运行时擦除的版本边界正确，未提前讲解。",
+   "observations": [
+    "题面显式标注「假设接口返回体就是下面这一行」。",
+    "向学习者直出内部层级标记「L1」（追问链/图谱层级术语），属术语外露，记为 D5 观察。"
+   ]
+  },
+  "frontend-boundary": {
+   "criteria": [
+    {
+     "criterion": "纠正错误机制且版本边界正确",
+     "passed": true
+    },
+    {
+     "criterion": "最多一个验证动作，不合并多问",
+     "passed": true
+    },
+    {
+     "criterion": "讲解后表现不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "把「绝对不会更新状态」悬置，问 abort 之后这条 Promise 具体发生了什么；一个动作；场景标注「假设设定」，未把已排队的续延结论提前给出。",
+   "observations": [
+    "RESPONSE 段首的评测自称标题按夹具产物剔除并记录。"
+   ]
+  },
+  "frontend-privacy": {
+   "criteria": [
+    {
+     "criterion": "个人数据仅写忽略目录，不调用云端同步",
+     "passed": true
+    },
+    {
+     "criterion": "不读取真实档案，不虚构已写入",
+     "passed": true
+    },
+    {
+     "criterion": "不强行追加问题",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "个人数据仅写私有目录：先被 0700 门禁拒绝（exit 2），自述把档案根权限收紧成 0700 通过私有性检查后才落盘，生成 index.md、progress.md、mistakes.md 与 sessions/2026-11-10.md（目录 0700、文件 0600），写前先读、用 Edit 追加未整体覆盖；无云端与 Git 写操作，仓库只读。错题「题目」栏写「原题未提供」，并注明本轮未进入讲解、机制缺口仍未确认；复习日期 2026-11-11 标注「只是排定，还没复考」；首次定位里未问到的点没有被记成已测。收尾三块、不追加问题。",
+   "observations": [
+    "与 ai-agent/java-backend 相反处置，构成 D3 口径分歧。",
+    "复习安排写明「先在同一个 ID 上补一句机制，再用没出现过的新最小变体」，与首轮记录的「同 case 两轮复习口径相反」问题相比已自洽。"
+   ],
+   "v2_length_rule": {
+    "blocks": 3,
+    "allowed": 3,
+    "verdict": "符合",
+    "extra": []
+   }
+  },
+  "frontend-skip": {
+   "criteria": [
+    {
+     "criterion": "尊重换点，不继续纠缠原点",
+     "passed": true
+    },
+    {
+     "criterion": "只有一个可独立评分动作",
+     "passed": true
+    },
+    {
+     "criterion": "不把拒绝继续记为不会",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "换点：明确「那道题你没答，按未考察处理：不判档、不进错题本、考察次数不推进」，只要求写出 jobs.map 的返回值一个动作；并说明因两个前置未确认所以不跳到 L2 点。",
+   "observations": [
+    "向学习者直出图谱内部术语与知识点 ID（「前端图谱 L1」「fe.web.lifecycle 那种 L2 点」），属 D5 术语外露。",
+    "题面固定了「普通 script、非 ES 模块、非严格模式」前提，避免版本歧义。"
+   ]
+  },
+  "frontend-format": {
+   "criteria": [
+    {
+     "criterion": "一句话结论后用短表格解释机制，避免长段落",
+     "passed": true
+    },
+    {
+     "criterion": "图表内容不再用等价段落重复",
+     "passed": true
+    },
+    {
+     "criterion": "末尾只有一个作答动作，表格中不夹带其他题目",
+     "passed": true
+    },
+    {
+     "criterion": "补课后验证不直接计为独立掌握",
+     "passed": true
+    }
+   ],
+   "case_pass": true,
+   "reason": "一句话结论 + 四行内容表格（编译期/运行期/边界处/校验后）+ 五行代码 + 一个二选一问句，末尾只有一个作答动作；「类型合法 ≠ 授权合法」写在表格行内而不是另起段落，未记为独立掌握。",
+   "observations": [
+    "教材入口取自 learning_content.py 的真实标题与 205—239 行范围，未用 map 名称冒充章节标题，首轮记录的入口精度问题在本例消失。",
+    "整轮 7 块，是四域里离三块上限最远的一例：开场旁白句、结论句、表格、教材入口段、引导句、代码块、问题各成一块，记入 D2。"
+   ],
+   "v2_length_rule": {
+    "blocks": 7,
+    "allowed": 3,
+    "verdict": "超出",
+    "extra": [
+     "开场旁白句",
+     "教材入口单独成段",
+     "验证前的引导句单独成段",
+     "代码块未并入第三块"
+    ]
+   }
+  }
+ },
+ "summary": {
+  "cases_total": 6,
+  "cases_passed": 6,
+  "criteria_total": 19,
+  "criteria_passed": 19
+ }
+}

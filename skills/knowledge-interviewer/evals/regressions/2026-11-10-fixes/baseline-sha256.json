@@ -1,0 +1,18 @@
+{
+  "skills/knowledge-interviewer/evals/ai-agent/runs/2026-11-10/grades.json": "ecd1982aa77611307264b3b7918c008b17477ee9206c1d361e03823323cb650f",
+  "skills/knowledge-interviewer/evals/ai-agent/runs/2026-11-10/evidence.md": "c0d4aa6dfd34b1b3a6186836b32b1047c881ed9c8c39f1f0568d7b03a82f42d6",
+  "skills/knowledge-interviewer/evals/ai-agent/runs/2026-11-10/README.md": "c59f28cc9d459f7665d765a035171a5d72cfdc92fe53964133edb329c0526a24",
+  "skills/knowledge-interviewer/evals/ai-agent/rubric.json": "4d052ea909dc7cde056c22f4dca453258d5f8e7ebbbaacdfb2ec80358f42c466",
+  "skills/knowledge-interviewer/evals/go-backend/runs/2026-11-10/grades.json": "1c76a14103d252169d845af8aa281aff991a2443230add86cc91eb34b1a84540",
+  "skills/knowledge-interviewer/evals/go-backend/runs/2026-11-10/evidence.md": "833b506563e9d339fe3b7a67d2f6396f3206ebc0a139ef232c8f9f847f047704",
+  "skills/knowledge-interviewer/evals/go-backend/runs/2026-11-10/README.md": "47e67e2a67700608049cccc30bbb3ba3de7081aae84fbbca9bbc8d33fd60ac55",
+  "skills/knowledge-interviewer/evals/go-backend/rubric.json": "bdd948ac846f1d4ab91e38653ab53c8ae749134d29c6eecc0a15635226ab73e9",
+  "skills/knowledge-interviewer/evals/java-backend/runs/2026-11-10/grades.json": "ce73f55d0fa3c8bad06ccdf1f91d9aa5c732c9b0ada0006ef566a839b8e56ea1",
+  "skills/knowledge-interviewer/evals/java-backend/runs/2026-11-10/evidence.md": "502cdaf2b86960b661b23f2c83c274d52b442c987d0789700fd6c0f226b4a87c",
+  "skills/knowledge-interviewer/evals/java-backend/runs/2026-11-10/README.md": "09280616c94511b0d99d94ebb2d748976fde2b5125fbd34e8c1cc247931deded",
+  "skills/knowledge-interviewer/evals/java-backend/rubric.json": "cf6306811aacc482ed81571b5c4b669d69b17b0c965d64a2680df24acf85acda",
+  "skills/knowledge-interviewer/evals/frontend/runs/2026-11-10/grades.json": "95aa348e10fd021b807320c2514765b3ad726cc7fda802f39c4b2f4dda4cd3f6",
+  "skills/knowledge-interviewer/evals/frontend/runs/2026-11-10/evidence.md": "776ad7bcc3e9b7c5365e01a5d2c861f0c78665b0fea6330ee0eb36378c1ee734",
+  "skills/knowledge-interviewer/evals/frontend/runs/2026-11-10/README.md": "e106e15ecc5723ae0fd41232ef8fededc57e9297774c3bb53bcc65ef1e7a5a3d",
+  "skills/knowledge-interviewer/evals/frontend/rubric.json": "8265bee5f25118a30113069e5c4c7144c86fd8a1b623cd21c4a6dd28c4dcba49"
+}

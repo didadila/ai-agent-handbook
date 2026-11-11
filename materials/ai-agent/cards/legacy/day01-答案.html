@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1600, height=900">
+<title>Agent 翻车现场 · 第 1 天 · 答案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 900px;
+  background: #FFFDF7;
+  font-family: 'Ma Shan Zheng', cursive;
+  overflow: hidden; position: relative;
+}
+.canvas-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.content-layer { position: relative; width: 100%; height: 100%; z-index: 2; }
+</style>
+</head>
+<body>
+<canvas id="sketch-canvas" class="canvas-layer" width="1600" height="900"></canvas>
+<div class="content-layer">
+<svg viewBox="0 0 1600 900" width="1600" height="900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+
+  <!-- 品牌条 -->
+  <rect x="66" y="34" width="272" height="50" rx="25" fill="#E5A800" opacity="0.9"/>
+  <text x="202" y="68" text-anchor="middle" font-family="Ma Shan Zheng" font-size="31" fill="#2C2C2C">Agent 翻车现场</text>
+  <text x="358" y="68" font-family="Ma Shan Zheng" font-size="30" fill="#2C2C2C" opacity="0.62">第 1 天 · 答案</text>
+  <text x="1300" y="66" font-family="Caveat" font-size="38" font-weight="700" fill="#E5A800">Day 01 — answer</text>
+
+  <!-- 标题 -->
+  <text x="70" y="148" font-family="Ma Shan Zheng" font-size="50" fill="#2C2C2C">它不是假的，它是「<tspan fill="#E5A800">真的，但不是这一件事</tspan>」</text>
+  <text x="70" y="192" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.75">真实性让它免于被质疑，缺作用域让反证对不上 — 于是 [invalidated] 机制全程没被触发</text>
+
+  <!-- 中缝 -->
+  <line x1="905" y1="240" x2="905" y2="792" stroke="#2C2C2C" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.45"/>
+
+  <!-- 左：① 为什么能骗到 -->
+  <rect x="70" y="232" width="268" height="48" rx="24" fill="#E5A800" opacity="0.85"/>
+  <text x="204" y="265" text-anchor="middle" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">① 为什么能骗到</text>
+
+  <text x="70" y="330" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">内容为真 → 不会被质疑，也<tspan fill="#E5A800">永远不会被 [invalidated]</tspan></text>
+  <text x="70" y="366" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.78">覆盖机制只认「被反证的事实」，而它的事实没被反证</text>
+  <text x="70" y="400" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.78">那次事故确实是索引被删，wiki 一个字都没写错</text>
+
+  <text x="70" y="462" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">被反证的是「<tspan fill="#E5A800">它适用于本案</tspan>」这个隐含断言</text>
+  <text x="70" y="498" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.78">这个断言从没作为一个块存在 → 没有东西可被覆盖</text>
+  <text x="70" y="532" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.78">题干那句「零 model_hypothesis」不是健康，是漏洞</text>
+
+  <text x="70" y="594" font-family="Ma Shan Zheng" font-size="28" fill="#2C2C2C">症状同构：300ms→60s 和 200ms→40s 长得一样</text>
+  <text x="70" y="630" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C" opacity="0.78">表名也像（daily_stats / daily_report），字段还同名</text>
+
+  <g transform="translate(70, 660)">
+    <rect x="0" y="0" width="800" height="132" rx="16" stroke="#CC4444" stroke-width="2.5" fill="#CC4444" fill-opacity="0.06"/>
+    <text x="26" y="42" font-family="Ma Shan Zheng" font-size="28" fill="#CC4444">第 4 轮其实已经把铁证摆出来了</text>
+    <text x="26" y="80" font-family="Ma Shan Zheng" font-size="26" fill="#CC4444" opacity="0.9">索引命中 range；表三天从 104 万涨到 8.3 亿</text>
+    <text x="26" y="116" font-family="Ma Shan Zheng" font-size="26" fill="#CC4444" opacity="0.9">根因是数据量，不是索引</text>
+  </g>
+
+  <!-- 右：② 入库时记 4 件事 -->
+  <rect x="936" y="232" width="300" height="48" rx="24" fill="#E5A800" opacity="0.85"/>
+  <text x="1086" y="265" text-anchor="middle" font-family="Ma Shan Zheng" font-size="29" fill="#2C2C2C">② 入库时记 4 件事</text>
+
+  <text x="936" y="330" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">subject：analytics_db.daily_stats.create_time</text>
+  <text x="936" y="364" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.75">库.表.字段 — scope 不匹配就降权，不是删</text>
+
+  <text x="936" y="420" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">type：historical_incident</text>
+  <text x="936" y="454" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.75">个案 ≠ general_rule，个案不可直接外推成因果</text>
+
+  <text x="936" y="510" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">status：resolved@事故当时</text>
+  <text x="936" y="544" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.75">已修复的事故，作为当前根因候选默认降权</text>
+
+  <text x="936" y="600" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">症状 / 根因<tspan fill="#E5A800">分列存放</tspan></text>
+  <text x="936" y="634" font-family="Ma Shan Zheng" font-size="24" fill="#2C2C2C" opacity="0.75">检索命中的是症状，因果不许跟着一起继承</text>
+
+  <g transform="translate(930, 664)">
+    <rect x="0" y="0" width="610" height="128" rx="16" stroke="#E5A800" stroke-width="3" fill="#FFFDF7"/>
+    <text x="24" y="40" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">再加运行时一条：检索得出的归因，必须</text>
+    <text x="24" y="76" font-family="Ma Shan Zheng" font-size="26" fill="#2C2C2C">落成 model_hypothesis 块并写上证伪条件</text>
+    <text x="24" y="112" font-family="Ma Shan Zheng" font-size="25" fill="#E5A800">这样第 4 轮一到，它才有东西可以被覆盖</text>
+  </g>
+
+  <!-- 底部收口 -->
+  <text x="70" y="856" font-family="Ma Shan Zheng" font-size="34" fill="#2C2C2C">别问「这条资料<tspan fill="#CC4444">可信吗</tspan>」— 它可信；要问「它说的是<tspan fill="#E5A800">同一个对象</tspan>吗」</text>
+
+  <!-- 小人 -->
+  <g transform="translate(1428, 800) scale(0.84)">
+    <ellipse cx="52" cy="102" rx="48" ry="11" fill="#2C2C2C" opacity="0.3"/>
+    <ellipse cx="52" cy="30" rx="30" ry="33" stroke="#2C2C2C" stroke-width="3.2" fill="#FFFDF7"/>
+    <path d="M22 21 C26 -9, 78 -9, 82 23 C74 7, 60 1, 52 10 C42 1, 28 7, 22 21 Z" fill="#E5A800" stroke="#2C2C2C" stroke-width="2.6" opacity="0.75"/>
+    <circle cx="43" cy="34" r="3.1" fill="#2C2C2C"/>
+    <circle cx="61" cy="34" r="3.1" fill="#2C2C2C"/>
+    <path d="M45 44 C49 50, 55 50, 59 44" stroke="#2C2C2C" stroke-width="2.4" fill="none"/>
+    <path d="M52 63 L52 90 M52 70 L24 84 M52 70 L80 84" stroke="#2C2C2C" stroke-width="3.2" fill="none"/>
+    <path d="M14 82 L52 74 L90 82 L52 92 Z" fill="#FFFDF7" stroke="#2C2C2C" stroke-width="2.6"/>
+    <path d="M52 74 L52 92" stroke="#2C2C2C" stroke-width="2"/>
+  </g>
+
+  <!-- 装饰小方块 -->
+  <rect x="1240" y="150" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(18, 1240, 150)"/>
+  <rect x="1556" y="330" width="10" height="10" fill="#E5A800" transform="rotate(-12, 1556, 330)"/>
+  <rect x="1552" y="586" width="13" height="13" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(24, 1552, 586)"/>
+  <rect x="42" y="264" width="11" height="11" fill="#E5A800" transform="rotate(30, 42, 264)"/>
+  <rect x="42" y="600" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(-16, 42, 600)"/>
+  <rect x="1330" y="864" width="11" height="11" fill="#E5A800" transform="rotate(14, 1330, 864)"/>
+  <rect x="1244" y="828" width="12" height="12" stroke="#E5A800" stroke-width="2" fill="none" transform="rotate(22, 1244, 828)"/>
+  <rect x="884" y="176" width="9" height="9" fill="#E5A800" transform="rotate(-20, 884, 176)"/>
+
+</svg>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<script>
+document.fonts.ready.then(() => {
+  const rc = rough.canvas(document.getElementById('sketch-canvas'));
+  rc.path('M70 216 C300 238, 660 238, 936 215', { stroke: '#E5A800', strokeWidth: 3, roughness: 1.9, fill: 'none' });
+  rc.circle(1266, 118, 9, { fill: '#2C2C2C', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.circle(60, 452, 8, { fill: '#E5A800', fillStyle: 'solid', stroke: 'none', roughness: 0.5 });
+  rc.line(70, 812, 1180, 812, { stroke: '#2C2C2C', strokeWidth: 1.5, roughness: 1.6 });
+  rc.path('M1276 760 C1326 732, 1382 742, 1412 772', { stroke: '#E5A800', strokeWidth: 2.4, roughness: 1.8, fill: 'none' });
+});
+</script>
+</body>
+</html>
