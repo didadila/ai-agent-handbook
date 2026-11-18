@@ -1,0 +1,1 @@
+{"eval_id":2,"eval_name":"python-async-blocking","case_id":"python-backend-wrong","prompt":"FastAPI里把函数写成async def后，里面用time.sleep(2)也不会卡住其他请求，因为已经异步了。我这个理解对吗？直接用短表格讲，最后只问一个验证问题。","assertions":["正确解释async def中的time.sleep同步阻塞事件循环，区分异步等待与线程卸载边界","实际定位读取Python对应教材正文，引用真实语义标题，不编造行号","严格结论/机制/验证三段，机制至多四行表，无开场旁白或重复段落","只有一个独立验证动作且不把讲解后复述计为独立A"]}

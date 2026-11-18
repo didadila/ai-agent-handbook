@@ -1,0 +1,33 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.agent.tools",
+  "actions_asked": 1,
+  "state_action": "none",
+  "external_sync": false,
+  "fallback": {
+    "reason": "旧 Skill 未列出 Python 领域包",
+    "reference": "skills/knowledge-interviewer-workspace/skill-snapshot/references/question-design.md",
+    "scope_and_start": "用户输入已明确 Python Agent 工具授权及不会该机制；按自造题方法补课并给出一个最小验证动作",
+    "point_id_source": "用户输入用例标识，不来自旧领域图谱",
+    "domain_package_created": false
+  },
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/SKILL.md",
+      "line_range": [1, 223]
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "line_range": [1, 12],
+      "used_as_input": "第 12 行 python-backend-format 的 prompt 与 fixture；读取窗口包含文件头及其他用例，未作为本轮输入使用"
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/question-design.md",
+      "line_range": [1, 86]
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/output-format.md",
+      "line_range": [1, 60]
+    }
+  ]
+}

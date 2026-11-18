@@ -88,6 +88,8 @@ def check_domain(domain: str, errors: list[str]) -> str:
         errors.append(f'{domain}: rubric/case coverage mismatch')
     runs = run_dirs(evals_dir)
     if not runs:
+        if cases.get('status') == 'not_run' and not cases.get('run') and not cases.get('previous_run'):
+            return f'not_run: {len(case_ids)} declared cases; no model behavior results'
         errors.append(f'{evals_dir.relative_to(ROOT)}: no archived behavior run')
         return 'no run'
     latest: dict[str, int] = {}
@@ -116,8 +118,8 @@ def main() -> int:
         print(f"{domain['id']}: {result}")
     for error in errors:
         print('ERROR:', error)
-    print('Archived envelopes, rubric coverage and review arithmetic are consistent. '
-          'This does not prove the behavior passes: passes come from model review of one sampled turn each.')
+    print('Definitions and existing archive envelopes checked; unrun domains are not behavior passes. '
+          'Behavior results require model execution and review, not structural coverage.')
     return bool(errors)
 
 

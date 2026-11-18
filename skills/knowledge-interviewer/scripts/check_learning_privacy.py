@@ -48,7 +48,9 @@ def violations(root: Path, staged: bool = False) -> list[str]:
         if str(Path.home()) + '/' in text:
             errors.append(f'personal home path in shared file: {name}')
         if staged and name.endswith('.md'):
-            for target in re.findall(r'\]\(([^)]+)\)', text):
+            prose = re.sub(r'^ {0,3}(`{3,}|~{3,})[^\n]*\n.*?^ {0,3}\1[`~]*[ \t]*$', '',
+                           text, flags=re.MULTILINE | re.DOTALL)
+            for target in re.findall(r'\]\(([^)]+)\)', prose):
                 if '://' in target or target.startswith('#'):
                     continue
                 destination = posixpath.normpath(posixpath.join(

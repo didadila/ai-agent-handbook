@@ -1,0 +1,31 @@
+{
+  "expectations": [
+    {
+      "text": "选择Python独立实现路线，不要求Java或Go前置且不重复询问已知语言/时长",
+      "passed": true,
+      "evidence": "outputs/response.txt第1行说明Python后端本地教学原型，‘不套 Java/Go，也不要求先学它们’；第5–11行直接给五天、每天3小时的安排，无语言/时长澄清问题。run根execution.json明确使用旧Skill快照的无包回退路线，而不是无Skill。"
+    },
+    {
+      "text": "计划按五天呈现，贯穿语言、异步API、存储、任务分发与Python Agent",
+      "passed": false,
+      "evidence": "response.txt第7–11行虽有五天、HTTP接口、SQLite、queue/线程任务及Agent，但没有事件循环、async/await、异步API或请求内异步等待/取消安排；第3行临时知识路线也仅列HTTP服务边界。不能把第9行线程队列或普通HTTP骨架视为异步API覆盖。"
+    },
+    {
+      "text": "SQL为最小存储主线，Redis/对象/向量/Celery按需扩展，不强制全装",
+      "passed": true,
+      "evidence": "response.txt第8行以SQLite任务表作为最小持久化，第9行强调缓存与队列不同职责；第13行把‘Redis/Celery 等跨进程组件的实接’留到后续，以免环境安装吞掉五天时间。对象/向量组件未被加入必做清单；按断言的按需、非全装边界判定，不将可选组件一一出现额外设为隐藏要求。"
+    },
+    {
+      "text": "五天定位为可验收上手而非精通或线上交付保证",
+      "passed": true,
+      "evidence": "response.txt第1行‘五天搭出一个本地教学原型，不是掌握完整生产架构’，第8–11行提供重启查询、故障注入和端到端测试的计划；第9行说明内存队列重启丢失，第13行把部署留待后续，没有生产交付保证。"
+    },
+    {
+      "text": "尊重只要计划：零作答动作，不虚构成绩或执行结果",
+      "passed": true,
+      "evidence": "response.txt第15行‘本轮仅提供计划，不开始提问、不判档；未运行代码、未读取个人档案、未写入学习状态，也未安装或部署’；全文计划产出未写成已完成观察，无问答动作。run根execution.json记录actions_asked=0及runtime_execution=none。"
+    }
+  ],
+  "summary": {"passed": 4, "failed": 1, "total": 5, "pass_rate": 0.8},
+  "method": "without_skill实际为旧版Skill快照。执行记录位于run根execution.json；记录明确textbook_reads为无，未借评测者的公共教材读取补算该run的读取。public_reads四项的路径和行范围均已核对。仅评现有输出，未重跑或读取真实档案；结构化执行记录不是可独立审计全部历史I/O的原始工具转录。"
+}

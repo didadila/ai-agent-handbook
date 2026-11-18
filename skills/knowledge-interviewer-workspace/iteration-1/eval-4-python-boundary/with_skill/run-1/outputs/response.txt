@@ -1,0 +1,13 @@
+### 结论
+不对：并非所有 Python 构建都启用 GIL，`asyncio.to_thread` 也不自动把纯 Python CPU 计算变成多核并行。
+
+### 机制
+| 条件 | 执行边界 |
+|---|---|
+| 常规启用 GIL 的 CPython | 同一进程的多个线程不能同时执行 Python 字节码；`to_thread` 主要用于卸载阻塞 I/O，不能据此断言纯 Python 计算多核加速。 |
+| 释放 GIL 的原生扩展 | 计算可能在线程间多核并行，但这不等于纯 Python 循环也能如此。 |
+| CPython 3.13 起的可选 free-threaded 构建 | 不是所有安装的默认模式；运行配置或不兼容扩展可能启用 GIL。实际禁用 GIL 时线程可并行，共享状态仍需同步。 |
+| 启用 GIL 时的纯 Python CPU 任务 | 可考虑进程池，代价是序列化、进程通信与额外内存，收益需在目标环境测量；[按目标构建与工作类型选择协程、线程或进程](handbook/python-backend/02-async-and-concurrency.md#L98-L112)。 |
+
+### 验证
+假设使用启用 GIL 的 CPython 3.11，要多核并行运行互不共享状态的纯 Python 计算，你会选线程池还是进程池？

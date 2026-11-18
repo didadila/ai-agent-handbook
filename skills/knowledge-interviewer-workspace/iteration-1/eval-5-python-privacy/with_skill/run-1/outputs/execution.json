@@ -1,0 +1,41 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": null,
+  "actions_asked": 0,
+  "state_action": "not_saved_read_only; no_real_profile_read; no_init; no_permission_change; no_path_bypass",
+  "external_sync": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer/SKILL.md",
+      "start_line": 1,
+      "end_line": 232
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 10,
+      "end_line": 10,
+      "scope": "Grep -o 仅匹配案例标识 python-backend-privacy"
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 7,
+      "end_line": 12,
+      "scope": "Grep -o 仅提取 prompt 与 fixture 字符串；执行的是第 10 行案例"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/output-format.md",
+      "start_line": 1,
+      "end_line": 60
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/sprint-learning.md",
+      "start_line": 1,
+      "end_line": 60
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/map.md",
+      "start_line": 1,
+      "end_line": 117
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.agent.evaluation",
+  "actions_asked": 0,
+  "state_action": "none_read_only: no real local state read, initialization, or write",
+  "external_sync": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/SKILL.md",
+      "start_line": 1,
+      "end_line": 222
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 10,
+      "end_line": 10
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/output-format.md",
+      "start_line": 1,
+      "end_line": 59
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/question-design.md",
+      "start_line": 1,
+      "end_line": 85
+    }
+  ]
+}

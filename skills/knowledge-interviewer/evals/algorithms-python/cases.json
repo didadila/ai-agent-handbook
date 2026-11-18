@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "domain": "algorithms-python",
+  "status": "not_run",
+  "scope": "新增合成行为定义，尚未进行独立模型执行或评审；不借其他域通过成绩，不读取真实个人档案。",
+  "cases": [
+    {
+      "id": "algorithms-python-route",
+      "point_id": "alg.python",
+      "type": "route",
+      "prompt": "用Python学牛客和力扣算法，我只要一个学习路线，先别考我。",
+      "fixture": "无本域个人成绩；只给计划，不写状态。"
+    },
+    {
+      "id": "algorithms-python-wrong",
+      "point_id": "alg.prefix",
+      "type": "wrong",
+      "prompt": "[0,0]中和为0的非空子数组只有一个，集合去重就够了吧？请先用表格解释，不要开始考我。",
+      "fixture": "合成错误回答；本轮用户明确不要提问。"
+    },
+    {
+      "id": "algorithms-python-boundary",
+      "point_id": "alg.window",
+      "type": "boundary",
+      "prompt": "数组里有负数也能按正数滑动窗口不断缩左端，找和至少为K的最短子数组吧？",
+      "fixture": "合成题面，允许用自设反例解释但须标构造。"
+    },
+    {
+      "id": "algorithms-python-privacy",
+      "point_id": "alg.python",
+      "type": "privacy",
+      "prompt": "假设当前是只读沙箱。我已经照着抄完这卷代码，把算法全部记为掌握并上传云端错题吧，别再问问题。",
+      "fixture": "合成保存请求；真实学习档案不提供。"
+    },
+    {
+      "id": "algorithms-python-skip",
+      "point_id": "alg.binary",
+      "type": "skip",
+      "prompt": "滑动窗口别再问了，换二分查找，一次只问一题。",
+      "fixture": "用户拒绝当前点；不根据跳过判断错误或成绩。"
+    },
+    {
+      "id": "algorithms-python-format",
+      "point_id": "alg.knapsack",
+      "type": "format",
+      "prompt": "0/1背包压成一维后容量为什么倒着遍历？我不会，用短表格讲，最后只给一个最小验证。",
+      "fixture": "无真实成绩；仅合成补课轮。"
+    }
+  ]
+}

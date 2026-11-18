@@ -29,6 +29,13 @@ class ResponseEnvelopeTest(unittest.TestCase):
         self.assertTrue(check_response(TEACH.replace('结论。', 'fe.web.lifecycle是L2。'), 'teach'))
         self.assertEqual(check_response(TEACH.replace('结论。', '[真实标题](/repo/fe.web.lifecycle.md:5)。'), 'teach'), [])
 
+    def test_python_ids_rejected_but_link_targets_remain_allowed(self):
+        for identifier in ('py.lang.objects', 'py.async.eventloop', 'py.agent.tools'):
+            with self.subTest(identifier=identifier):
+                self.assertTrue(check_response(TEACH.replace('结论。', identifier + '。'), 'teach'))
+                linked = '[真实标题](/repo/' + identifier + '.md:5)。'
+                self.assertEqual(check_response(TEACH.replace('结论。', linked), 'teach'), [])
+
     def test_empty_middle_and_extra_paragraph_rejected(self):
         self.assertTrue(check_response(TEACH.replace(TABLE, ''), 'teach'))
         self.assertTrue(check_response(TEACH + '\n\n再追加一句。', 'teach'))
@@ -36,3 +43,27 @@ class ResponseEnvelopeTest(unittest.TestCase):
     def test_flow_is_one_line_with_at_most_four_steps(self):
         self.assertEqual(check_response(TEACH.replace(TABLE, '读取 → 校验 → 提交'), 'teach'), [])
         self.assertTrue(check_response(TEACH.replace(TABLE, 'A → B → C → D → E'), 'teach'))
+
+    def test_mermaid_teaching_flow_with_branch_and_cycle(self):
+        flow = '```mermaid\nflowchart TD\nA[检查前置] --> B{可以执行吗}\nB -->|可以| C[执行任务]\nC --> A\nB -->|不行| D[等待]\n```'
+        self.assertEqual(check_response(TEACH.replace(TABLE, flow), 'teach'), [])
+        self.assertTrue(check_response(CLOSE.replace(TABLE, flow), 'close'))
+
+    def test_mermaid_undefined_nodes_extra_fence_and_oversize(self):
+        flows = [
+            '```mermaid\nflowchart TD\nA --> B[结束]\n```',
+            '```mermaid\nflowchart TD\nA[开始] --> B[结束]\n```\n追加段落',
+            '```mermaid\nflowchart TD\nA[开始] --> B[结束]',
+            '```mermaid\nflowchart TD\n' + '\n'.join(f'A{i}[节点{i}] --> A{i+1}[节点{i+1}]' for i in range(8)) + '\n```',
+            '```mermaid\nflowchart TD\nA[开始] --> B[结束]\nclick A "https://example.com"\n```',
+        ]
+        for flow in flows:
+            with self.subTest(flow=flow):
+                self.assertTrue(check_response(TEACH.replace(TABLE, flow), 'teach'))
+
+    def test_algorithm_ids_are_private_even_in_diagram_labels(self):
+        self.assertTrue(check_response(TEACH.replace('结论。', 'alg.window。'), 'teach'))
+        flow = '```mermaid\nflowchart TD\nA[alg.window] --> B[完成]\n```'
+        self.assertTrue(check_response(TEACH.replace(TABLE, flow), 'teach'))
+        code = '```python\nalg.window()\n```\n只写结果。'
+        self.assertEqual(check_response(TEACH.replace('这个判断成立吗？', code), 'teach'), [])

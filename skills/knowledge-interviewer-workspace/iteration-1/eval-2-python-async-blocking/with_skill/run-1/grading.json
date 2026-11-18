@@ -1,0 +1,26 @@
+{
+  "expectations": [
+    {
+      "text": "正确解释async def中的time.sleep同步阻塞事件循环，区分异步等待与线程卸载边界",
+      "passed": true,
+      "evidence": "outputs/response.txt第2行指出time.sleep仍阻塞当前事件循环线程；第7–10行分别解释协程不是后台线程、同循环请求受阻但其他worker未必、await asyncio.sleep异步等待、to_thread卸载阻塞I/O，以及await不保证每次挂起/不代表CPU并行。与公共异步教材第7、24–26行一致。"
+    },
+    {
+      "text": "实际定位读取Python对应教材正文，引用真实语义标题，不编造行号",
+      "passed": true,
+      "evidence": "outputs/execution.json的public_reads记载对handbook/python-backend/02-async-and-concurrency.md第5–33行的Read，并提供locator_execution的py.async.eventloop定位结果。评分者只读核对该文件：第5行确为‘协程只有让出控制权，事件循环才能服务其他任务’，下一节第34行开始；第7、24行支持本轮讲解。response.txt第10行链接语义标题与5–33行精确一致，不只是结论正确或空泛自称读过。"
+    },
+    {
+      "text": "严格结论/机制/验证三段，机制至多四行表，无开场旁白或重复段落",
+      "passed": true,
+      "evidence": "response.txt第1、4、12行仅有‘### 结论/机制/验证’，标题前无文本；结论单行，机制第7–10行恰为四个内容行，教材入口在表格单元格内；验证单行，无表外机制复述。check_response_format.py的只读结构检查无错误，人工语义检查未发现隐藏第二段或多题。"
+    },
+    {
+      "text": "只有一个独立验证动作且不把讲解后复述计为独立A",
+      "passed": true,
+      "evidence": "response.txt第13行只要求判断to_thread等待期间健康检查协程能否调度，没有另要求解释、改代码或执行测试；相对于用户的直接time.sleep场景改用了线程卸载。全文无A档或掌握宣告；execution.json记录actions_asked=1、state_action=none，尚未收到用户回答，未将即时接住计成独立掌握。"
+    }
+  ],
+  "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0},
+  "method": "实际响应、结构化execution记录、定位器源码及公共教材逐项交叉核对，所有public_reads路径/范围有效。机械结构通过不替代语义评分。没有原始完整工具转录，历史读取依赖所给执行记录并以真实节标题/正文校验，不能独立证明全部I/O；未重跑输出或读取真实学习档案。"
+}

@@ -17,6 +17,22 @@
 | OWASP入口 | 旧URL缺少for，返回404；正确官方页可读，日期2025-12-09 [S35] | 修复链接，不据此宣称风险清单完备 |
 
 
+## 2026-11-16 工程闭环局部核验
+
+本次只核验下列切面，不重置全表 `verified_at`，也不将文章架构命名升级为新增稳定ID。CLI/SDK对齐、快照字段、隐私与删除传播是本项目工程协议，不能冒称文章直接定义了这些字段。
+
+| 断言与核验结果 | 直接证据 | 适用边界 |
+|---|---|---|
+| 跨会话用结构化工件交接；reset与compaction不同 | [S43] “structured artifacts to hand off context between sessions” | 文章是应用开发harness案例，不提供通用artifact schema |
+| generator/evaluator分离有助于针对自评问题调优 | [S43] 区分执行与验收角色，并讨论校准 | 不保证客观，不要求不同模型；固定验收权是本项目设计 |
+| harness随任务和模型证据删减 | [S43] Sonnet4.5使用reset，Opus4.5移除reset，Opus4.6进一步精简sprint安排 | 历史模型实验，不是当前所有任务必须或不必reset |
+| 四种记忆对象及交互间dreaming | [S44] transcripts、notes、representations、injected context；“idle time between interactions to reorganize their existing context” | 非强制顺序流水线，dreaming不是第五层或该文所讨论的权重更新 |
+| transcript可用于核对错误笔记 | [S44] “The transcript gave Claude a ground truth to validate its memory against.” | 证明记录了什么，不等于记录中的断言真实或现在有权限；留存/删除是项目安全补充 |
+| judge需人工校准、trial应从干净环境开始、成功要查外部状态 | [S11] “LLM-as-judge graders should be closely calibrated with human experts”；“Each trial should be ‘isolated’ by starting from a clean environment.” | 无统一一致率或固定重复次数；隔离角色不等于人工校准 |
+| 自动评分与人工反馈校准 | [S10] 本次正文可见 “Use human feedback to calibrate automated scoring.” | 本次未发现直接定义holdout暴露流程或CLI/SDK完整快照规范，不据此扩张来源支持范围 |
+
+开发/保留集按意图组隔离、裁判调优/保留隔离、误判代价分析、受控内容采集和沙箱回放在教材中明确标为工程协议/推导。没有未使用样本或人工标注记录时，只报告开发期回归，不宣称holdout或人类一致率已测。
+
 ## 稳定结论
 
 | 结论 | 证据 | 教学边界 |
@@ -62,7 +78,7 @@
 - **[S8]** Anthropic, [Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval), 2024-09-19, Tier 1.
 - **[S9]** Park et al., [MIRAGE](https://aclanthology.org/2025.findings-naacl.157/), 2025-04, Tier 1.
 - **[S10]** OpenAI, [Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices), accessed 2026-10-08, Tier 1.
-- **[S11]** Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), 2026-01-09, Tier 1.
+- **[S11]** Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/research/demystifying-evals-for-ai-agents), 2026-01-09, Tier 1；2026-11-16局部复核人工校准、clean trial、外部终态断言，规范当前research入口。
 - **[S12]** Google Cloud, [A methodical approach to agent evaluation](https://cloud.google.com/blog/topics/developers-practitioners/a-methodical-approach-to-agent-evaluation), 2025-11-18, Tier 1.
 - **[S13]** OWASP GenAI, [Agentic AI Threats and Mitigations](https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/), updated 2025-04-28, Tier 1.
 - **[S14]** NIST NCCoE, [Software and AI Agent Identity and Authorization](https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd), 2026-02-05, Tier 1.
@@ -94,6 +110,9 @@
 - **[S40]** Chao et al., [STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?](https://arxiv.org/abs/2605.04412), 2026-05-07, Tier 2 预印本（400 场景 / 1,200 查询 / 150K 上下文；数字条件不全，只用机制）.
 - **[S41]** Li & Li, [What Should an Agent Forget? Separating What Is Stored from What Is Used](https://arxiv.org/abs/2609.07731), 2026-09-09, Tier 2 预印本（数字条件不全，只用机制）.
 - **[S42]** Tran & Kiela, [Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning](https://arxiv.org/abs/2604.09812), 2026-04, Tier 2 预印本（同等 token 预算条件；数字条件不全，只用机制）.
+
+- **[S43]** Anthropic, [Harness design for long-running application development](https://www.anthropic.com/research/harness-design-long-running-apps), 2026-03-24, Tier 1 工程案例；2026-11-16核验reset/compaction、跨会话工件、generator/evaluator、随模型删减harness；不作跨模型通用收益保证。
+- **[S44]** Anthropic, [The components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), 2026-11-06, Tier 1 研究/工程视角；2026-11-16核验四种对象、来源纠错、dreaming跨层整理及排除权重更新；隐私/删除传播不是本文定义。
 
 ## 历史实验数字及使用边界
 

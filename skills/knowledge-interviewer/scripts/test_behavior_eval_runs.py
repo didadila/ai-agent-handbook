@@ -137,6 +137,31 @@ class BehaviorRunArchiveTest(unittest.TestCase):
                 checker.check_domain('demo', errors)
             self.assertTrue(any('no archived behavior run' in item for item in errors), errors)
 
+    def test_explicit_unrun_definitions_are_not_reported_as_behavior_passes(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            evals = build_fixture(root, status='not_run')
+            shutil.rmtree(evals / 'runs')
+            cases = json.loads((evals / 'cases.json').read_text())
+            cases.pop('run')
+            (evals / 'cases.json').write_text(json.dumps(cases))
+            errors = []
+            with mock.patch.object(checker, 'ROOT', root), mock.patch.object(checker, 'SKILL', root / 'skills/knowledge-interviewer'):
+                result = checker.check_domain('demo', errors)
+            self.assertFalse(errors)
+            self.assertIn('no model behavior results', result)
+            self.assertNotIn('1/1', result)
+
+    def test_unrun_status_does_not_hide_a_claimed_missing_run(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            evals = build_fixture(root, status='not_run')
+            shutil.rmtree(evals / 'runs')
+            errors = []
+            with mock.patch.object(checker, 'ROOT', root), mock.patch.object(checker, 'SKILL', root / 'skills/knowledge-interviewer'):
+                checker.check_domain('demo', errors)
+            self.assertTrue(any('no archived behavior run' in item for item in errors))
+
     def test_shipped_archive_passes_structural_checks(self):
         self.assertEqual(checker.main(), False, 'archived four-domain runs are structurally inconsistent')
 

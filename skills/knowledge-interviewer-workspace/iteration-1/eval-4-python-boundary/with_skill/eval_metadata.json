@@ -1,0 +1,1 @@
+{"eval_id":4,"prompt":"所有Python构建都有GIL，所以只要把纯Python的CPU计算塞进asyncio.to_thread就能多核并行了吧？用短表格纠正我，最后只问一题。","configuration":"current_repository_skill"}

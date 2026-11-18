@@ -1,0 +1,329 @@
+{
+  "metadata": {
+    "skill_name": "knowledge-interviewer",
+    "skill_path": "skills/knowledge-interviewer",
+    "executor_model": "host-managed general-purpose agent; exact model identifier unavailable",
+    "analyzer_model": "independent general-purpose grading role, same agent family; no human calibration",
+    "timestamp": "2026-11-16T09:44:26Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 164.259,
+        "tokens": 467996,
+        "tool_calls": 12
+      },
+      "expectations": [
+        {
+          "text": "指出保留集反馈已参与修改，须记录暴露，不能继续宣称未调优检验。",
+          "passed": true,
+          "evidence": "response.txt第7行：‘失败反馈已用于修改提示词，这批样本只能再作开发回归，不能称为未调优检验；记录暴露，另用未参与调优的样本，并按意图族、近重复组隔离。’明确说明污染、暴露记录和后续独立样本，不是仅更名。"
+        },
+        {
+          "text": "解释52%一致率缺少标签分布和误判结构，不能无条件等同抛硬币。",
+          "passed": true,
+          "evidence": "response.txt第8行：‘52%只是总一致率；需结合样本量、标签分布、逐判据混淆矩阵及误放行/误拒绝代价’，并指出‘独立、公平的二分类随机猜测才有50%的期望一致率，接近它也不证明裁判就是随机猜测’。覆盖分布、误判结构与随机基线的适用条件。"
+        },
+        {
+          "text": "指出70%到85%极差是15个百分点，非±15、置信区间或永久噪声阈值。",
+          "passed": true,
+          "evidence": "response.txt第9行：‘70%～85%只给出15个百分点的观测极差，不是“±15”、置信区间或固定噪声门槛’，随后要求‘环境契约对齐后增加重复运行、保留逐例成败与失败次数’及同用例配对。未将构造范围当总体区间或永久标准。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行分别为‘### 结论’、‘### 机制’、‘### 验证’；第5—10行仅一张表，第7—10行为4个内容行。第13行唯一作答动作：‘假设把已用于调提示词的样本仅改写措辞，改写后的样本能作为新的未调优测试集吗？’第7—9行明确‘构造案例’，第10行‘完整案例教材未安装，本轮使用 Skill 包内参考讲解，不引用不存在的教材入口’，未给出虚构教材链接或声称自己实测。教材安装状况是执行者自报，非独立核实。"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 179.06,
+        "tokens": 330983,
+        "tool_calls": 12
+      },
+      "expectations": [
+        {
+          "text": "保留Python实现域，不要求先学Java/Go；区分reset重建模型上下文、compaction有损摘要、进程恢复持久执行状态。",
+          "passed": true,
+          "evidence": "response.txt第7行：‘开启新模型上下文，从外部工件重建任务信息’；第8行：‘把当前历史压成有损摘要……也不恢复进程’；第9行：‘Python runner 从持久 run/step 状态与 checkpoint 接续，不是还原 Python 调用栈或旧数据库连接’。始终针对Python，无Java/Go先修要求，三种对象未混淆。"
+        },
+        {
+          "text": "固定验收契约与执行者自报done分离，外部状态/证据核验，不允许执行者改期望通过。",
+          "passed": true,
+          "evidence": "response.txt第10行：‘任务开始前固定验收契约；执行者提交产物和证据，不能改预期给自己放行’，evaluator‘核对数据库、索引等外部状态与产物，而非只读 done’。第13行用‘指定文档版本……尚未入索引’验证外部契约而不是执行者成功标签。"
+        },
+        {
+          "text": "交接或恢复仍需核对已发生/未知外部效果及当前授权，JSON或历史聊天不自动提供这些保证。",
+          "passed": true,
+          "evidence": "response.txt第7行：‘JSON 只是容器，应包含版本、来源、成立条件、未知状态、效果键、下一步与授权引用，旧授权需重验，不能拿摘要代替事务执行记录’；第9行：‘外部效果未知时先按效果身份查询、对账，再决定重试，仍需业务幂等’。用执行记录核对已发生效果、对未知效果先查账且旧授权重验，未把JSON/旧聊天当执行或授权保证。"
+        },
+        {
+          "text": "独立evaluator指角色/上下文/验收权分离，不保证天然客观或必须不同模型，不把reset/evaluator组合当永久强制。",
+          "passed": true,
+          "evidence": "response.txt第10行：‘独立角色/上下文的 evaluator 核对数据库、索引等外部状态与产物……可用同一模型，但独立上下文不自动消除裁判偏差’，且‘执行者……不能改预期给自己放行’明确分离验收权。第2、7—9行分别解释reset、compaction和持久恢复的对象，没有要求所有任务固定组合reset与evaluator。省略了按模型与任务收益/成本调整组合的实例，但未作‘永久强制’主张；独立验收不等于强制reset。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，内容行第7—10行共4行。末尾第13行只有一个判断题：‘……执行者报告 done，但独立 evaluator 查到该版本尚未入索引：本次验收能通过吗？’，以‘假设’开头，无实测或部署声明。第8行引用‘[包内工程参考](references/engineering-learning.md)’；已以本机文件存在性和公开正文核对该包内入口，不是虚构完整教材入口。运行时‘完整案例教材未安装’仍只是自报。"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 162.017,
+        "tokens": 434504,
+        "tool_calls": 9
+      },
+      "expectations": [
+        {
+          "text": "区分原始事件记录、选择性笔记、组织化表示与本次注入投影，并明确非强制四步流水线。",
+          "passed": true,
+          "evidence": "response.txt第7行标注‘transcript（原始事件记录）’，第8行：‘分别是选择性笔记、组织化表示（如主题或索引）、本轮实际送入模型的内容；不必串行走完，原始事件也可直接选入上下文’；第2行称‘四类记忆对象是诊断视角……不是……必经流水线’。将后三类合并成一表行仍有逐一准确区分。"
+        },
+        {
+          "text": "transcript只证明当时记录了什么，不保证其中断言真实或代表当前授权。",
+          "passed": true,
+          "evidence": "response.txt第7行：‘只证明当时记录了什么，不保证其中断言真实，也不代表当前授权；执行结果仍需核对执行账本与必要的外部状态。’明确区分记录、事实核实与当前授权，不把源记录当客观真值。"
+        },
+        {
+          "text": "dreaming为交互间跨层整理纠错，非第五层、意识或该文讨论的权重训练。",
+          "passed": true,
+          "evidence": "response.txt第2行：‘dreaming是记忆整理，不是第五层或权重训练’；第9行：‘在交互间整理、纠错和提炼既有记忆，不是训练权重；猜测不能静默升为事实或扩大权限，变更应可复核、版本化、可回滚，收益需独立任务验证。’结合第8行派生物说明，是既有记忆的跨对象整理而非新增存储层。未逐字说‘非意识’，但给出的工程操作定义没有拟人意识或权重训练暗示，准确简化通过。"
+        },
+        {
+          "text": "拒绝永远全量保存原始对话，保留采集/敏感信息/留存删除边界，并说明删除要处理派生物和未来注入。",
+          "passed": true,
+          "evidence": "response.txt第10行：‘不必永久保留所有对话：按目的、授权、最小采集与留存期限处理，凭证不入日志；删除或撤权须传播到笔记、表示、缓存、摘要及未来注入。’同时覆盖采集目的、授权、敏感凭证排除、期限与派生/未来注入删除传播；第13行以来源撤权后的笔记注入作验证。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，第7—10行为4个内容行。末尾第13行唯一作答动作：‘假设某条笔记的来源已被撤权，下一轮还能仅凭“笔记还在”把它注入上下文吗？’第10行注明‘完整教材未安装，本轮使用[包内参考](references/engineering-learning.md)’，该公开包内文件已核实存在并只读核对正文；没有虚构完整教材入口或自称实测。教材安装状况仅执行者自报。"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "time_seconds": 165.255,
+        "tokens": 388623,
+        "tool_calls": 13
+      },
+      "expectations": [
+        {
+          "text": "指出保留集反馈已参与修改，须记录暴露，不能继续宣称未调优检验。",
+          "passed": false,
+          "evidence": "response.txt第7行：‘失败信息已参与调优，这批样本就不再是未调优测试集；可转作开发或回归集，最终检验需另留未参与调优的样本。’正确说明污染与替换样本，但完整回复未要求记录哪些样本/反馈已暴露。‘须记录暴露’这一独立审计要求缺失，不能用正确更名代替。"
+        },
+        {
+          "text": "解释52%一致率缺少标签分布和误判结构，不能无条件等同抛硬币。",
+          "passed": false,
+          "evidence": "response.txt第8行：‘只有公平随机的二选一判断，机会一致率才是 50%。还需看类别分布、样本量与不确定性，比较随机或多数类基线，并检查分歧和系统偏差，不能直接说等同抛硬币。’分布与随机基线解释正确；但‘检查分歧和系统偏差’未说明要拆解哪种误判结构，全文没有逐判据混淆矩阵、误放行/误拒绝或等价分解。总一致率掩盖不对称错误这一关键边界未得到实质说明。"
+        },
+        {
+          "text": "指出70%到85%极差是15个百分点，非±15、置信区间或永久噪声阈值。",
+          "passed": true,
+          "evidence": "response.txt第9行：‘观察范围宽 15 个百分点，不等于噪声为 ±15 个百分点；即使以中点写成 ±7.5，也只是范围描述。需固定样本、配置和环境，重复运行估计分布与区间，版本比较还要逐用例配对检查稳定退化。’将观察范围与待估计的分布/区间明确区分，±7.5只作描述，没有把范围当置信区间或永久放行阈值。简化可通过；省略了对‘永久噪声阈值’的直接点名，但后续重新估计与逐例退化检查排除了拿该范围直接作固定标准。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行分别为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一张表且第7—10行为4个内容行。末尾第13行唯一作答动作：‘构造案例：新版与旧版总通过率相同，但一个原本稳定通过的用例变成稳定失败，能仅凭总通过率判定没有回归吗？’第5行表头为‘构造案例’，第10行‘完整案例教材未安装，本轮使用 Skill 包内参考讲解’，没有实测声明或虚构教材入口。安装状况仅自报。形式通过不抵消前两条内容失败。"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "time_seconds": 180.419,
+        "tokens": 413314,
+        "tool_calls": 14
+      },
+      "expectations": [
+        {
+          "text": "保留Python实现域，不要求先学Java/Go；区分reset重建模型上下文、compaction有损摘要、进程恢复持久执行状态。",
+          "passed": true,
+          "evidence": "response.txt第7行：‘清掉旧上下文，再按当前任务重建目标、约束、已验证结果与下一步’，且‘不会撤销已执行的动作’；第8行：‘是有损整理，不是进程重启’；第9行：‘Python 进程恢复……从持久 run/step、工具意图、幂等身份、审批与结果重建资源并续跑’。没有Java/Go先修要求，Python实现域和三种对象正确。"
+        },
+        {
+          "text": "固定验收契约与执行者自报done分离，外部状态/证据核验，不允许执行者改期望通过。",
+          "passed": true,
+          "evidence": "response.txt第10行：‘用户确定目标与验收标准，执行者交付结果和证据；Harness（模型外的任务控制代码）调用独立校验检查租户隔离、来源版本、预期检索结果及恢复状态，通过后才标完成，不能只信 done。’契约由用户确定而非执行者掌握，执行者只交证据，外部Harness按预期结果控制完成，足以体现验收权与done分离。简化未逐字说‘任务开始前冻结’或‘禁止改预期’，但明确的契约归属与完成门禁不是仅写‘独立’标签；不因旧版标签额外扣分。"
+        },
+        {
+          "text": "交接或恢复仍需核对已发生/未知外部效果及当前授权，JSON或历史聊天不自动提供这些保证。",
+          "passed": false,
+          "evidence": "response.txt第7行说明‘不会撤销已执行的动作’且JSON‘必须有版本、状态与可核对的证据’；第9行明确‘外部效果未知先对账’。这些外部效果边界正确，但授权仅写‘从持久……审批与结果重建资源并续跑’，全文未要求核对当前授权、权限撤回或旧审批过期后的重新授权。历史审批记录不能保证当前许可，缺此关键恢复边界。"
+        },
+        {
+          "text": "独立evaluator指角色/上下文/验收权分离，不保证天然客观或必须不同模型，不把reset/evaluator组合当永久强制。",
+          "passed": false,
+          "evidence": "response.txt第10行只称‘Harness……调用独立校验’，验收权分离虽有依据，但没有解释独立模型上下文、同模型也可独立、独立不保证裁判客观。全文没有不同模型要求或永久组合强制主张；失败不是因为这种不存在的主张，而是关键独立性与偏差边界未讲清，‘独立校验’名称不能替代实质说明。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行分别为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，第7—10行为4个内容行。末尾第13行只有一个题：‘假设 Python worker 崩溃后，只剩会话摘要，没有持久步骤状态：这份摘要足以保证任务可靠续跑吗？’无安装、部署或实测声称。第10行明确‘完整教材未安装，本轮回退到[包内证据索引](references/domains/python-backend/sources.md)’；当前公开Skill包确有该索引，未伪造完整教材入口。不能据此证明旧版运行时文件或安装状况；该过程限制另列，不以自报当审计。"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "time_seconds": 163.281,
+        "tokens": 367826,
+        "tool_calls": 10
+      },
+      "expectations": [
+        {
+          "text": "区分原始事件记录、选择性笔记、组织化表示与本次注入投影，并明确非强制四步流水线。",
+          "passed": true,
+          "evidence": "response.txt第7行：transcript记录‘当时说过、工具返回过什么’；第8行：‘notes 是筛选出的笔记；representation 是便于存储、检索的表示，如结构化记录或向量；injected context 是本轮实际交给模型的内容。三者不必串行走完，可直接取原文或笔记，也可按需检索表示’。第2行也说‘不是必走流水线’。四类对象区分与绕过串行路径明确，合并表行不扣分。"
+        },
+        {
+          "text": "transcript只证明当时记录了什么，不保证其中断言真实或代表当前授权。",
+          "passed": false,
+          "evidence": "response.txt第7行：‘记录“当时说过、工具返回过什么”，是追溯依据，不是绝对事实真值：原话可能错误，结果可能过期。’事实非真值解释正确，但全文没有说明transcript不代表当前授权；第10行‘按授权、用途与期限’说的是留存政策，不是历史对话授权不能沿用。结果过期也不等于审批/授权复验，这一关键边界缺失。"
+        },
+        {
+          "text": "dreaming为交互间跨层整理纠错，非第五层、意识或该文讨论的权重训练。",
+          "passed": true,
+          "evidence": "response.txt第9行：‘通常指后台整理、反思、合并与纠错过程，可更新笔记或表示；不是固定第五层，也不等于训练模型权重。’后台过程更新笔记/表示体现跨对象整理，与当前注入对象有别；操作性定义没有意识暗示。未逐字使用‘交互间’或‘非意识’，但不是把dreaming神秘化或新增层的表面标签，准确简化可通过。"
+        },
+        {
+          "text": "拒绝永远全量保存原始对话，保留采集/敏感信息/留存删除边界，并说明删除要处理派生物和未来注入。",
+          "passed": false,
+          "evidence": "response.txt第10行：‘不必永远保存全部原始对话：按授权、用途与期限选择性保留必要证据……删除须传播到摘要、派生表示、索引、缓存及后续上下文，审计可只留不含原文的状态。’拒绝永久全量留存、期限和删除传播都正确，第13行也检查删除后摘要残留地址；不能误判为漏讲删除传播。但未规定初始采集的敏感内容边界，如凭证不采集/不入日志、去敏受控内容快照。删除后的无原文审计不能替代采集阶段的敏感信息保护，复合判据因此失败。"
+        },
+        {
+          "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+          "passed": true,
+          "evidence": "response.txt第1、4、12行为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，第7—10行共4个内容行。末尾第13行只有一个判断题：‘假设用户要求删除一条地址记忆，原对话已删除但摘要仍保留地址，这次删除算完成了吗？’明确是假设，无真实删除或成绩声称。第2行‘完整案例教材未安装，本轮用包内参考讲解’，无虚构教材链接；安装状况仅自报。形式通过与授权/敏感采集内容失败独立。"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 168.4453,
+        "stddev": 9.2607,
+        "min": 162.017,
+        "max": 179.06
+      },
+      "tokens": {
+        "mean": 411161.0,
+        "stddev": 71426.9716,
+        "min": 330983,
+        "max": 467996
+      }
+    },
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.5667,
+        "stddev": 0.0577,
+        "min": 0.5,
+        "max": 0.6
+      },
+      "time_seconds": {
+        "mean": 169.6517,
+        "stddev": 9.3769,
+        "min": 163.281,
+        "max": 180.419
+      },
+      "tokens": {
+        "mean": 389921.0,
+        "stddev": 22771.7619,
+        "min": 367826,
+        "max": 413314
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.43",
+      "time_seconds": "-1.2",
+      "tokens": "+21240"
+    }
+  },
+  "notes": [
+    "Development regression only: 3 synthetic single-turn cases, n=1 each/configuration. with_skill 14/14 criteria and 3/3 cases; old_skill 8/14 and 0/3. No repeated reliability, holdout, human agreement or learning effectiveness claim.",
+    "The summary pass rate is a macro-average across unequal-size case rubrics; criterion totals are reported separately. Standard deviations describe across-case variation, not repeated-run uncertainty.",
+    "Both versions pass all format criteria and correct the 15pp range/nonpipeline concepts. New-version differences concern explicit exposure audit, misclassification structure, current authorization, evaluator bias boundaries and sensitive collection safeguards.",
+    "The harness criterion permits absence of a universal requirement; current reply does not actively explain task/model-based harness simplification. A future transfer case can probe it; fixed rubric and original replies are unchanged.",
+    "Execution and grading share an agent family; no human review. public_reads is executor-reported and checked for file existence, not independently complete I/O.",
+    "Time and subagent_tokens come from host completion notifications; tokens are not validated output or billable counts. tool_calls is the host total tool-use count; error count unavailable and not defaulted to zero.",
+    "Both configurations disallow handbook and real learner state. Baseline is the immediately preceding Skill, not no-Skill or initial Git HEAD. See protocol.json for snapshots and limitations."
+  ],
+  "criterion_totals": {
+    "with_skill": {
+      "passed": 14,
+      "total": 14,
+      "cases_passed": 3,
+      "cases": 3
+    },
+    "old_skill": {
+      "passed": 8,
+      "total": 14,
+      "cases_passed": 0,
+      "cases": 3
+    }
+  }
+}

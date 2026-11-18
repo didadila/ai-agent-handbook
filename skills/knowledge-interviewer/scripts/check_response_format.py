@@ -1,15 +1,57 @@
 #!/usr/bin/env python3
-"""Check the v3 teaching/closing envelope, not semantic correctness."""
+"""Check the teaching/closing envelope, not semantic correctness."""
 import argparse
 import re
 from pathlib import Path
 
 HEADINGS = {'teach': ('结论', '机制', '验证'), 'close': ('状态', '记录', '入口')}
-INTERNAL = re.compile(r'\b(?:agent|go|fe|jvm|conc|mysql|redis|spring|mq|dist|sys)\.[a-z][\w.-]*\b|\bL[0-4]\b')
+INTERNAL = re.compile(r'\b(?:agent|go|fe|py|alg|jvm|conc|mysql|redis|spring|mq|dist|sys)\.[a-z][\w.-]*\b|\bL[0-4]\b')
+
+
+def check_flow(lines):
+    """Validate a deliberately small Mermaid subset; not a rendering guarantee."""
+    if len(lines) < 4 or lines[0] != '```mermaid' or lines[-1] != '```':
+        return ['Flow must be one closed Mermaid fence']
+    if lines[1].strip() not in ('flowchart TD', 'flowchart LR', 'graph TD', 'graph LR'):
+        return ['Flow direction must be TD or LR']
+    node = r'([A-Za-z][A-Za-z0-9_]*)(?:\[([^\[\]{}\n]+)\]|\{([^{}\[\]\n]+)\})?'
+    declaration = re.compile(node)
+    edge = re.compile(node + r'\s*-->(?:\|([^|\n]+)\|)?\s*' + node)
+    nodes, defined, edges = set(), set(), 0
+
+    def accept(groups):
+        name, rectangle, diamond = groups
+        nodes.add(name)
+        label = rectangle or diamond
+        if label:
+            if len(label) > 60 or any(char in label for char in '<>;`'):
+                return False
+            defined.add(name)
+        return True
+
+    for line in lines[2:-1]:
+        match = edge.fullmatch(line.strip())
+        if match:
+            groups = match.groups()
+            if not accept(groups[:3]) or not accept(groups[4:]):
+                return ['Flow labels must be short plain text']
+            if groups[3] and (len(groups[3]) > 20 or any(c in groups[3] for c in '<>;`')):
+                return ['Flow edge labels must be short plain text']
+            edges += 1
+        else:
+            match = declaration.fullmatch(line.strip())
+            if not match or not (match[2] or match[3]) or not accept(match.groups()):
+                return ['Flow supports only one labeled node or directed edge per line']
+    if not 2 <= len(nodes) <= 8 or not 1 <= edges <= 10:
+        return ['Flow needs 2-8 nodes and 1-10 edges']
+    if nodes != defined:
+        return ['Every flow node needs an explicit explanatory label']
+    return []
 
 
 def visible_text(text):
-    text = re.sub(r'```[^\n]*\n.*?```', '', text, flags=re.S)
+    text = re.sub(r'```([^\n]*)\n(.*?)```',
+                  lambda m: m[2] if m[1].strip() == 'mermaid' else '', text, flags=re.S)
     return re.sub(r'\[([^\]]+)\]\([^)]*\)', r'\1', text)
 
 
@@ -24,7 +66,7 @@ def check_response(text: str, mode: str) -> list[str]:
             headings.append((index, line))
     expected = ['### ' + name for name in HEADINGS[mode]]
     if [line for _, line in headings] != expected:
-        errors.append('Exactly three ordered v3 headings required: ' + ', '.join(expected))
+        errors.append('Exactly three ordered headings required: ' + ', '.join(expected))
         return errors
     if headings[0][0] != 0:
         errors.append('Introductory text before the first heading')
@@ -42,6 +84,8 @@ def check_response(text: str, mode: str) -> list[str]:
         widths = {len(line.strip().strip('|').split('|')) for line in middle}
         if separators != [1] or not 3 <= len(middle) <= 6 or len(widths) != 1:
             errors.append('One table with a header and 1-4 content rows required')
+    elif mode == 'teach' and middle and middle[0] == '```mermaid':
+        errors.extend(check_flow(middle))
     elif mode == 'teach' and len(middle) == 1 and 2 <= len(middle[0].split('→')) <= 4:
         pass
     else:

@@ -1,0 +1,1 @@
+{"eval_id":4,"eval_name":"python-boundary","case_id":"python-backend-boundary","prompt":"所有Python构建都有GIL，所以只要把纯Python的CPU计算塞进asyncio.to_thread就能多核并行了吧？用短表格纠正我，最后只问一题。","assertions":["区分默认启用GIL的CPython、可选free-threaded构建与其他实现，不泛化所有Python","纯Python CPU计算在启用GIL构建中不会因to_thread获得多核并行，说明进程或释放GIL例外","只有一个独立验证动作且不虚构运行结果"]}

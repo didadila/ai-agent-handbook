@@ -2,7 +2,7 @@
 
 以知识图谱组织学习范围，由AI陪练逐题诊断、结合教材讲解，并安排本地错题复习。项目目前通过Markdown教材、HTML图解、Skill和校验脚本提供学习能力；使用者可以一直从Skill进入，无需自己在多个目录间切换。
 
-公共知识供不同学习者复用；个人错题、成绩、偏好与会话记录只保存在本机。当前四域共135个稳定知识点，每点均有教材入口和题库入口。
+公共知识供不同学习者复用；个人错题、成绩、偏好与会话记录只保存在本机。当前六域共197个稳定知识点，每点均有教材入口和题库入口。
 
 ## 能学什么
 
@@ -12,10 +12,16 @@
 |Go后端|值与错误、并发、服务边界、事务、一致性、可观测、Agent后端|19|[教材](handbook/go-backend/README.md) · [图谱](skills/knowledge-interviewer/references/domains/go-backend/map.md) · [题库](skills/knowledge-interviewer/references/domains/go-backend/questions.md)|
 |Java后端|JVM、并发、MySQL、Redis、Spring、消息与分布式设计|64|[教材](handbook/java-backend/README.md) · [图谱](skills/knowledge-interviewer/references/domains/java-backend/map.md) · [题库](skills/knowledge-interviewer/references/domains/java-backend/questions.md)|
 |前端工程|HTML/CSS、JS/TS、状态、HTTP/SSE、审批、安全、性能与交付|19|[教材](handbook/frontend/README.md) · [图谱](skills/knowledge-interviewer/references/domains/frontend/map.md) · [题库](skills/knowledge-interviewer/references/domains/frontend/questions.md)|
+|Python后端与Agent实战|对象/类型、asyncio、API、SQL/Redis/对象与检索存储、任务分发、工具与恢复、部署|36|[五天路线](handbook/python-backend/sprint-5-days.md) · [教材](handbook/python-backend/README.md) · [图谱](skills/knowledge-interviewer/references/domains/python-backend/map.md) · [题库](skills/knowledge-interviewer/references/domains/python-backend/questions.md)|
+|Python算法与数据结构|复杂度、数组/字符串、链表/栈堆、树图、回溯、DP与背包、贪心/区间/位运算|26|[教材](handbook/algorithms-python/README.md) · [图谱](skills/knowledge-interviewer/references/domains/algorithms-python/map.md) · [题库](skills/knowledge-interviewer/references/domains/algorithms-python/questions.md)|
 
-135点是当前核心课程范围。各卷章节深度、实验覆盖和评测成熟度不同，目录齐全不等于已覆盖所有基础或完成逐句事实认证。Go与Java按各自依赖学习；前端和Agent通过状态、授权与恢复等主题衔接，无需先读完全部其他卷。
+197点是当前核心课程范围。各卷章节深度、实验覆盖和评测成熟度不同，目录齐全不等于已覆盖所有基础或完成逐句事实认证。Python、Go与Java是独立实现路线，不要求先学其他语言；前端和Agent通过状态、授权与恢复等主题衔接。
+
+偏好Python可从五天路线开始：语言与环境 → 异步API → 存储与检索 → 任务分发与重启 → Agent与交付。按每天3–4小时设计，每天一个最小交付物；SQL是必做主线，Redis、对象存储、向量库和Celery先理解选型，按需要扩展。目标是跑通小服务并解释关键故障，不是五天精通全部后端知识。本地实验使用标准库SQLite与明确标注的只读Agent替身，不调用付费模型，不冒充真实LLM效果或生产验收。
 
 ## 怎么开始
+
+新增独立[Python算法卷](handbook/algorithms-python/README.md)：26点、8章、可运行实现与边界/对拍测试，配套[牛客/力扣题型索引](handbook/algorithms-python/practice.md)。说“用Python学算法，从基础一次一题”即可走算法域，不会误入Python后端路线。
 
 |想做什么|操作|
 |---|---|
@@ -32,13 +38,14 @@
 我不会这个点，先用短表格或流程图讲解。
 这点已经懂了，换下一个知识点。
 展开讲这个机制，并给对应教材入口。
+我习惯Python，按五天路线带我做异步知识检索任务服务；先讲再练，一次一个最小改动。
 ```
 
 首次定位也逐轮进行；不会一次抛出整组问题。你可以要求换点、改变讲解方式或结束，不需要把计划题数全部问完。
 
 使用全局安装的Skill时，先确认它指向本仓库，还是另一份复制版本；仓库更新不会自动更新独立副本。软链应核对最终目标路径，避免以为在用新规则，实际读取旧工作副本。本仓库不自动改写其他工具的全局安装配置。
 
-全局入口建议指向选定的仓库工作副本，避免复制后长期分叉；可运行 `python3 skills/knowledge-interviewer/scripts/check_skill_entry.py`核验Qoder入口、主Skill及配套脚本是否确实来自当前仓库。该检查验证文件入口，不证明宿主已打开会话的缓存已刷新；切换后在新会话使用。
+全局入口建议指向选定的仓库工作副本，避免复制后长期分叉；可运行 `python3 skills/knowledge-interviewer/scripts/check_skill_entry.py`核验Qoder入口、主Skill及配套脚本是否确实来自当前仓库。2026-11-16本机运行此检查未通过，不能声称全局安装已更新；本轮仅修改仓库版，可先在本仓库显式读取Skill使用。更改全局入口需另行授权。该检查验证文件入口，不证明宿主已打开会话的缓存已刷新；切换后在新会话使用。
 
 ## Skill、教材、题库怎样协作
 
@@ -76,19 +83,20 @@ python3 skills/knowledge-interviewer/scripts/learning_content.py --domain fronte
 ```text
 .
 ├── README.md                         项目说明与使用入口
-├── catalog.json                      四域规范名、别名、ID前缀和目录契约
+├── catalog.json                      六域规范名、别名、ID前缀和目录契约
 ├── PRIVACY.md                        公共存储与发布规则
 ├── handbook/
 │   ├── ai-agent/                     Agent教材
 │   ├── go-backend/                   Go教材
 │   ├── java-backend/                 Java教材
-│   └── frontend/                     前端教材
+│   ├── frontend/                     前端教材
+│   └── python-backend/               Python教材、五天路线和本地任务实验
 ├── materials/<domain>/
 │   ├── maps/                         当前知识总览；legacy存历史图解
 │   └── cards/                        复习卡片；legacy存历史问答图卡
 ├── skills/knowledge-interviewer/
 │   ├── SKILL.md                      陪练主入口
-│   ├── references/                   通用教学规则与四域知识参考
+│   ├── references/                   通用教学规则与六域知识参考
 │   ├── templates/                    空白进度/错题结构
 │   ├── scripts/                      定位、本地档案与校验工具
 │   └── evals/<domain>/               合成用例、评分标准与历史证据
@@ -151,6 +159,7 @@ python3 skills/knowledge-interviewer/scripts/check_learning_privacy.py
 python3 skills/knowledge-interviewer/scripts/check_behavior_eval_runs.py
 python3 skills/knowledge-interviewer/scripts/check_frontend_eval_results.py
 node --test handbook/frontend/examples/*.test.mjs
+python3 -m unittest discover -s handbook/python-backend/examples -p 'test_*.py'
 ```
 
 提交前检查暂存区：
@@ -161,16 +170,19 @@ python3 skills/knowledge-interviewer/scripts/check_learning_privacy.py --staged
 
 |验证类型|能说明什么|当前限制|
 |---|---|---|
-|目录/ID/题链/链接校验|135点的公共材料能对应起来|不证明所有事实正确|
+|目录/ID/题链/链接校验|197点的公共材料能对应起来|不证明所有事实正确|
 |正文定位与隐私测试|脚本定位、兼容与部分发布边界有效|不证明模型每轮都遵循流程|
 |前端Node测试|示例协议核心与语言案例的确定性性质|不替代浏览器和后端验收|
+|Python任务实验|54项测试在Python 3.13与3.14.5通过：原48项本地任务性质，加6项交接/验收/记忆教学协议|3.11仅语法检查；教学协议不是CLI产品能力，不证明真实HTTP、LLM或生产集成|
 |合成行为用例与rubric|24例已冷启动运行两轮并逐项评审：首轮23例通过、`ai-agent-format`因补课单轮超出简短边界未通过；修复提交b8ec628后同一批原话与同一份rubric复跑24例通过。两轮输出与失败均归档在`evals/<域>/runs/2026-11-10/`与`runs/2026-11-10-v2/`|每例单次采样、执行与评审同族，不构成通过率或稳定性证明；SKILL新增的整轮三块上限不属该rubric，单独记录|
 |历史前端行为证据|保留当时12例模拟输出与评分|不当作当前全系统结果|
+
+2026-11-16新增Python六例新旧版冷启动对比：新版5/6例、21/22条判据满足，旧版2/6例、17/22条。新版构建边界表述遗漏“其他Python实现需另核实”，失败原样保留；n=1、同族评审，不是稳定通过率。见[Python评测说明](skills/knowledge-interviewer/evals/python-backend/README.md)和[输出评审页](skills/knowledge-interviewer-workspace/iteration-1/review.html)。
 
 四域24例行为用例的运行协议、唯一判据失败样本、判据外观察与一个`learning_state.py init`缺陷见[行为评测运行报告](docs/reports/2026-11-10-behavior-eval-run.md)。privacy用例另跑可写沙箱轮直接观察写文件；归档前必须脱敏个人主目录路径，否则公共评测文件会触发隐私检查失败。
 
 上述结果按原判据保留。针对缺陷的脚本修复、新版整轮长度/准确性判据及独立回归见[修复报告](docs/reports/2026-11-10-behavior-fixes.md)；新版结果单独归档，不回写原23/24成绩。可运行 `python3 skills/knowledge-interviewer/scripts/check_fix_regressions.py`检查新信封与原始证据哈希。
 
-原24例的全量复跑及其留下的格式、权限、数字和全局入口问题见[修复后全量复评](docs/reports/2026-11-10-recheck-after-fixes.md)。这些问题已在后续v3定向优化中处理：16个新判据用例满足要求，授权切换全局入口后另跑2例冒烟；详情见[v3优化报告](docs/reports/2026-11-10-v3-optimization.md)。旧24/24仍按旧rubric保存，不改分、不与新标准混算；全局入口文件已指向当前仓库，已打开宿主会话的缓存不在文件校验范围内。
+原24例的全量复跑及其留下的格式、权限、数字和全局入口问题见[修复后全量复评](docs/reports/2026-11-10-recheck-after-fixes.md)。这些问题已在后续v3定向优化中处理：16个新判据用例满足要求，授权切换全局入口后另跑2例冒烟；详情见[v3优化报告](docs/reports/2026-11-10-v3-optimization.md)。旧24/24仍按旧rubric保存，不改分、不与新标准混算；该报告记录的是当时的全局入口状态，2026-11-16本机重验未通过，以本页当前入口限制为准；宿主会话缓存不在文件校验范围内。
 
 维护知识时同步检查教材、图谱、题库、来源和有关图解；稳定ID不改名、不重用，不为适配新教材篡改个人成绩。详细职责、已知缺口和补全优先级见[学习系统说明](docs/learning-system.md)。

@@ -1,0 +1,37 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": null,
+  "actions_asked": 0,
+  "state_action": "none：本轮仅生成计划，未读取个人档案，未初始化或写入学习状态。",
+  "external_sync": "none：未调用外部服务，未进行云端写入或同步。",
+  "domain_resolution": "旧 Skill 无 Python 领域包，按 references/question-design.md 的无包规则临时组织依赖图谱；范围与起点取自本例 prompt 和 fixture，不路由到 Java/Go，不使用预设 point_id，不出题。",
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/SKILL.md",
+      "line_range": [1, 223],
+      "scope": "旧 Skill 全文"
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/question-design.md",
+      "line_range": [1, 86],
+      "scope": "旧公开自造题模板与无包回退规则"
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/output-format.md",
+      "line_range": [1, 60],
+      "scope": "旧公开展示协议；计划不套默认补课或保存收尾模板"
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "line_range": [7, 7],
+      "scope": "Grep 定位 python-backend-route：该单行返回了条目；仅采用 prompt 与 fixture 作为合成用户输入，未采用同行 point_id/type 作为知识或选点依据，未读取其他案例或 rubric。"
+    }
+  ],
+  "textbook_reads": "无：未读取 handbook、教材正文或新 Python 参考材料。",
+  "runtime_execution": "none：未执行学习计划中的代码或测试，不声称实测。",
+  "installation_or_deployment": "none",
+  "artifact_writes": [
+    "skills/knowledge-interviewer-workspace/iteration-1/eval-1-python-five-day-plan/without_skill/run-1/outputs/response.txt",
+    "skills/knowledge-interviewer-workspace/iteration-1/eval-1-python-five-day-plan/without_skill/run-1/execution.json"
+  ]
+}

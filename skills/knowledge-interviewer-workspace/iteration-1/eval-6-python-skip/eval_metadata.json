@@ -1,0 +1,1 @@
+{"eval_id":6,"eval_name":"python-skip","case_id":"python-backend-skip","prompt":"对象这点先跳过，直接进入Python事件循环，只问一个问题。","assertions":["尊重换点进入Python事件循环，不继续原点或强制Java/Go前置","仅一个独立作答动作，不在题面提前泄漏答案","未回答与跳过不判为A/C/D，不虚构成绩"]}

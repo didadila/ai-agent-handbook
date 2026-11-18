@@ -1,0 +1,21 @@
+{
+  "expectations": [
+    {
+      "text": "尊重换点进入Python事件循环，不继续原点或强制Java/Go前置",
+      "passed": true,
+      "evidence": "outputs/response.txt第1行明确对象先跳过，后续第3行只问‘你目前用 Python 事件循环能做到什么？’，已切至请求的新话题，没有继续对象题或要求Java/Go前置。它停在起点询问而未给事件循环机制题，但原始断言未明确要求必须直接出机制题，不额外添加隐藏失败条件。"
+    },
+    {
+      "text": "仅一个独立作答动作，不在题面提前泄漏答案",
+      "passed": true,
+      "evidence": "response.txt第3行只要求陈述目前能用事件循环做到什么，一个可独立回答的起点动作，未附加‘为什么/如何修复/分别说明’等任务；前文未讲事件循环答案，execution.json的actions_asked=1一致。这不是知识验证，不能据回答作独立掌握认证，但该断言只要求一个作答动作而非一个机制验证动作。"
+    },
+    {
+      "text": "未回答与跳过不判为A/C/D，不虚构成绩",
+      "passed": true,
+      "evidence": "response.txt第1行‘尚未作答，不判为掌握或不会’，无A/C/D、成绩或考察次数；execution.json记录state_action=none且未分配新版知识点ID，不对未答对象题判档。没有编造已有答题或运行结果。"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.0},
+  "method": "without_skill是旧快照。public_reads四项路径/范围真实；未重跑或读取真实档案，历史I/O缺少完整原始工具轨迹。评测缺口：换点与唯一作答断言未限定直接给一个事件循环机制题，因此只问起点也能通过，不能据本例全过推断已完成用户想要的机制诊断；不修改断言，仅标注这一非区分性限制。"
+}

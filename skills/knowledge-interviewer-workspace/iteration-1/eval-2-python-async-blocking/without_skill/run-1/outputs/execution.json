@@ -1,0 +1,25 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": null,
+  "actions_asked": 1,
+  "state_action": "none",
+  "external_sync": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/SKILL.md",
+      "start_line": 1,
+      "end_line": 223
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 8,
+      "end_line": 8,
+      "use": "python-backend-wrong 的 prompt 与 fixture，仅作用户输入"
+    },
+    {
+      "path": "skills/knowledge-interviewer-workspace/skill-snapshot/references/question-design.md",
+      "start_line": 1,
+      "end_line": 86
+    }
+  ]
+}

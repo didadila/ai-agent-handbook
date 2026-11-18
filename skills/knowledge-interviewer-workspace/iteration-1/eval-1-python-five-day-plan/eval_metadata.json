@@ -1,0 +1,1 @@
+{"eval_id":1,"eval_name":"python-five-day-plan","case_id":"python-backend-route","prompt":"我习惯Python，想用5天快速上手后端的存储、任务分发和Python Agent。按每天3小时给我一个五天路线，先只要计划，不要开始考我，也别要求先学Java或Go。","assertions":["选择Python独立实现路线，不要求Java或Go前置且不重复询问已知语言/时长","计划按五天呈现，贯穿语言、异步API、存储、任务分发与Python Agent","SQL为最小存储主线，Redis/对象/向量/Celery按需扩展，不强制全装","五天定位为可验收上手而非精通或线上交付保证","尊重只要计划：零作答动作，不虚构成绩或执行结果"]}

@@ -1,0 +1,31 @@
+{
+  "expectations": [
+    {
+      "text": "选择Python独立实现路线，不要求Java或Go前置且不重复询问已知语言/时长",
+      "passed": true,
+      "evidence": "outputs/response.txt第1行：‘直接用 Python，不必先学 Java 或 Go。按每天 3 小时、共 15 小时’；没有重新询问语言或时长。execution.json选择python-backend，与实际路线一致。"
+    },
+    {
+      "text": "计划按五天呈现，贯穿语言、异步API、存储、任务分发与Python Agent",
+      "passed": true,
+      "evidence": "response.txt第7–11行分别安排语言与校验、事件循环/API契约及超时适配器、SQLite持久化、持久队列/租约接管、Python Agent guard，围绕同一个异步知识检索任务服务。第13行明确HTTP/SSE适配尚未交付，未把CLI冒充HTTP实现。公共handbook/python-backend/sprint-5-days.md第23–27行和第13–15行支持该五天组织及API扩展边界。"
+    },
+    {
+      "text": "SQL为最小存储主线，Redis/对象/向量/Celery按需扩展，不强制全装",
+      "passed": true,
+      "evidence": "response.txt第9、13行以SQLite完成新连接持久查询；第15行明确‘Redis、Celery、S3、向量服务只选读用途与边界，不作为必装项’。与公共五天教材第15、25行一致，不强制安装整套存储或队列服务。"
+    },
+    {
+      "text": "五天定位为可验收上手而非精通或线上交付保证",
+      "passed": true,
+      "evidence": "response.txt第3行：‘目标是建立本地闭环，不是五天精通或完成生产上线’；表格逐日给出未执行的有界验收证据，且第9–11行分别排除PG并发/备份、外部恰好一次及真实模型质量等扩大结论。"
+    },
+    {
+      "text": "尊重只要计划：零作答动作，不虚构成绩或执行结果",
+      "passed": true,
+      "evidence": "response.txt第1行‘本轮只给计划，不出题、不写学习状态’，第15行‘本轮未运行测试、安装、部署或调用云服务，所有验收均为计划’；全文没有要求用户立即回答的问题，也无已完成成绩或实测结果。execution.json的actions_asked=0、state_action=none相符。"
+    }
+  ],
+  "summary": {"passed": 5, "failed": 0, "total": 5, "pass_rate": 1.0},
+  "method": "按本run实际response.txt、outputs/execution.json及公共教材交叉评分；public_reads路径和所报行范围均存在，对象节真实定位为handbook/python-backend/01-python-foundations.md第5–28行。未重跑学习输出或访问真实学习档案。execution.json不是完整原始工具转录，不能独立证明全部历史I/O或排除未记录副作用。"
+}

@@ -1,0 +1,21 @@
+{
+  "expectations": [
+    {
+      "text": "尊重换点进入Python事件循环，不继续原点或强制Java/Go前置",
+      "passed": true,
+      "evidence": "outputs/response.txt第1行‘对象这点先跳过，暂不判档，进入 Python 事件循环’，后续仅涉及同一事件循环中的协程调度，不继续考对象、不增加Java/Go前置。execution.json所选py.async.eventloop与实际题面相符。"
+    },
+    {
+      "text": "仅一个独立作答动作，不在题面提前泄漏答案",
+      "passed": true,
+      "evidence": "response.txt第3行只给‘假设’同一线程执行time.sleep、另一个协程已就绪的场景，第5行只要求判断该协程两秒内能否执行；未先说明阻塞导致无法调度，也没有附加解释/修复/运行要求。仅一个可单独回答的机制判断，execution.json的actions_asked=1一致。"
+    },
+    {
+      "text": "未回答与跳过不判为A/C/D，不虚构成绩",
+      "passed": true,
+      "evidence": "response.txt第1行明确‘暂不判档’，全文无A/C/D、掌握宣告或错题/次数记录；execution.json说明不对未答对象题判档、不更改进度/错题/复习安排且state_action=none。题面被标假设，没有编造用户实测或历史答法。"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.0},
+  "method": "按该目录原始assertions检查换点、唯一作答及不造档位；普通出题不强套补课三段模板。public_reads四项路径/范围已核对，未将题库读取冒充教材正文读取，本例亦无正文读取断言。未重跑或读取真实档案；所给execution记录不能独立审计全部历史I/O。"
+}

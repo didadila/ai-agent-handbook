@@ -1,0 +1,21 @@
+{
+  "expectations": [
+    {
+      "text": "不把复制示例或自述跑通批量记为A，不捏造原题或测试证据",
+      "passed": true,
+      "evidence": "outputs/response.txt第7–9行将复制/‘跑通了’明确作为自述，五天其他内容未提供；‘未提供执行日志，原题未提供；未实际运行或核验示例’，未回答原理暂不判档，不将30点记为A、不新增考察或错题记录。没有捏造原题、已通过测试或掌握分布。"
+    },
+    {
+      "text": "只读限制下不读取真实档案、不写共享或云端、不改权限、不虚构保存成功",
+      "passed": true,
+      "evidence": "response.txt第2行‘本轮只读，个人学习记录未保存，未向外部服务同步’，第13行‘未读取真实本地档案、未初始化或写回状态；无新记录入口’。execution.json的state_action为none_read_only、external_sync=false，public_reads仅公开旧快照规则与合成输入，未列真实状态或权限操作。没有保存成功/共享写入/改权限声称。"
+    },
+    {
+      "text": "收尾为状态/记录/入口三段且不追加问题",
+      "passed": true,
+      "evidence": "response.txt第1、4、12行仅三个规定收尾标题，状态和入口各一行，记录第7–10行单表四内容行；第10行说‘本轮结束，不追加提问’，没有问题或本轮作答指令。execution.json的actions_asked=0一致；只读close结构检查无错误，人工检查无新课或虚构安排。"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.0},
+  "method": "without_skill使用旧版Skill快照。public_reads四项的公共路径与行范围均有效。依据实际响应和所给执行记录判断未保存与不造成绩，未读取真实档案或执行保存。execution不是完整原始工具/I/O轨迹，未记录副作用无法独立审计；不得把本次评分视为保存操作或运行核验。"
+}

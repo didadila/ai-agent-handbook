@@ -1,0 +1,53 @@
+{
+  "expectations": [
+    {
+      "text": "保留Python实现域，不要求先学Java/Go；区分reset重建模型上下文、compaction有损摘要、进程恢复持久执行状态。",
+      "passed": true,
+      "evidence": "response.txt第7行：‘开启新模型上下文，从外部工件重建任务信息’；第8行：‘把当前历史压成有损摘要……也不恢复进程’；第9行：‘Python runner 从持久 run/step 状态与 checkpoint 接续，不是还原 Python 调用栈或旧数据库连接’。始终针对Python，无Java/Go先修要求，三种对象未混淆。"
+    },
+    {
+      "text": "固定验收契约与执行者自报done分离，外部状态/证据核验，不允许执行者改期望通过。",
+      "passed": true,
+      "evidence": "response.txt第10行：‘任务开始前固定验收契约；执行者提交产物和证据，不能改预期给自己放行’，evaluator‘核对数据库、索引等外部状态与产物，而非只读 done’。第13行用‘指定文档版本……尚未入索引’验证外部契约而不是执行者成功标签。"
+    },
+    {
+      "text": "交接或恢复仍需核对已发生/未知外部效果及当前授权，JSON或历史聊天不自动提供这些保证。",
+      "passed": true,
+      "evidence": "response.txt第7行：‘JSON 只是容器，应包含版本、来源、成立条件、未知状态、效果键、下一步与授权引用，旧授权需重验，不能拿摘要代替事务执行记录’；第9行：‘外部效果未知时先按效果身份查询、对账，再决定重试，仍需业务幂等’。用执行记录核对已发生效果、对未知效果先查账且旧授权重验，未把JSON/旧聊天当执行或授权保证。"
+    },
+    {
+      "text": "独立evaluator指角色/上下文/验收权分离，不保证天然客观或必须不同模型，不把reset/evaluator组合当永久强制。",
+      "passed": true,
+      "evidence": "response.txt第10行：‘独立角色/上下文的 evaluator 核对数据库、索引等外部状态与产物……可用同一模型，但独立上下文不自动消除裁判偏差’，且‘执行者……不能改预期给自己放行’明确分离验收权。第2、7—9行分别解释reset、compaction和持久恢复的对象，没有要求所有任务固定组合reset与evaluator。省略了按模型与任务收益/成本调整组合的实例，但未作‘永久强制’主张；独立验收不等于强制reset。"
+    },
+    {
+      "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+      "passed": true,
+      "evidence": "response.txt第1、4、12行为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，内容行第7—10行共4行。末尾第13行只有一个判断题：‘……执行者报告 done，但独立 evaluator 查到该版本尚未入索引：本次验收能通过吗？’，以‘假设’开头，无实测或部署声明。第8行引用‘[包内工程参考](references/engineering-learning.md)’；已以本机文件存在性和公开正文核对该包内入口，不是虚构完整教材入口。运行时‘完整案例教材未安装’仍只是自报。"
+    }
+  ],
+  "summary": {"passed": 5, "failed": 0, "total": 5, "pass_rate": 1.0},
+  "claims": [
+    {
+      "claim": "独立evaluator可以使用同一模型，但不自动消除偏差；未知效果与过期授权须复核。",
+      "type": "factual",
+      "verified": true,
+      "evidence": "response.txt第7、9、10行分别明确‘旧授权需重验’、‘外部效果未知时先……查询、对账’及‘可用同一模型，但独立上下文不自动消除裁判偏差’；与公开engineering-learning.md第31—35行边界一致。不是经过运行验证的恢复性能承诺。"
+    },
+    {
+      "claim": "执行者选择python-backend领域、读取所列公共文件，完整教材不可用且没有状态写入。",
+      "type": "process",
+      "verified": false,
+      "evidence": "execution.json自报‘selected_domain’: ‘python-backend’及‘public_reads’、‘handbook_available’: false、‘state_writes’: false、‘synthetic’: true，但没有逐工具调用独立轨迹。Python领域保留由回复本身核实；其他过程保证不能由自报推断。"
+    }
+  ],
+  "audit_limitations": [
+    "完整读取本运行response.txt与execution.json；只读公开工程参考及核对包内入口，未读取个人状态、未访问网络、未运行服务或自造用户成绩。执行者自报路径不作完整审计。"
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {"assertion": "独立evaluator指角色/上下文/验收权分离，不保证天然客观或必须不同模型，不把reset/evaluator组合当永久强制。", "reason": "关于‘不永久强制’的负向要求可由不提出普遍强制主张满足；本回复没有讲清何时按收益/成本删减reset或调整验收粒度。未来可用模型变更后的组合选择场景区分真正理解与沉默，当前固定rubric保持不变。"}
+    ],
+    "overall": "角色、上下文、验收权、未知效果和当前授权均有实质说明。组合的任务/模型适用条件是解释省略，未把非必要负面例子或关键词缺席机械判错。"
+  }
+}

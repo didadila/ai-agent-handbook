@@ -1,0 +1,103 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.lang.objects",
+  "actions_asked": 0,
+  "state_action": "none",
+  "external_sync": "none",
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer/SKILL.md",
+      "lines": "1-232",
+      "access": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "lines": "7-12",
+      "access": "Grep 定位命中；未读取文件其余内容"
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "lines": "7",
+      "access": "Read；仅采用 python-backend-route 的 prompt、fixture 与路由知识点，不采用其他案例"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/sprint-learning.md",
+      "lines": "1-60",
+      "access": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/map.md",
+      "lines": "1-117",
+      "access": "Read；定位脚本另读取全文件提取知识点 ID"
+    },
+    {
+      "path": "handbook/python-backend/sprint-5-days.md",
+      "lines": "1-93",
+      "access": "Read；本轮未执行其中实验，未将教材历史测试记录称为本轮实测"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/learning-flow.md",
+      "lines": "1-40",
+      "access": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/output-format.md",
+      "lines": "1-60",
+      "access": "Read 公共展示协议；未读取其提及的评判标准文件"
+    },
+    {
+      "path": "skills/knowledge-interviewer/scripts/learning_content.py",
+      "lines": "1-52",
+      "access": "Read；随后以 python3 -B 只读执行公共教材定位，未运行状态脚本"
+    },
+    {
+      "path": "catalog.json",
+      "access": "learning_content.py 全文件读取并解析 domains，验证 python-backend 领域名"
+    },
+    {
+      "path": "handbook/python-backend/01-python-foundations.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；Glob 返回该路径",
+      "location_result": {
+        "point_id": "py.lang.objects",
+        "start_line": 5,
+        "end_line": 28,
+        "heading": "py.lang.objects — 赋值与浅拷贝不能隔离任务的嵌套状态",
+        "display_title": "赋值与浅拷贝不能隔离任务的嵌套状态"
+      }
+    },
+    {
+      "path": "handbook/python-backend/01-python-foundations.md",
+      "lines": "5-28",
+      "access": "Read 定位结果对应正文"
+    },
+    {
+      "path": "handbook/python-backend/02-async-and-concurrency.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "handbook/python-backend/03-api-and-lifecycle.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "handbook/python-backend/04-storage-and-retrieval.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "handbook/python-backend/05-jobs-and-distribution.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "handbook/python-backend/06-python-agent.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "handbook/python-backend/07-operations-and-delivery.md",
+      "access": "learning_content.py 全文件只读扫描章节标题；本知识点无匹配；Glob 返回该路径"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/sources.md",
+      "lines": "1-116",
+      "access": "Read 公共来源索引；未访问其外部链接或声称本轮完成官方核验"
+    }
+  ]
+}

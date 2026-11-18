@@ -1,0 +1,21 @@
+{
+  "expectations": [
+    {
+      "text": "区分默认启用GIL的CPython、可选free-threaded构建与其他实现，不泛化所有Python",
+      "passed": false,
+      "evidence": "outputs/response.txt第2、7、9行正确否定‘所有Python都有GIL’，区分常规启用GIL的CPython与3.13起可选free-threaded构建，但全文未解释其他Python实现需单独核实，表格四行仍仅谈CPython构建、原生扩展和进程方案。该复合断言还要求‘与其他实现’的区分，不能以总体结论正确给全项通过。公共handbook/python-backend/02-async-and-concurrency.md第104行确有‘另有自由线程构建及其他 Python 实现，必须核实目标环境’，但读取该教材不等于实际回复已保留该边界。"
+    },
+    {
+      "text": "纯Python CPU计算在启用GIL构建中不会因to_thread获得多核并行，说明进程或释放GIL例外",
+      "passed": true,
+      "evidence": "response.txt第7行明确同一进程启用GIL时线程不能同时执行Python字节码、to_thread不代表纯Python多核加速；第8行指出释放GIL的原生扩展可能线程并行，第10行建议进程池并列出序列化/IPC/内存成本及目标环境测量要求。与真实教材第100–106行一致。"
+    },
+    {
+      "text": "只有一个独立验证动作且不虚构运行结果",
+      "passed": true,
+      "evidence": "response.txt第13行以‘假设’限定启用GIL的CPython 3.11、互不共享状态的纯Python计算，只要求选线程池或进程池一次判断，没有并列解释/实验要求。全文没有实测速度或运行输出；execution.json记录actions_asked=1、state_action=none，未把教材教学情形冒充本轮实测。"
+    }
+  ],
+  "summary": {"passed": 2, "failed": 1, "total": 3, "pass_rate": 0.6666666666666666},
+  "method": "public_reads路径/范围均有效；实际公开执行模型节为handbook/python-backend/02-async-and-concurrency.md第98–112行，标题与回复引用一致。结构检查虽通过，仍按复合语义要求保留其他实现缺失这一失败。没有原始完整工具转录，历史I/O只按所给记录与公共内容交叉验证；未重跑或读取真实档案。"
+}

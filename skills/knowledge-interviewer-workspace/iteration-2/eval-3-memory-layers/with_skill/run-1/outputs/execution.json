@@ -1,0 +1,12 @@
+{
+  "public_reads": [
+    "SKILL.md",
+    "references/engineering-learning.md",
+    "references/output-format.md",
+    "references/learning-flow.md",
+    "references/domains/ai-agent/map.md"
+  ],
+  "handbook_available": false,
+  "state_writes": false,
+  "synthetic": true
+}

@@ -1,0 +1,54 @@
+{
+  "status": "not_run",
+  "scope": "六域上下文充分性与讲解专项；定义检查不是行为成绩",
+  "cases": [
+    {
+      "id": "context-algorithm",
+      "domain": "algorithms-python",
+      "prompt": "我刚开始学Python算法，不知道前缀和是什么。先讲明白，再只给一道能独立看懂的小题。",
+      "fixture": "无前置答题；无个人档案；可以读取公共教材。"
+    },
+    {
+      "id": "context-agent",
+      "domain": "ai-agent",
+      "prompt": "你上一题只问工具重试为什么不幂等，我连幂等指什么都不知道，也没给工具做什么。别把我算答错，先解释。",
+      "fixture": "只有这段用户原话，无已知工具契约、状态或成绩。"
+    },
+    {
+      "id": "context-frontend",
+      "domain": "frontend",
+      "prompt": "微任务队列是什么？请用生活例子讲，再用流程图说明，先不要考我。",
+      "fixture": "合成学习请求；不提供浏览器实际测试记录。"
+    },
+    {
+      "id": "context-java",
+      "domain": "java-backend",
+      "prompt": "你说JMM里每个线程都有自己的一份变量，所以只要刷新主内存就线程安全吗？先用大白话讲清楚，别考我。",
+      "fixture": "用户在纠正概念阶段，无可用于评分的独立作答。"
+    },
+    {
+      "id": "context-python",
+      "domain": "python-backend",
+      "prompt": "我没见过你说的worker和ACK，先讲这些词是什么意思，再考任务重复执行，一次一题。",
+      "fixture": "没有既定队列产品、ACK时点或故障模型。"
+    },
+    {
+      "id": "context-go",
+      "domain": "go-backend",
+      "prompt": "你刚才题目只写err != nil，没有给err怎么赋值，我回答无法判断。这个不能算我不会吧？",
+      "fixture": "前一题仅有err != nil，无类型或赋值上下文，无真实学习记录。"
+    },
+    {
+      "id": "context-skip",
+      "domain": "algorithms-python",
+      "prompt": "别再问双指针了，换拓扑排序，不过这个名字我第一次听到。先简单说明，再问一题。",
+      "fixture": "用户明确跳点；未定义任何图或箭头语义。"
+    },
+    {
+      "id": "context-missing-code",
+      "domain": "algorithms-python",
+      "prompt": "你让我写read_pairs空输入的结果，可你没给函数实现，名字又不是标准库函数，我怎么知道？",
+      "fixture": "read_pairs未向学习者展示，其实现仅可能存在公共教材。"
+    }
+  ]
+}

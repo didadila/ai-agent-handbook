@@ -1,0 +1,16 @@
+{
+  "public_reads": [
+    "SKILL.md",
+    "references/engineering-learning.md",
+    "references/domains/python-backend/map.md",
+    "references/learning-flow.md",
+    "references/output-format.md",
+    "references/domains/python-backend/questions.md",
+    "references/personas.md",
+    "references/domains/python-backend/sources.md"
+  ],
+  "selected_domain": "python-backend",
+  "handbook_available": false,
+  "state_writes": false,
+  "synthetic": true
+}

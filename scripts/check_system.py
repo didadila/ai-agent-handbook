@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the public four-domain contract; never read learner records."""
+"""Check the public catalog-driven domain contract; never read learner records."""
 import json
 import re
 import subprocess
@@ -10,10 +10,28 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / 'skills/knowledge-interviewer'
 
 
+def without_fenced_code(text):
+    """Preserve rendered links; archived source in code fences is not navigation."""
+    visible = []
+    marker = None
+    for line in text.splitlines():
+        if marker is not None:
+            if re.fullmatch(r' {0,3}' + marker[0] + '{' + str(len(marker)) + r',}[ \t]*', line):
+                marker = None
+            continue
+        opening = re.match(r'^ {0,3}(`{3,}|~{3,})(.*)$', line)
+        if opening and (opening[1][0] != '`' or '`' not in opening[2]):
+            marker = opening[1]
+        else:
+            visible.append(line)
+    return '\n'.join(visible)
+
+
 def main():
     catalog = json.loads((ROOT / 'catalog.json').read_text())
     errors = []
     total = 0
+    public_ids = set()
     for domain in catalog['domains']:
         name = domain['id']
         ref = SKILL / 'references/domains' / name
@@ -32,6 +50,12 @@ def main():
         questions = re.findall(r'^###\s+`([^`]+)`', (ref / 'questions.md').read_text(), re.M)
         if len(ids) != domain['points'] or len(set(ids)) != len(ids):
             errors.append(f'{name}: map count/duplicates')
+        for identifier in ids:
+            if not any(identifier.startswith(prefix) for prefix in domain['prefixes']):
+                errors.append(f'{name}: ID outside declared prefixes {identifier}')
+            if identifier in public_ids:
+                errors.append(f'{name}: cross-domain duplicate ID {identifier}')
+        public_ids.update(ids)
         if set(ids) != set(questions) or len(questions) != len(set(questions)):
             errors.append(f'{name}: question coverage/duplicates')
         text = '\n'.join(p.read_text() for p in book.glob('*.md') if p.name not in ('README.md', 'knowledge-map.md', 'progress.md', 'mistakes.md'))
@@ -63,7 +87,7 @@ def main():
         # Historical evidence may contain intentionally recorded former paths.
         if 'history' in relative.parts or 'legacy' in relative.parts:
             continue
-        text = (ROOT / relative).read_text()
+        text = without_fenced_code((ROOT / relative).read_text())
         for target in re.findall(r'\]\(([^\s)]+)(?:\s+"[^"]*")?\)', text):
             target = unquote(target.split('#')[0])
             if not target or re.match(r'^[a-zA-Z][\w+.-]*:', target):

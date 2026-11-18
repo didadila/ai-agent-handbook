@@ -1,0 +1,26 @@
+{
+  "expectations": [
+    {
+      "text": "正确解释async def中的time.sleep同步阻塞事件循环，区分异步等待与线程卸载边界",
+      "passed": true,
+      "evidence": "outputs/response.txt第2、7–10行明确async def不会自动改造同步调用，time.sleep阻塞同一事件循环线程但不必影响所有worker；asyncio.sleep等待期间让出执行权，to_thread把阻塞I/O移到线程池。机制与公开教材一致，没有把所有调用写成await当作自动非阻塞。"
+    },
+    {
+      "text": "实际定位读取Python对应教材正文，引用真实语义标题，不编造行号",
+      "passed": false,
+      "evidence": "outputs/execution.json的public_reads仅列旧快照SKILL.md、合成输入cases.json及旧question-design.md，没有Python教材正文或定位结果；response.txt也没有真实教材标题或链接。结论讲对不能替代该run实际定位读取。评分者核对教材不补算为执行者已读。"
+    },
+    {
+      "text": "严格结论/机制/验证三段，机制至多四行表，无开场旁白或重复段落",
+      "passed": true,
+      "evidence": "response.txt第1、4、12行恰为规定的三个三级标题，首行即结论标题；机制第7–10行是四内容行的单表，表外无补充旁白，末段只一行问题。只读格式检查无错误，人工检查同样确认三段及表格上限。"
+    },
+    {
+      "text": "只有一个独立验证动作且不把讲解后复述计为独立A",
+      "passed": true,
+      "evidence": "response.txt第13行仅要求判断B在A执行time.sleep期间能否继续，只有一个可单独回答的判断动作，未要求并列解释或额外实验；全文未宣告A档或用户掌握，execution.json的state_action=none。该题基本复述刚讲过的同循环阻塞情形，只能作即时理解检查，不能证明独立迁移；本断言禁止计为A，而输出确未计A。"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 1, "total": 4, "pass_rate": 0.75},
+  "method": "without_skill是旧Skill快照而非无Skill。public_reads三项真实路径/行范围有效，但无教材读取证据。语义与格式分开判定，未重跑或读取真实档案。证据限于响应和结构化执行记录，不能独立审计全部历史I/O。断言未要求未见过的迁移场景，故简单复述检查不因缺乏迁移难度额外判失败，也不被视为独立A证据。"
+}

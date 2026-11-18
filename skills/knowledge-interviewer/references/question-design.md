@@ -4,6 +4,8 @@
 
 掌握了这个模板，一个领域包其实只需要 `map.md`（该考什么）就能跑起来，`questions.md` 只是把高频点的追问链预制好、省一点现场设计的成本。所以新增领域时别被"要写几十条题"卡住，先写图谱。
 
+出题前必读[上下文与讲解模板](teaching-context.md)：以下题链是内部设计素材，每次只发其中一个动作，并补齐简介、实际场景和该题前提。不能把“为什么如此”里的“如此”交给学习者猜。未知术语先解释；用户不懂或题面缺项先作废诊断，不记C/D。模板中的答案箭头仅供内部判据，不向用户提前展示。
+
 ## 四步法
 
 **第一步：找到这个知识点的"设计决策"。**
@@ -29,20 +31,22 @@
 ## 范例一（`java-backend`，题库里没有的点：为什么 Tomcat 要破坏双亲委派）
 
 ```
-设计决策：双亲委派保证同一个类只被加载一次，但 Tomcat 需要同一个类在不同 webapp 里是不同的类。
+设计决策：类身份由二进制类名与定义类加载器共同确定，并非全JVM的同名类只能加载一次。Tomcat 10.1默认的Webapp加载器对普通应用类优先本地，便于各应用使用独立依赖；不能把这一策略说成应用隔离的唯一来源。
 
 L0: 双亲委派是什么？
-L1: Tomcat 的 WebappClassLoader 怎么破坏它的？（→ 重写 loadClass，先自己找）
-L2: 为什么必须破坏？不破坏会出什么问题？（→ 两个 webapp 用不同版本的同名类会冲突）
-L3: 那 Tomcat 怎么保证 JDK 的核心类不被 webapp 覆盖？（→ 仍然对 java.* 走委派）
+L1: 假设Tomcat 10.1默认delegate=false，普通应用类怎样选择本地与父加载器？（→ 重写 loadClass，先自己找）
+L2: 假设Common层也有同名依赖，为什么应用可能更希望优先加载WEB-INF里的版本？（→ 避免优先父加载选中共享版本；不能断言委派一定导致冲突）
+L3: Tomcat 10.1默认本地优先是否适用于全部类？（→ JRE基础类和Tomcat实现的Jakarta EE API有优先委派例外）
 
-A 档要点：① 重写 loadClass 而非 findClass ② 目的是 webapp 间类隔离
-        ③ 仍保留对 JDK 核心包的委派 ④ 知道这导致每个 webapp 有独立的静态变量
+A 档要点：① 区分loadClass委派决策与findClass本地查找 ② 类身份包含定义加载器
+        ③ 说明本地优先的例外及delegate=true配置 ④ 静态状态是否独立取决于实际定义类的加载器，而非只看webapp数量
 
 错误答法识别：
 - "为了热部署" → 这是结果不是机制，追问"热部署具体依赖它哪一点"
 - "重写了 findClass" → 混淆了两个方法，直接指出并问"findClass 和 loadClass 谁控制委派顺序"
 ```
+
+依据：[JVMS 21 §5.3](https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-5.html#jvms-5.3)、[Tomcat 10.1类加载文档](https://tomcat.apache.org/tomcat-10.1-doc/class-loader-howto.html)，2026-11-17核验。
 
 ## 范例二（`ai-agent`，题库里没有的点：为什么要给 agent 做工具调用的重试上限）
 

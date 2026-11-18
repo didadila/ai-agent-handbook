@@ -1,0 +1,1 @@
+{"eval_id":2,"prompt":"FastAPI里把函数写成async def后，里面用time.sleep(2)也不会卡住其他请求，因为已经异步了。我这个理解对吗？直接用短表格讲，最后只问一个验证问题。","configuration":"old_skill_snapshot_not_no_skill"}

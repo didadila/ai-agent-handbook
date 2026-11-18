@@ -1,0 +1,28 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.async.execution",
+  "actions_asked": 1,
+  "state_action": "none; synthetic fixture only; no real .local reads or learning-state writes",
+  "external_sync": false,
+  "public_reads": [
+    {"path": "skills/knowledge-interviewer/SKILL.md", "start_line": 1, "end_line": 232, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/evals/python-backend/cases.json", "start_line": 9, "end_line": 9, "via": "Grep; selected prompt and fixture only"},
+    {"path": "skills/knowledge-interviewer/references/domains/python-backend/map.md", "start_line": 1, "end_line": 117, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/references/domains/python-backend/sources.md", "start_line": 1, "end_line": 116, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/references/learning-flow.md", "start_line": 1, "end_line": 40, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md", "start_line": 168, "end_line": 168, "via": "Grep; heading location"},
+    {"path": "skills/knowledge-interviewer/scripts/learning_content.py", "start_line": 1, "end_line": 52, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md", "start_line": 168, "end_line": 185, "via": "Read"},
+    {"path": "skills/knowledge-interviewer/references/output-format.md", "start_line": 1, "end_line": 60, "via": "Read"},
+    {"path": "catalog.json", "start_line": 1, "end_line": 17, "via": "learning_content.py"},
+    {"path": "skills/knowledge-interviewer/references/domains/python-backend/map.md", "start_line": 1, "end_line": 116, "via": "learning_content.py"},
+    {"path": "handbook/python-backend/01-python-foundations.md", "start_line": 1, "end_line": 158, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/02-async-and-concurrency.md", "start_line": 1, "end_line": 112, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/03-api-and-lifecycle.md", "start_line": 1, "end_line": 91, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/04-storage-and-retrieval.md", "start_line": 1, "end_line": 122, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/05-jobs-and-distribution.md", "start_line": 1, "end_line": 75, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/06-python-agent.md", "start_line": 1, "end_line": 62, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/07-operations-and-delivery.md", "start_line": 1, "end_line": 60, "via": "learning_content.py; public section scan"},
+    {"path": "handbook/python-backend/02-async-and-concurrency.md", "start_line": 98, "end_line": 112, "via": "Read; located teaching section"}
+  ]
+}

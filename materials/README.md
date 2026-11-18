@@ -6,5 +6,7 @@
 - [Go后端](go-backend/README.md)
 - [Java后端](java-backend/README.md)
 - [前端工程](frontend/README.md)
+- [Python后端与Agent实战](python-backend/README.md)
+- [Python算法与数据结构](algorithms-python/README.md)
 
 maps/overview.html可离线打开。legacy保留历史图卡，旧日期、术语与版式以当前教材和sources为准。

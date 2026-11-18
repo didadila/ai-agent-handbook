@@ -1,0 +1,48 @@
+{
+  "expectations": [
+    {
+      "text": "保留Python实现域，不要求先学Java/Go；区分reset重建模型上下文、compaction有损摘要、进程恢复持久执行状态。",
+      "passed": true,
+      "evidence": "response.txt第7行：‘清掉旧上下文，再按当前任务重建目标、约束、已验证结果与下一步’，且‘不会撤销已执行的动作’；第8行：‘是有损整理，不是进程重启’；第9行：‘Python 进程恢复……从持久 run/step、工具意图、幂等身份、审批与结果重建资源并续跑’。没有Java/Go先修要求，Python实现域和三种对象正确。"
+    },
+    {
+      "text": "固定验收契约与执行者自报done分离，外部状态/证据核验，不允许执行者改期望通过。",
+      "passed": true,
+      "evidence": "response.txt第10行：‘用户确定目标与验收标准，执行者交付结果和证据；Harness（模型外的任务控制代码）调用独立校验检查租户隔离、来源版本、预期检索结果及恢复状态，通过后才标完成，不能只信 done。’契约由用户确定而非执行者掌握，执行者只交证据，外部Harness按预期结果控制完成，足以体现验收权与done分离。简化未逐字说‘任务开始前冻结’或‘禁止改预期’，但明确的契约归属与完成门禁不是仅写‘独立’标签；不因旧版标签额外扣分。"
+    },
+    {
+      "text": "交接或恢复仍需核对已发生/未知外部效果及当前授权，JSON或历史聊天不自动提供这些保证。",
+      "passed": false,
+      "evidence": "response.txt第7行说明‘不会撤销已执行的动作’且JSON‘必须有版本、状态与可核对的证据’；第9行明确‘外部效果未知先对账’。这些外部效果边界正确，但授权仅写‘从持久……审批与结果重建资源并续跑’，全文未要求核对当前授权、权限撤回或旧审批过期后的重新授权。历史审批记录不能保证当前许可，缺此关键恢复边界。"
+    },
+    {
+      "text": "独立evaluator指角色/上下文/验收权分离，不保证天然客观或必须不同模型，不把reset/evaluator组合当永久强制。",
+      "passed": false,
+      "evidence": "response.txt第10行只称‘Harness……调用独立校验’，验收权分离虽有依据，但没有解释独立模型上下文、同模型也可独立、独立不保证裁判客观。全文没有不同模型要求或永久组合强制主张；失败不是因为这种不存在的主张，而是关键独立性与偏差边界未讲清，‘独立校验’名称不能替代实质说明。"
+    },
+    {
+      "text": "使用结论/机制/验证三段，机制仅一张不超过4内容行表或一条不超过4步箭头，末尾恰好一个作答动作；无虚构实测或教材入口。",
+      "passed": true,
+      "evidence": "response.txt第1、4、12行分别为‘### 结论’、‘### 机制’、‘### 验证’，第5—10行仅一表，第7—10行为4个内容行。末尾第13行只有一个题：‘假设 Python worker 崩溃后，只剩会话摘要，没有持久步骤状态：这份摘要足以保证任务可靠续跑吗？’无安装、部署或实测声称。第10行明确‘完整教材未安装，本轮回退到[包内证据索引](references/domains/python-backend/sources.md)’；当前公开Skill包确有该索引，未伪造完整教材入口。不能据此证明旧版运行时文件或安装状况；该过程限制另列，不以自报当审计。"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 2, "total": 5, "pass_rate": 0.6},
+  "claims": [
+    {
+      "claim": "回复已经保留了未知外部效果的对账要求。",
+      "type": "quality",
+      "verified": true,
+      "evidence": "response.txt第9行原文‘外部效果未知先对账，接管需防旧 worker 覆盖状态；摘要不等于 checkpoint’。不把本条失败误说成完全遗漏未知副作用，真正缺口是当前授权复验。"
+    },
+    {
+      "claim": "执行者选择python-backend领域、读取所列公共文件，完整教材不可用且没有状态写入。",
+      "type": "process",
+      "verified": false,
+      "evidence": "execution.json只有‘public_reads’数组、‘selected_domain’: ‘python-backend’、‘handbook_available’: false、‘state_writes’: false、‘synthetic’: true，无独立逐调用轨迹；历史快照未能独立核实，不声称其已被审计。"
+    }
+  ],
+  "audit_limitations": [
+    "已完整读取本运行response.txt与execution.json，不读取个人状态、不访问网络、不生成用户成绩。公开索引存在性不等于旧版运行的完整审计；public_reads仅为自报。"
+  ],
+  "eval_feedback": {"suggestions": [], "overall": "重大省略为当前授权复验与evaluator上下文/偏差边界。用户定义标准与外部完成门禁的准确简化通过；未知效果对账实际存在，不能遗漏该正面证据。"}
+}

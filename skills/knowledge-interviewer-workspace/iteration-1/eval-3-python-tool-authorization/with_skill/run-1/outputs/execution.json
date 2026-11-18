@@ -1,0 +1,72 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.agent.tools",
+  "actions_asked": 1,
+  "state_action": "none_read_only",
+  "external_sync": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer/SKILL.md",
+      "start_line": 1,
+      "end_line": 232
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 12,
+      "end_line": 12,
+      "location_result": "python-backend-format 的 prompt 与 fixture；定位搜索同时返回本文件第 7–11 行的案例字段，未读取 rubric 或其他运行产物。"
+    },
+    {
+      "path": "skills/knowledge-interviewer/scripts/learning_content.py",
+      "start_line": 1,
+      "end_line": 52,
+      "location_result": {
+        "domain": "python-backend",
+        "point_id": "py.agent.tools",
+        "sections": [
+          {
+            "path": "handbook/python-backend/06-python-agent.md",
+            "start_line": 5,
+            "end_line": 31,
+            "heading": "py.agent.tools — allowlist、schema 与当前授权缺一不可",
+            "display_title": "allowlist、schema 与当前授权缺一不可"
+          }
+        ],
+        "questions": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+        "sources": "skills/knowledge-interviewer/references/domains/python-backend/sources.md",
+        "materials": "materials/python-backend/README.md"
+      }
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/learning-flow.md",
+      "start_line": 1,
+      "end_line": 40
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/output-format.md",
+      "start_line": 1,
+      "end_line": 60
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/map.md",
+      "start_line": 1,
+      "end_line": 117
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+      "start_line": 401,
+      "end_line": 414,
+      "location_result": "按 py.agent.tools 标题定位后读取对应题链；标题搜索未读取其他题链正文。"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/sources.md",
+      "start_line": 1,
+      "end_line": 116
+    },
+    {
+      "path": "handbook/python-backend/06-python-agent.md",
+      "start_line": 5,
+      "end_line": 31
+    }
+  ]
+}

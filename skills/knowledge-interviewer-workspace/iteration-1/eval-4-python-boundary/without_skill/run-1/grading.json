@@ -1,0 +1,21 @@
+{
+  "expectations": [
+    {
+      "text": "区分默认启用GIL的CPython、可选free-threaded构建与其他实现，不泛化所有Python",
+      "passed": false,
+      "evidence": "outputs/response.txt第7行虽然使用‘Python 实现与构建’作为行名并说‘不能说所有 Python 都有 GIL’，实际只区分CPython常规GIL与可选free-threaded构建；第10行也仅解释free-threaded运行时GIL。没有给出其他实现需独立核实的机制边界，不能把行名或泛化否定视为三类环境的完整区分。"
+    },
+    {
+      "text": "纯Python CPU计算在启用GIL构建中不会因to_thread获得多核并行，说明进程或释放GIL例外",
+      "passed": true,
+      "evidence": "response.txt第8行‘to_thread…不等于自动获得 CPU 多核并行’，第9行明确启用GIL时多个线程不能同时执行Python字节码，利用多核通常考虑多进程并承担通信开销；第10行另述关闭GIL后线程可能并行但不保证加速。断言要求进程或释放GIL例外，已提供进程方案。"
+    },
+    {
+      "text": "只有一个独立验证动作且不虚构运行结果",
+      "passed": false,
+      "evidence": "response.txt第13行仅问‘这轮先只聚焦…可以吗？’，是范围同意而不是检验CPU执行模型的知识动作。execution.json也明确‘按自造题回退停在范围确认’；没有虚构运行结果，但复合断言的独立验证要求未满足。不能因只有一个问号或机械三段结构通过就判为有效验证。"
+    }
+  ],
+  "summary": {"passed": 1, "failed": 2, "total": 3, "pass_rate": 0.3333333333333333},
+  "method": "without_skill实际是旧版快照；public_reads三项路径/范围真实。只读结构检查无错误，但范围确认不能替代语义验证，且其他Python实现边界缺失；与新版用同一复合断言标准。未重跑或读取真实档案。证据为响应和结构化执行记录，不能独立审计全部历史I/O。"
+}

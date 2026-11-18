@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-16",
+  "skill_name": "knowledge-interviewer",
+  "baseline_commit": "2e4a02c5a7cfe6ff1d18158defd8e4e4a38676bc",
+  "configurations": {
+    "with_skill": {
+      "meaning": "current repository Skill with Python domain and sprint-learning",
+      "skill_path": "skills/knowledge-interviewer/SKILL.md",
+      "skill_sha256": "f45f58fd2124b51f36e4059ee6e2618595eec5f8ff9925ae9195a82828f140fc"
+    },
+    "without_skill": {
+      "meaning": "old Skill snapshot, NOT a no-Skill run",
+      "skill_path_at_run": "skills/knowledge-interviewer-workspace/skill-snapshot/SKILL.md",
+      "skill_sha256": "4173faccab22d21ee8938d0462d51f8efa4e1ea6a7c92c0207e6447a2a15e37d",
+      "reproduce_source": "baseline commit skills/knowledge-interviewer/SKILL.md, references, scripts and templates"
+    }
+  },
+  "snapshot_handling": "Temporary old-copy directory removed after all executions and grading completed; reproduce from baseline_commit and recorded SHA256. No original Skill or learner record was deleted.",
+  "cases": 6,
+  "runs_per_case_per_configuration": 1,
+  "all_runs_started_in_parallel": true,
+  "fixtures": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+  "rubric": "skills/knowledge-interviewer/evals/python-backend/rubric.json",
+  "executor_rubric_access": false,
+  "state_scope": "synthetic read-only; no actual learner records or state writes",
+  "timing_source": "host completion notifications; total_tokens records host-reported subagent_tokens, not validated billable/output token counts",
+  "limitations": [
+    "One sampled turn per case/configuration, not repeated-run stability measurement.",
+    "Execution and independent grading use the same agent family; no human review yet.",
+    "The old version lacks Python package and handbook access; comparison measures combined routing/resource/workflow improvement, not isolated wording.",
+    "The privacy case tests a read-only refusal to save; successful private writes are covered separately by deterministic state tests.",
+    "public_reads contains executor-reported relative paths/ranges, checked against public files; it is not a full independently audited tool transcript."
+  ]
+}

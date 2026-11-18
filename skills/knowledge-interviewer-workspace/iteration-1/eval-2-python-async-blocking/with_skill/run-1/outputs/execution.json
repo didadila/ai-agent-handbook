@@ -1,0 +1,157 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.async.eventloop",
+  "actions_asked": 1,
+  "verification_question": "构造场景：同一事件循环中健康检查协程已就绪，当前协程执行 await asyncio.to_thread(time.sleep, 2)；等待期间，健康检查协程能否获得调度？",
+  "state_action": "none",
+  "state_action_detail": "仅使用指定合成 prompt 与 fixture；未读取真实 .local，未初始化、修改或保存学习状态。",
+  "external_sync": false,
+  "external_actions": {
+    "cloud_queries": false,
+    "installation": false,
+    "deployment": false
+  },
+  "teaching_example_executed": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer/SKILL.md",
+      "start_line": 1,
+      "end_line": 231,
+      "via": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/learning-flow.md",
+      "start_line": 1,
+      "end_line": 39,
+      "via": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/output-format.md",
+      "start_line": 1,
+      "end_line": 59,
+      "via": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "start_line": 8,
+      "end_line": 8,
+      "via": "Bash selected-field extraction",
+      "fields": ["id", "prompt", "fixture"],
+      "prompt": "FastAPI里把函数写成async def后，里面用time.sleep(2)也不会卡住其他请求，因为已经异步了。我这个理解对吗？直接用短表格讲，最后只问一个验证问题。",
+      "fixture": "合成学习者，明确要求补课；无真实状态，不预填A。"
+    },
+    {
+      "path": "skills/knowledge-interviewer/scripts/learning_content.py",
+      "start_line": 1,
+      "end_line": 51,
+      "via": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/map.md",
+      "start_line": 1,
+      "end_line": 116,
+      "via": ["Read", "learning_content.py"]
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+      "start_line": 123,
+      "end_line": 137,
+      "via": "Read"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+      "matched_lines": [1, 5, 14, 16, 38, 53, 76, 91, 106, 121, 123, 138, 153, 168, 183, 185, 200, 215, 230, 245, 247, 262, 277, 292, 307, 322, 337, 339, 354, 369, 384, 399, 401, 416, 431, 446, 448, 463, 478],
+      "via": "Grep",
+      "scope": "仅显示标题与目标知识点匹配行，不表示已阅读其他题目正文。"
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/sources.md",
+      "start_line": 1,
+      "end_line": 115,
+      "via": "Read"
+    },
+    {
+      "path": "catalog.json",
+      "start_line": 1,
+      "end_line": 17,
+      "via": "learning_content.py"
+    },
+    {
+      "path": "handbook/python-backend/01-python-foundations.md",
+      "start_line": 1,
+      "end_line": 158,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    },
+    {
+      "path": "handbook/python-backend/02-async-and-concurrency.md",
+      "start_line": 1,
+      "end_line": 112,
+      "via": "learning_content.py"
+    },
+    {
+      "path": "handbook/python-backend/02-async-and-concurrency.md",
+      "start_line": 5,
+      "end_line": 33,
+      "via": "Read",
+      "scope": "实际阅读并用于本轮讲解的目标正文。"
+    },
+    {
+      "path": "handbook/python-backend/03-api-and-lifecycle.md",
+      "start_line": 1,
+      "end_line": 91,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    },
+    {
+      "path": "handbook/python-backend/04-storage-and-retrieval.md",
+      "start_line": 1,
+      "end_line": 122,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    },
+    {
+      "path": "handbook/python-backend/05-jobs-and-distribution.md",
+      "start_line": 1,
+      "end_line": 75,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    },
+    {
+      "path": "handbook/python-backend/06-python-agent.md",
+      "start_line": 1,
+      "end_line": 62,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    },
+    {
+      "path": "handbook/python-backend/07-operations-and-delivery.md",
+      "start_line": 1,
+      "end_line": 60,
+      "via": "learning_content.py",
+      "scope": "定位器扫描公共章节；未作为本轮补课正文。"
+    }
+  ],
+  "locator_execution": {
+    "script": "skills/knowledge-interviewer/scripts/learning_content.py",
+    "arguments": ["--domain", "python-backend", "--point", "py.async.eventloop"],
+    "method": "python3 -B + runpy.run_path(run_name='__main__')；在内存中记录 Path.read_text 的实际公共读取范围，不产生文件。",
+    "exit_code": 0,
+    "output": {
+      "domain": "python-backend",
+      "point_id": "py.async.eventloop",
+      "sections": [
+        {
+          "path": "handbook/python-backend/02-async-and-concurrency.md",
+          "start_line": 5,
+          "end_line": 33,
+          "heading": "py.async.eventloop — 协程只有让出控制权，事件循环才能服务其他任务",
+          "display_title": "协程只有让出控制权，事件循环才能服务其他任务"
+        }
+      ],
+      "questions": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+      "sources": "skills/knowledge-interviewer/references/domains/python-backend/sources.md",
+      "materials": "materials/python-backend/README.md"
+    }
+  }
+}

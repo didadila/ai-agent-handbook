@@ -14,7 +14,9 @@ references/domains/<领域名>/
 └── questions.md    # 可选，覆盖高频点即可
 ```
 
-领域名用小写加连字符（`java-backend`、`ai-agent`、`kubernetes`），因为它同时是状态文件的目录名（`~/Documents/learning/<领域名>/`）。
+领域名用小写加连字符（`python-backend`、`java-backend`、`ai-agent`、`kubernetes`），因为它同时是状态文件的目录名（仓库模式 `.local/learning/<领域名>/`；独立安装使用本机私有状态根）。不要沿用旧 `~/Documents/learning/` 作为新默认。
+
+上面的最小形态适用于现场自造题；正式加入本仓库 `catalog.json` 的发布领域需满足完整契约：handbook 的 README/knowledge-map/编号教材，references 的 map/questions/sources/maintenance，materials 的 README/maps/overview.html/cards/01.md，以及 evals 的 cases/rubric。每个稳定ID都有正文 `## ID — 标题` 和题库 `### \`ID\``，脚本可按ID定位；新案例先标未运行，保存真实输出并按预定义判据评审后才报告通过。
 
 ## map.md 骨架
 

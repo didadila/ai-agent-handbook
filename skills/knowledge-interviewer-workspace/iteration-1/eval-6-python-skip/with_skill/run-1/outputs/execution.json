@@ -1,0 +1,25 @@
+{
+  "selected_domain": "python-backend",
+  "selected_point_id": "py.async.eventloop",
+  "actions_asked": 1,
+  "state_action": "none; honor the requested topic switch without grading the unanswered objects question or changing progress, mistakes, preferences, or review scheduling; no real local state read",
+  "external_sync": false,
+  "public_reads": [
+    {
+      "path": "skills/knowledge-interviewer/SKILL.md",
+      "line_ranges": [[1, 232]]
+    },
+    {
+      "path": "skills/knowledge-interviewer/evals/python-backend/cases.json",
+      "line_ranges": [[11, 11]]
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/map.md",
+      "line_ranges": [[1, 117]]
+    },
+    {
+      "path": "skills/knowledge-interviewer/references/domains/python-backend/questions.md",
+      "line_ranges": [[123, 138]]
+    }
+  ]
+}
